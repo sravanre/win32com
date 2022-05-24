@@ -1,62 +1,102 @@
-H,Reporting batch jobs executed in period 2022-05-22 17:00:00.000 to 2022-05-23 07:15:00.000,,,,,,,,,
-H,Generated: 2022-05-23,,,,,,,,,
+H,Reporting batch jobs executed in period 2022-05-23 17:00:00.000 to 2022-05-24 07:15:00.000,,,,,,,,,
+H,Generated: 2022-05-24,,,,,,,,,
 H,BatchJob Name,Date Executed,Time Executed,Date Ended,Time Ended,Elapsed Time (ms),Elapsed Time (hours),Progress Percentage,Exit Code,Created By
-B,P41EdiCreateDeliveryBatchJob,2022-05-22,19:15:05.852,2022-05-22,19:15:09.442,3590,0.001,100,1,82SLTWP1
-B,TransmitBatchJob (P41EdiCreateDelivery),2022-05-22,19:15:09.489,2022-05-22,19:15:26.846,17357,0.0048,100,1,BatchJob.P41EdiCreateDelivery
-B,PrimoBatchJob,2022-05-23,00:01:06.489,2022-05-23,06:03:52.141,21765652,6.046,100,23,82SLTWP1
-B,TopPrintDistributorBatchJob,2022-05-23,04:45:02.736,2022-05-23,04:45:23.786,21050,0.0058,100,0,82SLTWP1
-B,PollBatchJob (SapPaymentReceipt),2022-05-23,05:00:03.829,2022-05-23,05:00:09.081,5252,0.0015,100,0,82SLTWP1
-B,SapPaymentReceiptBatchJob,2022-05-23,05:00:09.104,2022-05-23,05:00:42.670,33566,0.0093,100,0,BatchJob.Poll
-B,PollBatchJob (GTISkiftCpr),2022-05-23,05:30:03.603,2022-05-23,05:30:09.070,5467,0.0015,100,0,82SLTWP1
-B,P41EdiCreateDeliveryBatchJob,2022-05-23,05:30:04.270,2022-05-23,05:30:08.786,4516,0.0013,100,1,82SLTWP1
-B,TransmitBatchJob (P41EdiCreateDelivery),2022-05-23,05:30:08.817,2022-05-23,05:30:28.914,20097,0.0056,100,1,BatchJob.P41EdiCreateDelivery
-B,GTISkiftCprBatchJob,2022-05-23,05:30:09.115,2022-05-23,05:31:44.986,95871,0.0266,100,0,BatchJob.Poll
-B,PollBatchJob (GTISkiftLandekode),2022-05-23,05:45:02.810,2022-05-23,05:45:08.891,6081,0.0017,100,0,82SLTWP1
-B,GTISkiftLandekodeBatchJob,2022-05-23,05:45:08.910,2022-05-23,05:45:18.657,9747,0.0027,100,23,BatchJob.Poll
-B,CoverCategorizationReportingBatchJob,2022-05-23,06:00:06.488,2022-05-23,07:14:38.510,4472022,1.2422,98,-1,82SLTWP1
-B,PollBatchJob (GTISkiftStatus),2022-05-23,06:00:07.095,2022-05-23,06:00:09.109,2014,6.0E-4,100,0,82SLTWP1
-B,SqlReportingBatchJob,2022-05-23,06:00:07.149,2022-05-23,07:07:43.896,4056747,1.1269,100,0,82SLTWP1
-B,GTISkiftStatusBatchJob,2022-05-23,06:00:09.282,2022-05-23,06:00:33.332,24050,0.0067,100,0,BatchJob.Poll
-B,RunningPayablesReportingBatchJob,2022-05-23,06:04:20.325,2022-05-23,06:06:24.925,124600,0.0346,100,0,82SLTWP1
-B,AccountStrategyBatchJob (payablesReceiverWaiting),2022-05-23,06:04:20.406,2022-05-23,06:05:21.107,60701,0.0169,100,0,82SLTWP1
-B,AccountStrategyBatchJob (payablesReceiver),2022-05-23,06:05:21.211,2022-05-23,06:06:46.144,84933,0.0236,100,0,BatchJob.AccountStrategy
-B,TransmitBatchJob (RunningPayablesReporting),2022-05-23,06:06:24.975,2022-05-23,06:06:28.918,3943,0.0011,100,0,BatchJob.RunningPayablesReporting
-B,AccountStrategyBatchJob (inheritanceTaxReceiver),2022-05-23,06:06:46.161,2022-05-23,06:06:48.991,2830,8.0E-4,100,0,BatchJob.AccountStrategy
-B,SapPaymentBatchJob,2022-05-23,06:06:54.050,2022-05-23,06:07:01.228,7178,0.002,100,1,82SLTWP1
-B,TransmitBatchJob (SapPayment),2022-05-23,06:07:01.261,2022-05-23,06:07:11.700,10439,0.0029,100,1,BatchJob.SapPayment
-B,SapPaymentNemKontoBatchJob,2022-05-23,06:07:27.268,2022-05-23,06:07:31.210,3942,0.0011,100,0,82SLTWP1
-B,TransmitBatchJob (SapPaymentNemKonto),2022-05-23,06:07:31.275,2022-05-23,06:07:42.364,11089,0.0031,100,0,BatchJob.SapPaymentNemKonto
-B,TopPaymentSpecPrintBatchJob,2022-05-23,06:08:00.013,2022-05-23,06:08:12.712,12699,0.0035,100,0,82SLTWP1
-B,OiAccountItemExportBatchJob,2022-05-23,06:08:00.103,2022-05-23,06:08:50.761,50658,0.0141,100,0,82SLTWP1
-B,TransmitBatchJob (OiAccountItemExport),2022-05-23,06:08:50.788,2022-05-23,06:09:03.991,13203,0.0037,100,0,BatchJob.OiAccountItemExport
-B,OiAccountBalanceExportBatchJob,2022-05-23,06:09:33.014,2022-05-23,06:56:50.662,2837648,0.7882,100,0,82SLTWP1
-B,PollBatchJob (P41EdiHandleDelivery),2022-05-23,06:40:03.087,2022-05-23,06:40:13.953,10866,0.003,100,0,82SLTWP1
-B,P41EdiHandleDeliveryBatchJob,2022-05-23,06:40:14.509,2022-05-23,06:40:25.262,10753,0.003,100,0,BatchJob.Poll
-B,Pif2UpdateBatchJob,2022-05-23,06:55:02.696,2022-05-23,06:57:07.978,125282,0.0348,100,0,82SLTWP1
-B,PollBatchJob (P41EdiBanksImport),2022-05-23,06:55:02.767,2022-05-23,06:55:12.418,9651,0.0027,100,0,82SLTWP1
-B,P41EdiBanksImportBatchJob,2022-05-23,06:55:12.835,2022-05-23,06:55:35.221,22386,0.0062,100,0,BatchJob.Poll
-B,PollBatchJob (P41EdiFundsImport),2022-05-23,06:56:07.270,2022-05-23,06:56:10.142,2872,8.0E-4,100,0,82SLTWP1
-B,P41EdiFundsImportBatchJob,2022-05-23,06:56:10.345,2022-05-23,06:56:22.371,12026,0.0033,100,0,BatchJob.Poll
-B,TransmitBatchJob (OiAccountBalanceExport),2022-05-23,06:56:50.747,2022-05-23,06:57:13.225,22478,0.0062,100,0,BatchJob.OiAccountBalanceExport
-B,TransmitBatchJob (Pif2Update),2022-05-23,06:57:08.053,2022-05-23,06:57:19.571,11518,0.0032,100,0,BatchJob.Pif2Update
-B,AccountStrategyBatchJob (receivablesContributor),2022-05-23,06:57:21.696,2022-05-23,06:57:45.932,24236,0.0067,100,0,82SLTWP1
-B,AccountStrategyBatchJob (receivables),2022-05-23,06:57:45.953,2022-05-23,07:13:29.749,943796,0.2622,55,-1,BatchJob.AccountStrategy
-B,TransmitBatchJob (SqlReporting),2022-05-23,07:07:43.932,2022-05-23,07:08:30.185,46253,0.0128,100,0,BatchJob.SqlReporting
-S,Combined: All,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except DmMapper,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except DmValuation,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except Sas,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except DmMapper-DmValuation,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except DmMapper-Sas,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except DmValuation-Sas,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: All except DmMapper-DmValuation-Sas,2022-05-22,,,,26032968,7.2314,,,
-S,Combined: DmMapper,2022-05-22,,,,0,0.0,,,
-S,Combined: DmValuation,2022-05-22,,,,0,0.0,,,
-S,Combined: Sas,2022-05-22,,,,0,0.0,,,
-S,Combined: DmMapper-DmValuation,2022-05-22,,,,0,0.0,,,
-S,Combined: DmMapper-Sas,2022-05-22,,,,0,0.0,,,
-S,Combined: DmValuation-Sas,2022-05-22,,,,0,0.0,,,
-S,Combined: DmMapper-DmValuation-Sas,2022-05-22,,,,0,0.0,,,
-S,Time limit for batch run,2022-05-22,,,,14400000,4.0,,,
-S,Result,2022-05-22,,,,11632968,3.2314,,,
+B,TopStartTaxCardSubscriptionBatchJob,2022-05-23,17:00:03.065,2022-05-23,17:01:07.613,64548,0.0179,100,0,82SLTWP1
+B,TransmitBatchJob (StartTaxCardSubscription),2022-05-23,17:01:07.630,2022-05-23,17:01:10.669,3039,8.0E-4,100,0,BatchJob.StartTaxCardSubscription
+B,PollBatchJob (Db9669PaymentImport),2022-05-23,19:00:04.462,2022-05-23,19:00:09.127,4665,0.0013,100,0,82SLTWP1
+B,TopPafReportingBatchJob,2022-05-23,19:00:04.463,2022-05-23,19:00:25.925,21462,0.006,100,10,82SLTWP1
+B,DbCremulPaymentImportBatchJob,2022-05-23,19:00:09.146,2022-05-23,19:00:37.003,27857,0.0077,100,0,BatchJob.Poll
+B,PollBatchJob (P41AccountPaymentImport),2022-05-23,19:01:07.011,2022-05-23,19:01:08.754,1743,5.0E-4,100,0,82SLTWP1
+B,P41CremulPaymentImportBatchJob,2022-05-23,19:01:08.773,2022-05-23,19:01:19.649,10876,0.003,100,0,BatchJob.Poll
+B,PollBatchJob (CardPaymentImport),2022-05-23,19:01:39.473,2022-05-23,19:01:48.678,9205,0.0026,100,1,82SLTWP1
+B,CardPaymentImportBatchJob,2022-05-23,19:01:48.692,2022-05-23,19:01:58.399,9707,0.0027,100,1,BatchJob.Poll
+B,PollBatchJob (DbPaymentImport),2022-05-23,19:02:12.345,2022-05-23,19:02:18.723,6378,0.0018,100,0,82SLTWP1
+B,DbPaymentImportBatchJob,2022-05-23,19:02:18.737,2022-05-23,19:02:28.610,9873,0.0027,100,0,BatchJob.Poll
+B,P41EdiCreateDeliveryBatchJob,2022-05-23,19:15:03.047,2022-05-23,19:16:21.716,78669,0.0219,100,0,82SLTWP1
+B,TransmitBatchJob (P41EdiCreateDelivery),2022-05-23,19:16:21.733,2022-05-23,19:16:35.930,14197,0.0039,100,0,BatchJob.P41EdiCreateDelivery
+B,PollBatchJob (PbsInfoServiceImport),2022-05-23,19:27:30.810,2022-05-23,19:27:38.750,7940,0.0022,100,0,82SLTWP1
+B,PbsInfoServiceImportBatchJob,2022-05-23,19:27:38.764,2022-05-23,19:27:49.134,10370,0.0029,100,0,BatchJob.Poll
+B,AccountStrategyBatchJob (receivablesContributor),2022-05-23,19:27:49.146,2022-05-23,19:29:43.283,114137,0.0317,100,0,BatchJob.PbsInfoServiceImport
+B,AccountStrategyBatchJob (receivables),2022-05-23,19:29:43.293,2022-05-23,19:45:33.858,950565,0.264,100,23,BatchJob.AccountStrategy
+B,SasBatchJob,2022-05-23,19:56:33.088,2022-05-24,04:52:26.484,32153396,8.9315,100,23,82SLTWP1
+B,DmValuationMapperBatchJob,2022-05-23,19:56:33.134,2022-05-23,19:56:37.704,4570,0.0013,100,0,82SLTWP1
+B,PereReportingBatchJob,2022-05-23,20:00:04.263,2022-05-23,20:10:03.997,599734,0.1666,100,10,82SLTWP1
+B,ResignationInfoPrintBatchJob,2022-05-23,20:00:04.290,2022-05-23,20:00:24.368,20078,0.0056,100,1,82SLTWP1
+B,TransmitBatchJob (PereReporting),2022-05-23,20:10:04.008,2022-05-23,20:10:08.677,4669,0.0013,100,0,BatchJob.PereReporting
+B,PereOphReportingBatchJob,2022-05-23,20:10:38.782,2022-05-23,20:13:04.544,145762,0.0405,100,1,82SLTWP1
+B,TransmitBatchJob (PereOphReporting),2022-05-23,20:13:04.558,2022-05-23,20:13:08.367,3809,0.0011,100,1,BatchJob.PereOphReporting
+B,PollBatchJob (MpsPaymentImport),2022-05-23,21:30:03.699,2022-05-23,21:30:08.796,5097,0.0014,100,0,82SLTWP1
+B,MpsPaymentImportBatchJob,2022-05-23,21:30:08.808,2022-05-23,21:30:18.722,9914,0.0028,100,0,BatchJob.Poll
+B,AccountStrategyBatchJob (receivablesContributor),2022-05-23,21:30:18.733,2022-05-23,21:30:41.523,22790,0.0063,100,0,BatchJob.MpsPaymentImport
+B,HeapDepositesBatchJob,2022-05-23,21:31:06.561,2022-05-23,21:31:38.280,31719,0.0088,100,0,82SLTWP1
+B,PollBatchJob (EIncomeImport),2022-05-23,22:00:08.717,2022-05-23,22:00:19.689,10972,0.003,100,0,82SLTWP1
+B,EIncomeImportBatchJob,2022-05-23,22:00:19.724,2022-05-23,22:00:31.609,11885,0.0033,100,0,BatchJob.Poll
+B,PollBatchJob (EKapitalReceipt),2022-05-23,22:10:05.710,2022-05-23,22:10:10.453,4743,0.0013,100,0,82SLTWP1
+B,EKapitalReceiptBatchJob,2022-05-23,22:10:10.465,2022-05-23,22:10:18.446,7981,0.0022,100,0,BatchJob.Poll
+B,PollBatchJob (PbsBetalingsServiceImport),2022-05-23,23:00:05.374,2022-05-23,23:00:08.818,3444,0.001,100,0,82SLTWP1
+B,PbsBetalingsServiceImportBatchJob,2022-05-23,23:00:08.843,2022-05-23,23:00:18.897,10054,0.0028,100,0,BatchJob.Poll
+B,AccountStrategyBatchJob (receivablesContributor),2022-05-23,23:00:18.907,2022-05-23,23:00:39.110,20203,0.0056,100,0,BatchJob.PbsBetalingsServiceImport
+B,AccountStrategyBatchJob (receivables),2022-05-23,23:00:39.135,2022-05-23,23:14:01.406,802271,0.2229,100,23,BatchJob.AccountStrategy
+B,AccountStrategyBatchJob (payablesReceiverWaiting),2022-05-24,00:06:15.737,2022-05-24,00:06:51.165,35428,0.0098,100,0,82SLTWP1
+B,AccountStrategyBatchJob (payablesReceiver),2022-05-24,00:06:51.205,2022-05-24,00:07:41.094,49889,0.0139,100,0,BatchJob.AccountStrategy
+B,AccountStrategyBatchJob (inheritanceTaxReceiver),2022-05-24,00:07:41.112,2022-05-24,00:07:48.614,7502,0.0021,100,0,BatchJob.AccountStrategy
+B,SapPaymentBatchJob,2022-05-24,00:08:18.633,2022-05-24,00:08:32.156,13523,0.0038,100,0,82SLTWP1
+B,TransmitBatchJob (SapPayment),2022-05-24,00:08:32.169,2022-05-24,00:08:40.560,8391,0.0023,100,0,BatchJob.SapPayment
+B,SapPaymentNemKontoBatchJob,2022-05-24,00:08:51.342,2022-05-24,00:09:01.503,10161,0.0028,100,0,82SLTWP1
+B,TransmitBatchJob (SapPaymentNemKonto),2022-05-24,00:09:01.518,2022-05-24,00:09:10.999,9481,0.0026,100,0,BatchJob.SapPaymentNemKonto
+B,OiAccountItemExportBatchJob,2022-05-24,00:09:24.189,2022-05-24,00:11:09.943,105754,0.0294,100,0,82SLTWP1
+B,TopPaymentSpecPrintBatchJob,2022-05-24,00:09:24.249,2022-05-24,00:09:46.273,22024,0.0061,100,0,82SLTWP1
+B,TransmitBatchJob (OiAccountItemExport),2022-05-24,00:11:09.963,2022-05-24,00:11:24.133,14170,0.0039,100,0,BatchJob.OiAccountItemExport
+B,OiAccountBalanceExportBatchJob,2022-05-24,00:11:29.424,2022-05-24,00:56:19.439,2690015,0.7472,100,0,82SLTWP1
+B,TransmitBatchJob (OiAccountBalanceExport),2022-05-24,00:56:19.455,2022-05-24,00:56:36.654,17199,0.0048,100,0,BatchJob.OiAccountBalanceExport
+B,AccountStrategyBatchJob (receivablesContributor),2022-05-24,00:56:42.521,2022-05-24,00:56:59.128,16607,0.0046,100,0,82SLTWP1
+B,AccountStrategyBatchJob (receivables),2022-05-24,00:56:59.159,2022-05-24,01:09:59.105,779946,0.2167,100,23,BatchJob.AccountStrategy
+B,NeedsAdvanceBatchJob,2022-05-24,01:10:17.400,2022-05-24,02:05:53.431,3336031,0.9267,100,23,82SLTWP1
+B,NeedsAdvanceBatchJob,2022-05-24,02:05:53.462,2022-05-24,03:28:21.135,4947673,1.3744,100,23,BatchJob.NeedsAdvance
+B,TopPrintDistributorBatchJob,2022-05-24,04:45:03.436,2022-05-24,04:45:17.489,14053,0.0039,100,23,82SLTWP1
+B,PollBatchJob (SapPaymentReceipt),2022-05-24,05:00:03.796,2022-05-24,05:00:08.760,4964,0.0014,100,0,82SLTWP1
+B,SapPaymentReceiptBatchJob,2022-05-24,05:00:08.774,2022-05-24,05:00:31.541,22767,0.0063,100,0,BatchJob.Poll
+B,PollBatchJob (GTISkiftCpr),2022-05-24,05:30:03.162,2022-05-24,05:30:08.785,5623,0.0016,100,0,82SLTWP1
+B,P41EdiCreateDeliveryBatchJob,2022-05-24,05:30:03.640,2022-05-24,05:34:12.174,248534,0.069,100,0,82SLTWP1
+B,GTISkiftCprBatchJob,2022-05-24,05:30:08.804,2022-05-24,05:30:18.537,9733,0.0027,100,0,BatchJob.Poll
+B,TransmitBatchJob (P41EdiCreateDelivery),2022-05-24,05:34:12.189,2022-05-24,05:34:26.486,14297,0.004,100,0,BatchJob.P41EdiCreateDelivery
+B,PollBatchJob (GTISkiftLandekode),2022-05-24,05:45:02.971,2022-05-24,05:45:08.691,5720,0.0016,100,0,82SLTWP1
+B,GTISkiftLandekodeBatchJob,2022-05-24,05:45:08.706,2022-05-24,05:45:18.520,9814,0.0027,100,0,BatchJob.Poll
+B,SqlReportingBatchJob,2022-05-24,06:00:06.856,2022-05-24,06:02:44.779,157923,0.0439,100,0,82SLTWP1
+B,PollBatchJob (GTISkiftStatus),2022-05-24,06:00:07.520,2022-05-24,06:00:08.878,1358,4.0E-4,100,0,82SLTWP1
+B,CoverCategorizationReportingBatchJob,2022-05-24,06:00:07.643,2022-05-24,06:27:12.198,1624555,0.4513,100,0,82SLTWP1
+B,AccountStrategyBatchJob (moneyAccount),2022-05-24,06:00:07.954,2022-05-24,06:08:08.631,480677,0.1335,100,0,82SLTWP1
+B,GTISkiftStatusBatchJob,2022-05-24,06:00:08.975,2022-05-24,06:00:35.596,26621,0.0074,100,0,BatchJob.Poll
+B,TransmitBatchJob (SqlReporting),2022-05-24,06:02:44.920,2022-05-24,06:03:07.783,22863,0.0064,100,0,BatchJob.SqlReporting
+B,BundleWaitingTradesBatchJob,2022-05-24,06:08:11.552,2022-05-24,06:08:23.691,12139,0.0034,100,0,82SLTWP1
+B,TopFundTradeExportBatchJob,2022-05-24,06:08:23.713,2022-05-24,06:08:29.128,5415,0.0015,100,0,BatchJob.BundleWaitingTrades
+B,TransmitBatchJob (FundTradeExport),2022-05-24,06:08:29.147,2022-05-24,06:08:45.034,15887,0.0044,100,0,BatchJob.FundTradeExport
+B,TransmitBatchJob (CoverCategorizationReporting),2022-05-24,06:27:12.215,2022-05-24,06:27:19.814,7599,0.0021,100,0,BatchJob.CoverCategorizationReporting
+B,KeyPersonsReportingBatchJob,2022-05-24,06:27:43.395,2022-05-24,06:27:56.904,13509,0.0038,100,0,82SLTWP1
+B,TransmitBatchJob (KeyPersonsReporting),2022-05-24,06:27:56.915,2022-05-24,06:27:59.742,2827,8.0E-4,100,0,BatchJob.KeyPersonsReporting
+B,PollBatchJob (P41EdiHandleDelivery),2022-05-24,06:40:02.764,2022-05-24,06:40:09.241,6477,0.0018,100,0,82SLTWP1
+B,P41EdiHandleDeliveryBatchJob,2022-05-24,06:40:09.258,2022-05-24,06:48:13.750,484492,0.1346,100,0,BatchJob.Poll
+B,PollBatchJob (P41EdiBanksImport),2022-05-24,06:55:02.413,2022-05-24,06:55:08.577,6164,0.0017,100,0,82SLTWP1
+B,Pif2UpdateBatchJob,2022-05-24,06:55:02.443,2022-05-24,06:55:47.443,45000,0.0125,100,0,82SLTWP1
+B,P41EdiBanksImportBatchJob,2022-05-24,06:55:08.590,2022-05-24,06:55:18.741,10151,0.0028,100,0,BatchJob.Poll
+B,PollBatchJob (P41EdiFundsImport),2022-05-24,06:55:34.958,2022-05-24,06:55:38.522,3564,0.001,100,0,82SLTWP1
+B,P41EdiFundsImportBatchJob,2022-05-24,06:55:38.535,2022-05-24,06:55:48.635,10100,0.0028,100,0,BatchJob.Poll
+B,TransmitBatchJob (Pif2Update),2022-05-24,06:55:47.465,2022-05-24,06:56:01.083,13618,0.0038,100,0,BatchJob.Pif2Update
+S,Combined: All,2022-05-23,,,,35982674,9.9952,,,
+S,Combined: All except DmMapper,2022-05-23,,,,35982674,9.9952,,,
+S,Combined: All except DmValuation,2022-05-23,,,,35982674,9.9952,,,
+S,Combined: All except Sas,2022-05-23,,,,17584718,4.8846,,,
+S,Combined: All except DmMapper-DmValuation,2022-05-23,,,,35982674,9.9952,,,
+S,Combined: All except DmMapper-Sas,2022-05-23,,,,17584718,4.8846,,,
+S,Combined: All except DmValuation-Sas,2022-05-23,,,,17580148,4.8834,,,
+S,Combined: All except DmMapper-DmValuation-Sas,2022-05-23,,,,17580148,4.8834,,,
+S,Combined: DmMapper,2022-05-23,,,,0,0.0,,,
+S,Combined: DmValuation,2022-05-23,,,,4570,0.0013,,,
+S,Combined: Sas,2022-05-23,,,,32153396,8.9315,,,
+S,Combined: DmMapper-DmValuation,2022-05-23,,,,4570,0.0013,,,
+S,Combined: DmMapper-Sas,2022-05-23,,,,32153396,8.9315,,,
+S,Combined: DmValuation-Sas,2022-05-23,,,,32153396,8.9315,,,
+S,Combined: DmMapper-DmValuation-Sas,2022-05-23,,,,32153396,8.9315,,,
+S,Time limit for batch run,2022-05-23,,,,14400000,4.0,,,
+S,Result,2022-05-23,,,,21582674,5.9952,,,
 F,,,,,,,,,,

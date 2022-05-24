@@ -21,7 +21,7 @@ PLPACCDDMMAPPER,DmValuationMapper
 PLPACCDDMMAPPER,SAS Efter DmMapper
 PLPACCDDMMAPPER,DmReconcile
 PLPAATMACCPROJEM,EndMonth Sidste kalenderdag 00:01
-PLPAAHDACCSTRAT,AccountStrategyPayablesReceiverWaiting Alle dage 00:01
+PLPAAHDACCSTRAT,AccountStrategyPayablesReceiverWaiting
 PLPAAIDPAYOUTSAP,SapPayment
 PLPAAIDPAYOUTSAP,SapPaymentNemKonto
 PLPACRDPAYOUTSPC,PaymentSpecPrint
@@ -88,9 +88,9 @@ PLPACGMPEREREPOR,PereReporting
 PLPABSRESIGNATIN,ResignationInfoPrint
 PLPAAXMPOLICNETR,PbsBillingReceipt
 PLPACQMBILLING,Billing
-PLPACQMBILLING,BillingRequest Efter Billing
-PLPACQMBILLING,PbsBillingRequest Efter BillingRequest
-PLPACQMBILLING,BillingRequestPrint Efter BillingRequest
+PLPACQMBILLING,BillingRequest
+PLPACQMBILLING,PbsBillingRequest
+PLPACQMBILLING,BillingRequestPrint
 :::::: Yearly batch jobs
 PLPADYYIRTEPRINT,TopIrteReportingPrint
 PLPADGYINDLAAN,IndlaanAccount13TaxReporting
@@ -153,7 +153,7 @@ PLPACCDDMMAPPER,DmMapper
 PLPACCDDMMAPPER,DmValuationMapper
 PLPACCDDMMAPPER,DmReconcile
 PLPACCDDMMAPPER,SAS Efter DmMapper  
-PLPACCDDMMAPPER,Mail job Efter DmValuationMapper
+PLPACCDDMMAPPER,DmValuationMapper
 PLTADQDPRODUCTM1,DmProductMapper
 PLTADQDPRODUCTM2,DmProductMapper
 PLTADQDPRODUCTM3,DmProductMapper
@@ -176,7 +176,7 @@ PLPAEUMAGREEMENT,AgreementValidationExport
 PLPAAQDNEEDSADVA,NeedsAdvance
 PLPAEWWQUOTEDEL,QouteDeletion
 PLPAERDPRAAC,PolicyRollbackAfterAgreementChange
-PLPAEWWQUOTEDEL,Læg på Kerneslet Hver søndag efter GdprDatamartDeletion
+PLPAEWWQUOTEDEL,GdprDatamartDeletion
 :::::  Diverse jobs  :::
 PLPAPCDPIFUPDATE,PifUpdate
 PLPADZDPIF2UPDAT,Pif2Update

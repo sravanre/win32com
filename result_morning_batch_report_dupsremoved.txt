@@ -1,12 +1,14 @@
 																																								TopDanmark BatchJob Report
 
 					:::::::::::   ERROR JOBS   :::::::::::
-PrimoBatchJob       { error_code = 23 }
-GTISkiftLandekodeBatchJob       { error_code = 23 }
 					:::::::::::   INPROGRESS JOBS   :::::::::::
-CoverCategorizationReportingBatchJob   ( 98% )
-AccountStrategyBatchJob (receivables)   ( 55% )
 					:::::::::::   WARNING JOBS   :::::::::::
+TopPafReportingBatchJob       { error_code = 10 }
+AccountStrategyBatchJob (receivables)       { error_code = 23 }
+SasBatchJob       { error_code = 23 }
+PereReportingBatchJob       { error_code = 10 }
+NeedsAdvanceBatchJob       { error_code = 23 }
+TopPrintDistributorBatchJob       { error_code = 23 }
 				:::::::::::   WAITING JOBS   :::::::::::
 BatchReportBatchJob
 TotalInvestmentInventoryBatchJob
@@ -17,7 +19,6 @@ DmMapperBatchJob
 DmValuationMapperBatchJob
 SAS Efter DmMapperBatchJob
 DmReconcileBatchJob
-NeedsAdvanceBatchJob
 QuoteDeletionBatchJob
 PersonDeletionBatchJob
 GdprDatamartDeletionBatchJob
