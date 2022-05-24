@@ -1,0 +1,27 @@
+																																								TopDanmark BatchJob Report
+
+					:::::::::::   ERROR JOBS   :::::::::::
+PrimoBatchJob       { error_code = 23 }
+GTISkiftLandekodeBatchJob       { error_code = 23 }
+					:::::::::::   INPROGRESS JOBS   :::::::::::
+CoverCategorizationReportingBatchJob   ( 98% )
+AccountStrategyBatchJob (receivables)   ( 55% )
+					:::::::::::   WARNING JOBS   :::::::::::
+				:::::::::::   WAITING JOBS   :::::::::::
+BatchReportBatchJob
+TotalInvestmentInventoryBatchJob
+FundMergeBatchJob
+FundPriceImportBatchJob
+DmProductMapperBatchJob
+DmMapperBatchJob
+DmValuationMapperBatchJob
+SAS Efter DmMapperBatchJob
+DmReconcileBatchJob
+NeedsAdvanceBatchJob
+QuoteDeletionBatchJob
+PersonDeletionBatchJob
+GdprDatamartDeletionBatchJob
+Mail job Efter DmValuationMapperBatchJob
+QouteDeletionBatchJob
+PolicyRollbackAfterAgreementChangeBatchJob
+Læg på Kerneslet Hver søndag efter GdprDatamartDeletionBatchJob

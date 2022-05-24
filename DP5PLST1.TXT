@@ -1,0 +1,99 @@
+
+********************************************************************************
+****                      OPC CONTROL LANGUAGE  (OCL)                       ****
+****          Execution started on 23 May 2022 at 07:05:01.450576           ****
+********************************************************************************
+
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLP*) STATUS(C)
+EQQCL0JI Searching for occurrence PLP* in CP
+EQQCL0OI Occurrence found: APPL(PLPAAHDACCSTRAT) IA(2205220001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAHDACCSTRAT) IA(2205230001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAIDPAYOUTSAP) IA(2205220001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAIDPAYOUTSAP) IA(2205230001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAKDBOOKING) IA(2205220001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAKDBOOKING) IA(2205230001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAALDEXTRACT) IA(2205220600) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAODTRANSFP2) IA(2205211915) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAODTRANSFP2) IA(2205220530) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAODTRANSFP2) IA(2205221915) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAODTRANSFP2) IA(2205230530) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAAQDNEEDSADVA) IA(2205220001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAASMACCPROJPR) IA(2205230001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPABJDTRANSFP4) IA(2205220600) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPABJDTRANSFP4) IA(2205230600) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPABPDGTISKIFTS) IA(2205230600) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPABQDGTISKIFCP) IA(2205230530) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPABVDSAPPAYMEN) IA(2205230500) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACADFROMNETS) IA(2205230400) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACLMRUNPAYREP) IA(2205230001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACPDNPRINTDIS) IA(2205230445) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACRDPAYOUTSPC) IA(2205220001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACRDPAYOUTSPC) IA(2205230001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACTDP41EDIMET) IA(2205230600) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPACZDBATCHREPO) IA(2205220715) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPADXWASRECCON) IA(2205220001) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPADZDPIF2UPDAT) IA(2205230600) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAEKDTESTDATA) IA(2205211500) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAEKDTESTDATA) IA(2205221500) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAETDTESTDATA) IA(2205211500) STATUS(C)
+EQQCL0OI Occurrence found: APPL(PLPAETDTESTDATA) IA(2205221500) STATUS(C)
+EQQCL0KI Total number of matching occurrences: 31
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLP*) STATUS(E)
+EQQCL0JI Searching for occurrence PLP* in CP
+EQQCL0OI Occurrence found: APPL(PLPABODGTISKIFTL) IA(2205230545) STATUS(E)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205150001) STATUS(E)
+EQQCL0KI Total number of matching occurrences: 2
+EQQCL0LI Oper. in error: 004 APPL(PLPABODGTISKIFTL) IA(2205230545) WS(PLP0) ERR(0023)
+EQQCL0LI Oper. in error: 004 APPL(PLPACCDDMMAPPER) IA(2205150001) WS(PLP0) ERR(0100)
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLP*) STATUS(S)
+EQQCL0JI Searching for occurrence PLP* in CP
+EQQCL0OI Occurrence found: APPL(PLPAALDEXTRACT) IA(2205230600) STATUS(S)
+EQQCL0OI Occurrence found: APPL(PLPACMDKEYPERREP) IA(2205230600) STATUS(S)
+EQQCL0OI Occurrence found: APPL(PLPACNDCOVCATREP) IA(2205230600) STATUS(S)
+EQQCL0OI Occurrence found: APPL(PLPADXWASRECCON) IA(2205230001) STATUS(S)
+EQQCL0OI Occurrence found: APPL(PLPAFAWSUBSETTER) IA(2205220001) STATUS(S)
+EQQCL0KI Total number of matching occurrences: 5
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLP*) STATUS(W)
+EQQCL0JI Searching for occurrence PLP* in CP
+EQQCL0OI Occurrence found: APPL(PLPAABDSHRPRICES) IA(2205231600) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAACDUNITFUND) IA(2205231600) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAAQDNEEDSADVA) IA(2205230001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205160001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205170001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205180001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205190001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205200001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205210001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205220001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACCDDMMAPPER) IA(2205230001) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPACZDBATCHREPO) IA(2205230715) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAEKDTESTDATA) IA(2205231500) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAERDPRAAC) IA(2205231630) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAETDTESTDATA) IA(2205231500) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAEVDDKURSFIL) IA(2205231555) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAEWWQUOTEDEL) IA(2205151700) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAEWWQUOTEDEL) IA(2205221700) STATUS(W)
+EQQCL0OI Occurrence found: APPL(PLPAFEDLIVAHPEXS) IA(2205230600) STATUS(W)
+EQQCL0KI Total number of matching occurrences: 19
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLV*) STATUS(C)
+EQQCL0JI Searching for occurrence PLV* in CP
+EQQCL4XW Occurrence not found in the current plan: APPL(PLV*)
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLV*) STATUS(E)
+EQQCL0JI Searching for occurrence PLV* in CP
+EQQCL4XW Occurrence not found in the current plan: APPL(PLV*)
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLV*) STATUS(S)
+EQQCL0JI Searching for occurrence PLV* in CP
+EQQCL4XW Occurrence not found in the current plan: APPL(PLV*)
+EQQCL01I ==========================================================================================================================
+EQQCL00I Processing: CHKAPPL APPL(PLV*) STATUS(W)
+EQQCL0JI Searching for occurrence PLV* in CP
+EQQCL4XW Occurrence not found in the current plan: APPL(PLV*)
+READY
+END

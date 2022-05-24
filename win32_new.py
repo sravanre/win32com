@@ -3,8 +3,7 @@ import os
 import win32com.client
 import glob
 
-
-path = r"D:\mail_box"
+path = r"C:\Users\sravanr\Documents\win32com"
 today = datetime.date.today()
 
 my_mailbox = 'Liva Operations'
@@ -41,10 +40,12 @@ save_attachments('Liva batchrapport 202205')
 save_attachments('STATUS PAA PLP APPLIKATIONER')
 
 
+# changing the name of the files .csv to test.csv  
 filepath = os.getcwd()
 extension = 'csv'
 os.chdir(filepath)
 result = glob.glob('*.{}'.format(extension))
 print(result)
 
+os.rename(result[0], 'test.csv')
 
