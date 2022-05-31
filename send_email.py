@@ -13,14 +13,16 @@ outlookapi = outlook.GetNamespace('MAPI')
 
 
 mail = outlook.CreateItem(0)
-mail.To = 'sravan.kumar.reddy@keylane.com'
+#mail.From = 'sravan.kumar.reddy@keylane.com'
+mail.To = 'sravan.kumar.reddy@keylane.com; Mahesh.Sanikommu@keylane.com'
+mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com'
+#mail.CC = 'sravan.r@comakeit.com'
 # mail.Subject = 'Liva morgenrapport'+ today  
 mail.Subject = f"Liva morgenrapport {today}."
 mail.HTMLBody = '<h3>This is HTML Body</h3>'
 # mail.Body = 'Godmorgen'
-mail.Body = "Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en "
+mail.Body = "Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\nRegards, "
 mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
-# mail.Attachments.Add('c:\\sample.xlsx')
-# mail.Attachments.Add('c:\\sample2.xlsx')
-# mail.CC = 'somebody@company.com'
+
+#mail.Display()
 mail.Send()

@@ -160,7 +160,15 @@ my_file = open(textfilepath, "a+")
 with open(filepath, 'r') as fp:
     print("\t\t\t\t\t::::ERROR JOB LIST::::")
     my_file.writelines("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTopDanmark BatchJob Report\n\n")
-    my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
+    # for l_no, line in enumerate(fp):
+    #     for x in check_error:
+    #         if str(x) in line:
+    #             line1=line.strip()
+    #             line2=line1.split(',')
+    #             if x in line2[9]:
+    #                 my_file.writelines("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTopDanmark BatchJob Report\n\n")
+    #                 my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
+
     for l_no, line in enumerate(fp):
         for x in check_error:
 
@@ -177,6 +185,7 @@ with open(filepath, 'r') as fp:
                     #print("::::ERROR job Report::::")
                     print(line2[1])
                     #print(line2[1])
+                    my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
                     my_file.write('\n')
                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
 
