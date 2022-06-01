@@ -36,7 +36,7 @@ def save_attachments(subject):
                 attachment.SaveAsFile(os.path.join(path, str(attachment)))
 
 
-save_attachments('Liva batchrapport 202205')
+save_attachments('Liva batchrapport 202206')
 save_attachments('STATUS PAA PLP APPLIKATIONER')
 
 

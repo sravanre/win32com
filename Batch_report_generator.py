@@ -1,7 +1,7 @@
 from fpdf import FPDF
 import os
 import pathlib
-import pandas as pd
+#import pandas as pd
 import subprocess
 
 #checkE= 'STATUS(E)'
