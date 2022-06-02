@@ -82,10 +82,6 @@ for j in file2:
 compared_output_2files.close()
 
 
-
-
-
-
 # file_1 = open('result_TWS_Report.txt', 'r')
 # file_2 = open('TWSmapJobNames.txt', 'r')
 
@@ -157,37 +153,54 @@ comparedfile = os.getcwd() + "/compared_output_2files.txt"
 
 # search operation 
 my_file = open(textfilepath, "a+")
-with open(filepath, 'r') as fp:
-    print("\t\t\t\t\t::::ERROR JOB LIST::::")
-    my_file.writelines("\t\t\t\tTopDanmark BatchJob Report\n\n")
-    # for l_no, line in enumerate(fp):
-    #     for x in check_error:
-    #         if str(x) in line:
-    #             line1=line.strip()
-    #             line2=line1.split(',')
-    #             if x in line2[9]:
-    #                 my_file.writelines("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTopDanmark BatchJob Report\n\n")
-    #                 my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
 
+with open(filepath, 'r') as fp:
+    print("\t\t\t\t\t::::ERROR JOB LIST ::::::")               
+    
     for l_no, line in enumerate(fp):
         for x in check_error:
-
-        # search string
             if str(x) in line:
-                #print('string found in a file')
-                #print('Line Number:', l_no)
-                #print('Line:', line)
-            #print(line.strip())
-            # don't look for next lines
                 line1=line.strip()
                 line2=line1.split(',')
-                if x in line2[9]:
-                    #print("::::ERROR job Report::::")
+                if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
                     print(line2[1])
-                    #print(line2[1])
-                    my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
+                    my_file.writelines('\n')
+                    my_file.writelines("\n\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
                     my_file.write('\n')
                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+
+
+# with open(filepath, 'r') as fp:
+#     print("\t\t\t\t\t::::ERROR JOB LIST::::")
+#     my_file.writelines("\t\t\t\tTopDanmark BatchJob Report\n\n")
+#     # for l_no, line in enumerate(fp):
+#     #     for x in check_error:
+#     #         if str(x) in line:
+#     #             line1=line.strip()
+#     #             line2=line1.split(',')
+#     #             if x in line2[9]:
+#     #                 my_file.writelines("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTopDanmark BatchJob Report\n\n")
+#     #                 my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
+
+#     for l_no, line in enumerate(fp):
+#         for x in check_error:
+
+#         # search string
+#             if str(x) in line:
+#                 #print('string found in a file')
+#                 #print('Line Number:', l_no)
+#                 #print('Line:', line)
+#             #print(line.strip())
+#             # don't look for next lines
+#                 line1=line.strip()
+#                 line2=line1.split(',')
+#                 if x in line2[9]:
+#                     #print("::::ERROR job Report::::")
+#                     print(line2[1])
+#                     #print(line2[1])
+#                     my_file.writelines("\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
+#                     my_file.write('\n')
+#                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
 
 with open(filepath, 'r') as fp:
     print('\n')
@@ -225,22 +238,22 @@ with open(filepath, 'r') as fp:
                     my_file.write('\n')
                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
 
-
-with open(filepath, 'r') as fp:
-    print("\t\t\t\t\t:::::: COMPLETED WITH MINOR ERROR JOB LIST ::::::")               
-    # my_file.writelines('\n')
-    # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
-    for l_no, line in enumerate(fp):
-        for x in complete_warning:
-            if str(x) in line:
-                line1=line.strip()
-                line2=line1.split(',')
-                if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
-                    print(line2[1])
-                    my_file.writelines('\n')
-                    my_file.writelines("\n\t\t\t\t\t:::::::::::   COMPLETED WITH MINOR ERROR JOB LIST   :::::::::::")
-                    my_file.write('\n')
-                    my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")                        
+#  {{{ error code = 10 , is not required for now , }}}
+# with open(filepath, 'r') as fp:
+#     print("\t\t\t\t\t:::::: COMPLETED WITH MINOR ERROR JOB LIST ::::::")               
+#     # my_file.writelines('\n')
+#     # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
+#     for l_no, line in enumerate(fp):
+#         for x in complete_warning:
+#             if str(x) in line:
+#                 line1=line.strip()
+#                 line2=line1.split(',')
+#                 if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
+#                     print(line2[1])
+#                     my_file.writelines('\n')
+#                     my_file.writelines("\n\t\t\t\t\t:::::::::::   COMPLETED WITH MINOR ERROR JOB LIST   :::::::::::")
+#                     my_file.write('\n')
+#                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")                        
                     
 
 
@@ -250,9 +263,6 @@ with open(comparedfile, 'r') as fp:
     my_file.writelines('\n')
     for l_no, line in enumerate(fp):
         my_file.writelines(line)
-
-
-
 
 my_file.close()
 
