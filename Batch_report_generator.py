@@ -11,6 +11,8 @@ filepath = 'DP5PLST1.TXT'
 
 
 
+
+
 # removing the files before every new execution 
 
 textfile = pathlib.Path("result_TWS_Report.txt")
@@ -151,8 +153,19 @@ filepath = os.getcwd() + "/test.csv"
 textfilepath = os.getcwd() + "/result_morning_batch_report.txt"
 comparedfile = os.getcwd() + "/compared_output_2files.txt"
 
+error_result = os.getcwd() + "/error_result.txt"
+warning_result = os.getcwd() + "/warning_result.txt"
+inprogress_result = os.getcwd() + "/inprogress_result.txt"
+waiting_result = os.getcwd() + "/waiting_result.txt"
+
 # search operation 
 my_file = open(textfilepath, "a+")
+
+error_file = open(error_result, "a+")
+inprogress_file = open(inprogress_result, "a+")
+# waiting_file = open(waiting_result, "a+")
+warning_file = open(warning_result, "a+")
+
 
 with open(filepath, 'r') as fp:
     print("\t\t\t\t\t::::ERROR JOB LIST ::::::")               
@@ -168,6 +181,12 @@ with open(filepath, 'r') as fp:
                     my_file.writelines("\n\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
                     my_file.write('\n')
                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+
+                    error_file.writelines('\n')
+                    error_file.writelines("\n\t\t\t\t\t:::::::::::   ERROR JOBS   :::::::::::")
+                    error_file.write('\n')
+                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+                    
 
 
 # with open(filepath, 'r') as fp:
@@ -220,6 +239,11 @@ with open(filepath, 'r') as fp:
                     my_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
                     my_file.write('\n')
                     my_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
+
+                    inprogress_file.writelines('\n')
+                    inprogress_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
+                    inprogress_file.write('\n')
+                    inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
                
 
 with open(filepath, 'r') as fp:
@@ -237,6 +261,11 @@ with open(filepath, 'r') as fp:
                     my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
                     my_file.write('\n')
                     my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+
+                    warning_file.writelines('\n')
+                    warning_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
+                    warning_file.write('\n')
+                    warning_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
 
 #  {{{ error code = 10 , is not required for now , }}}
 # with open(filepath, 'r') as fp:
@@ -265,6 +294,12 @@ with open(comparedfile, 'r') as fp:
         my_file.writelines(line)
 
 my_file.close()
+error_file.close()
+inprogress_file.close()
+# waiting_file.close()
+warning_file.close()
+
+
 
 
 ### removing the duplicates on the text file itself
@@ -277,6 +312,32 @@ for line in open("result_morning_batch_report.txt", "r"):
         lines_seen.add(line)
 outfile.close()
 
+# removing error file dups remove
+
+lines_seen = set() # holds lines already seen
+outfile = open('error_file_dupsremoved.txt', "w")
+for line in open("error_result.txt", "r"):
+    if line not in lines_seen: # not a duplicate
+        outfile.write(line)
+        lines_seen.add(line)
+outfile.close()
+
+lines_seen = set() # holds lines already seen
+outfile = open('warning_file_dupsremoved.txt', "w")
+for line in open("warning_result.txt", "r"):
+    if line not in lines_seen: # not a duplicate
+        outfile.write(line)
+        lines_seen.add(line)
+outfile.close()
+
+
+lines_seen = set() # holds lines already seen
+outfile = open('inprogress_file_dupsremoved.txt', "w")
+for line in open("inprogress_result.txt", "r"):
+    if line not in lines_seen: # not a duplicate
+        outfile.write(line)
+        lines_seen.add(line)
+outfile.close()
 
 
 #### writing the result to a pdf file 
@@ -329,5 +390,6 @@ try:
 
 except:
     print("file removed")
+
 
 
