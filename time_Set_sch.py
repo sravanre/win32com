@@ -387,14 +387,26 @@ def win32_new():
 
     # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-    mail.Display()
-    # mail.Send()
+    # mail.Display()
+    mail.Send()
+
+    #removing the saved files
+
+    os.remove("test.csv")
+    os.remove("DP5PLST1.txt")
+
+    
 
 
 
-schedule.every().day.at("12:50").do(win32_new)
+schedule.every().day.at("14:10").do(win32_new)
 schedule.every().day.at("07:40").do(win32_new)
-schedule.every().day.at("12:49").do(win32_new)
+schedule.every().day.at("14:16").do(win32_new)
+
+schedule.every().hour.do(win32_new)
+# Run every 5 to 10 seconds.
+# schedule.every(5).to(10).minutes.do(win32_new)
+
 
 while True:
 
