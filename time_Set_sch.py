@@ -392,8 +392,9 @@ def win32_new():
 
 
 
-schedule.every().day.at("12:04").do(win32_new)
-
+schedule.every().day.at("12:50").do(win32_new)
+schedule.every().day.at("07:40").do(win32_new)
+schedule.every().day.at("12:49").do(win32_new)
 
 while True:
 
