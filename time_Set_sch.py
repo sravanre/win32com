@@ -13,7 +13,8 @@ import subprocess
 
 
 def win32_new():
-    path = r"C:\Users\sravanr\Documents\win32com"
+    # path = r"C:\Users\sravanr\Documents\win32com"
+    path = os.getcwd()
     today = datetime.date.today()
 
     my_mailbox = 'Liva Operations'
@@ -364,7 +365,8 @@ def win32_new():
 
 
 
-    path = r"C:\Users\sravanr\Documents\win32com"
+    # path = r"C:\Users\sravanr\Documents\win32com"
+    path = os.getcwd()
     today = datetime.date.today()
 
     my_mailbox = 'Liva Operations'
