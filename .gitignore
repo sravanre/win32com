@@ -4,3 +4,4 @@ win32.py
 Morning_batch_report.pdf
 test.csv
 *.txt
+*.csv
