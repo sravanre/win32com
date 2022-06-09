@@ -384,6 +384,13 @@ def Send_email_only_Batch_report_csv_file_present():
     # mail.Send()
 
 
+if os.path.isfile('test.csv'):
+    os.remove('test.csv')
+    print('removing old test.csv')
+
+if os.path.isfile('DP5PLST1.txt'):
+    os.remove('DP5PLST1.txt')
+    print('removing old TWS report')
 
 Pull_Attachments()
 

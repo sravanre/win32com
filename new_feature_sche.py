@@ -39,14 +39,7 @@ def win32_new():
             for l_no, line in enumerate(fp):
                 # search string
                 # if checkE in line:
-                #     #print('string found in a file')
-                #     #print('Line Number:', l_no)
-                #     #print('Line:', line)
-                #     print(line.strip())
-                #     # don't look for next 
-                    
-                #     my_file.writelines(line)
-                    
+              
 
                 if checkW in line:
                     #print(line.strip().split(' '))
@@ -260,9 +253,6 @@ def win32_new():
         path = os.getcwd()
         today = datetime.date.today()
 
-        os.remove('text.csv')
-        os.remove('DP5PLST1.txt')
-
         my_mailbox = 'Liva Operations'
 
         outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
@@ -314,9 +304,9 @@ def win32_new():
         # mail.Body = 'Godmorgen'
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
 
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n\n WE have received both the files.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
+        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n\n WE have received both the files.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n\n::::::::::: Ventende batchjobs :::::::::::\n\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -349,7 +339,7 @@ def win32_new():
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
         
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Ventende batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n No Batch job report received only TWS report is received, showing only Waiting jobs or Current jobs \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards,  "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Ventende batchjobs :::::::::::\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\n\n No Batch job report received only TWS report is received, showing only Waiting jobs or Current jobs \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards,  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
         mail.Display()
@@ -377,7 +367,7 @@ def win32_new():
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nNo TWS report sent till now . Sending job report of the Batch report only \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nNo TWS report sent till now . Sending job report of the Batch report only \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
         
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -385,7 +375,14 @@ def win32_new():
         # mail.Send()
 
 
+    if os.path.isfile('test.csv'):
+        os.remove('test.csv')
+    print('removing old test.csv')
 
+    if os.path.isfile('DP5PLST1.txt'):
+        os.remove('DP5PLST1.txt')
+        print('removing old TWS report')
+    
     Pull_Attachments()
 
     if os.path.isfile('test.csv') and os.path.isfile('DP5PLST1.txt'):
@@ -407,9 +404,10 @@ def win32_new():
         Send_email_only_TWS_txt_file_present()
 
 
+
 schedule.every().day.at("15:37").do(win32_new)
 schedule.every().day.at("07:40").do(win32_new)
-schedule.every().day.at("19:30").do(win32_new)
+schedule.every().day.at("20:14").do(win32_new)
 
 while True:
 
