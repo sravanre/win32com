@@ -400,15 +400,15 @@ def win32_new():
         # mail.Send()
 
 
-    # if os.path.isfile('test.csv'):
-    #     os.remove('test.csv')
-    #     print('removing old test.csv')
+    if os.path.isfile('test.csv'):
+        os.remove('test.csv')
+        print('removing old test.csv')
 
-    # if os.path.isfile('DP5PLST1.txt'):
-    #     os.remove('DP5PLST1.txt')
-    #     print('removing old TWS report')
+    if os.path.isfile('DP5PLST1.txt'):
+        os.remove('DP5PLST1.txt')
+        print('removing old TWS report')
     
-    # # Pull_Attachments()
+    Pull_Attachments()
     
 
     if os.path.isfile('test.csv') and os.path.isfile('DP5PLST1.txt'):
