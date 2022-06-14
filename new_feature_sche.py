@@ -277,7 +277,7 @@ def win32_new():
         result = glob.glob('*.{}'.format(extension))
         print(result)
 
-        if len(result) == 2:
+        if len(result) == 1:
             os.rename(result[0], 'test.csv')
         else:
             print('Pull attachment script has failed , not able to pull the attachments from the Inbaakke')
