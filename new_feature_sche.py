@@ -28,8 +28,6 @@ def win32_new():
     # if comparedfile1.exists():
     #     os.remove("compared_output_2files.txt")
 
-
-
     def TWS_textfile_processing():
         checkW= 'STATUS(W)'
         filepath = 'DP5PLST1.TXT'
@@ -37,26 +35,41 @@ def win32_new():
         my_file = open("result_TWS_Report.txt", "a+")
         with open(filepath, 'r') as fp:
             for l_no, line in enumerate(fp):
-                # search string
-                # if checkE in line:
-              
-
+            
+                   
                 if checkW in line:
                     #print(line.strip().split(' '))
                     line1 = line.strip().split(' ')
                     line2 = line1[3]
                     line3 = line2[5:-1]
 
-                    print(line3)
+                    line4 = line1[4]
+                    line5 = line4[3:-1]
+                    
+                    # print(line5)
+                    print(line3,line5)
 
                     
-                    my_file.writelines(line3)
+                    my_file.writelines(line3+","+line5)
+                    
                     my_file.writelines('\n')
                 # if checkERR in line:
                 #     print(line.strip())
                     
                 #     my_file.writelines(line)
 
+        my_file.close()
+        now1 = datetime.datetime.now()
+        todayMMDD = now1.strftime('%m%d')
+        my_file = open('result_TWS_Report_timestamp.txt', "a+")
+        with open('result_TWS_Report.txt', 'r') as fp:
+            for l_no, line in enumerate(fp):
+                if todayMMDD in line:
+                    print('timestp++++')
+                    print(line)
+
+                    my_file.writelines(line)
+        
         my_file.close()
 
 
@@ -65,23 +78,41 @@ def win32_new():
         compared_output_2files = open("compared_output_2files.txt", "a+")
         compared_output_2files.write("\t\t::::::::::: Ventende batchjobs :::::::::::")
         compared_output_2files.write('\n')
-        file1 = open('result_TWS_Report.txt', 'r').readlines()
+        file1 = open('result_TWS_Report_timestamp.txt', 'r').readlines()
         file2 = open('TWSmapJobNames.txt', 'r').readlines()
 
         # print(file1)
-
+        # try:
         # print(file2)
         for j in file2:
+            k = j.strip().split(',')            
             for i in file1:
-                if i.strip() in j:
+                    y = i.strip().split(',')
+                    # print(k)
+                    # print(y)
+                    try:
+                        if y[0] in k[0]:
                     #print(j.strip())
                     # print(j.strip().split(','))
-                    k = j.strip().split(',')
-                    print(k[1] + 'BatchJob')
-                    compared_output_2files.writelines(k[1] + 'BatchJob')
-                    compared_output_2files.writelines('\n')
+                    # k = j.strip().split(',')
+                            print(k[1]+'BatchJob',y[1])
+                            
+                            compared_output_2files.writelines('\n')
+                            compared_output_2files.writelines(k[1] + 'BatchJob'+ "      " + "{ "+y[1]+" }")
+                    except IndexError:
+                        pass
 
+                    # print(k)
+                    # print(y)
+                    
+                    # print(k[1] + 'BatchJob'+ y[1])
+                    # compared_output_2files.writelines(k[1] + 'BatchJob'+ "       " +"{ " +y[1]+ " }")
+                    # compared_output_2files.writelines('\n')
+
+            
         compared_output_2files.close()
+        
+        
 
 
         lines_seen = set() # holds lines already seen
@@ -91,6 +122,68 @@ def win32_new():
                 outfile.write(line)
                 lines_seen.add(line)
         outfile.close()
+
+    # def TWS_textfile_processing():
+    #     checkW= 'STATUS(W)'
+    #     filepath = 'DP5PLST1.TXT'
+
+    #     my_file = open("result_TWS_Report.txt", "a+")
+    #     with open(filepath, 'r') as fp:
+    #         for l_no, line in enumerate(fp):
+    #             # search string
+    #             # if checkE in line:
+              
+
+    #             if checkW in line:
+    #                 #print(line.strip().split(' '))
+    #                 line1 = line.strip().split(' ')
+    #                 line2 = line1[3]
+    #                 line3 = line2[5:-1]
+
+    #                 print(line3)
+
+                    
+    #                 my_file.writelines(line3)
+    #                 my_file.writelines('\n')
+    #             # if checkERR in line:
+    #             #     print(line.strip())
+                    
+    #             #     my_file.writelines(line)
+
+    #     my_file.close()
+
+
+    #     #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
+
+    #     compared_output_2files = open("compared_output_2files.txt", "a+")
+    #     compared_output_2files.write("\t\t::::::::::: Ventende batchjobs :::::::::::")
+    #     compared_output_2files.write('\n')
+    #     file1 = open('result_TWS_Report.txt', 'r').readlines()
+    #     file2 = open('TWSmapJobNames.txt', 'r').readlines()
+
+    #     # print(file1)
+
+    #     # print(file2)
+    #     for j in file2:
+    #         for i in file1:
+    #             if i.strip() in j:
+    #                 #print(j.strip())
+    #                 # print(j.strip().split(','))
+    #                 k = j.strip().split(',')
+    #                 print(k[1] + 'BatchJob')
+    #                 compared_output_2files.writelines(k[1] + 'BatchJob')
+    #                 compared_output_2files.writelines('\n')
+
+    #     compared_output_2files.close()
+
+
+    #     lines_seen = set() # holds lines already seen
+    #     outfile = open('compared_output_2files_dupsRemoved.txt', "w")
+    #     for line in open("compared_output_2files.txt", "r"):
+    #         if line not in lines_seen: # not a duplicate
+    #             outfile.write(line)
+    #             lines_seen.add(line)
+    #     outfile.close()
 
 
 
@@ -422,6 +515,7 @@ def win32_new():
 
 
     # Deleting all the old files on every run 
+    file_remove('result_TWS_Report_timestamp.txt')
     file_remove('error_result.txt')
     file_remove('inprogress_result.txt')
     file_remove('compared_output_2files.txt')
@@ -476,7 +570,7 @@ def win32_new():
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("10:25").do(win32_new)
+schedule.every().day.at("14:52").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 

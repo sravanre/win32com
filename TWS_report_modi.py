@@ -54,6 +54,18 @@ def TWS_textfile_processing():
             #     my_file.writelines(line)
 
     my_file.close()
+    now1 = datetime.datetime.now()
+    todayMMDD = now1.strftime('%m%d')
+    my_file = open('result_TWS_Report_timestamp.txt', "a+")
+    with open('result_TWS_Report.txt', 'r') as fp:
+        for l_no, line in enumerate(fp):
+            if todayMMDD in line:
+                print('timestp++++')
+                print(line)
+
+                my_file.writelines(line)
+    
+    my_file.close()
 
 
     #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
@@ -61,25 +73,41 @@ def TWS_textfile_processing():
     compared_output_2files = open("compared_output_2files.txt", "a+")
     compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
     compared_output_2files.write('\n')
-    file1 = open('result_TWS_Report.txt', 'r').readlines()
+    file1 = open('result_TWS_Report_timestamp.txt', 'r').readlines()
     file2 = open('TWSmapJobNames.txt', 'r').readlines()
 
     # print(file1)
-
+    # try:
     # print(file2)
     for j in file2:
+        k = j.strip().split(',')            
         for i in file1:
-            y = i.strip().split(',')
-
-            if y[0] in j:
+                y = i.strip().split(',')
+                # print(k)
+                # print(y)
+                try:
+                    if y[0] in k[0]:
                 #print(j.strip())
                 # print(j.strip().split(','))
-                k = j.strip().split(',')
-                print(k[1] + 'BatchJob'+ y[1])
-                compared_output_2files.writelines(k[1] + 'BatchJob'+ "       " +"{ " +y[1]+ " }")
-                compared_output_2files.writelines('\n')
+                # k = j.strip().split(',')
+                        print(k[1]+'BatchJob',y[1])
+                        
+                        compared_output_2files.writelines('\n')
+                        compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
+                except IndexError:
+                    pass
 
+                # print(k)
+                # print(y)
+                
+                # print(k[1] + 'BatchJob'+ y[1])
+                # compared_output_2files.writelines(k[1] + 'BatchJob'+ "       " +"{ " +y[1]+ " }")
+                # compared_output_2files.writelines('\n')
+
+        
     compared_output_2files.close()
+    
+    
 
 
     lines_seen = set() # holds lines already seen
