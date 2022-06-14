@@ -277,7 +277,10 @@ def win32_new():
         result = glob.glob('*.{}'.format(extension))
         print(result)
 
-        os.rename(result[0], 'test.csv')
+        if len(result) == 2:
+            os.rename(result[0], 'test.csv')
+        else:
+            print('Pull attachment script has failed , not able to pull the attachments from the Inbaakke')
 
 
 
@@ -400,14 +403,40 @@ def win32_new():
         # mail.Send()
 
 
-    if os.path.isfile('test.csv'):
-        os.remove('test.csv')
-        print('removing old test.csv')
+    def file_remove(filename):
+        if os.path.isfile(filename):
+            os.remove(filename)
+            print(f"Old File removed : {filename} ")
+        else:
+            print(f"file does'nt exist : {filename}")
 
-    if os.path.isfile('DP5PLST1.txt'):
-        os.remove('DP5PLST1.txt')
-        print('removing old TWS report')
-    
+
+
+    # if os.path.isfile('test.csv'):
+    #     os.remove('test.csv')
+    #     print('removing old test.csv')
+
+    # if os.path.isfile('DP5PLST1.txt'):
+    #     os.remove('DP5PLST1.txt')
+    #     print('removing old TWS report')
+
+
+    # Deleting all the old files on every run 
+    file_remove('error_result.txt')
+    file_remove('inprogress_result.txt')
+    file_remove('compared_output_2files.txt')
+    file_remove('result_TWS_Report.txt')
+    file_remove('inprogress_file_dupsremoved.txt')
+    file_remove('warning_file_dupsremoved.txt')
+    file_remove('error_file_dupsremoved.txt')
+    file_remove('result_morning_batch_report_dupsremoved.txt')
+    file_remove('result_morning_batch_report.txt')
+    file_remove('warning_result.txt')
+    file_remove('compared_output_2files_dupsRemoved.txt')
+    file_remove('DP5PLST1.txt')
+    file_remove('test.csv')
+
+    # Running the first script to pull the email attachments on every run 
     Pull_Attachments()
     
 
@@ -443,7 +472,7 @@ def win32_new():
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("08:55").do(win32_new)
+schedule.every().day.at("10:25").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 
