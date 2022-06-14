@@ -444,7 +444,7 @@ def win32_new():
         TWS_textfile_processing()
         csvfile_processing()
         Send_email_Both_files_present()
-        time = print(datetime.datetime.now())
+        time = datetime.datetime.now()
         print(f'Email sent for both the files at {time} ')
         
         #exit the program as both the files are there and output is received 
@@ -454,19 +454,19 @@ def win32_new():
     elif os.path.isfile('test.csv'):
         csvfile_processing()
         Send_email_only_Batch_report_csv_file_present()
-        time = print(datetime.datetime.now())
+        time = datetime.datetime.now()
         print(f'Email sent for only the Batch Report only, at {time}')
 
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
         Send_email_only_TWS_txt_file_present()
-        time = print(datetime.datetime.now())
+        time = datetime.datetime.now()
         print(f'Email sent for only the TWS report only, at {time} ')
     
     else:
         Send_email_as_both_files_are_missing()
-        time = print(datetime.datetime.now())
+        time = datetime.datetime.now()
         print(f'Email sent as NO Batch Report file , no TWS report received yet,  at {time} ')
 
 
