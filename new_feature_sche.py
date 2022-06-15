@@ -175,6 +175,7 @@ def win32_new():
 
         my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
         with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
+            my_file_time.writelines("\n\t\t::::::::::: Ventende  batchjobs :::::::::::\n")
             try:
                 for l_no, line in enumerate(fp):
                     line1 = line.strip().split(',')
@@ -606,7 +607,7 @@ def win32_new():
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("16:38").do(win32_new)
+schedule.every().day.at("18:21").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 
