@@ -11,8 +11,9 @@ import glob
 import os.path
 # import schedule
 import time
-
-
+# import maya
+from datetime import date
+from datetime import timedelta
 
 def TWS_textfile_processing():
     checkW= 'STATUS(W)'
@@ -55,15 +56,22 @@ def TWS_textfile_processing():
 
     my_file.close()
     now1 = datetime.datetime.now()
+    yesterday = now1 - timedelta(days = 1)
     todayMMDD = now1.strftime('%m%d')
+    yesterdayMMDD = yesterday.strftime('%m%d')
+    
     my_file = open('result_TWS_Report_timestamp.txt', "a+")
     with open('result_TWS_Report.txt', 'r') as fp:
         for l_no, line in enumerate(fp):
             if todayMMDD in line:
                 print('timestp++++')
                 print(line)
-
                 my_file.writelines(line)
+
+            if yesterdayMMDD in line:
+                print(line)
+                my_file.writelines(line)
+            
     
     my_file.close()
 
@@ -71,8 +79,8 @@ def TWS_textfile_processing():
     #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
 
     compared_output_2files = open("compared_output_2files.txt", "a+")
-    compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
-    compared_output_2files.write('\n')
+    # compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
+    # compared_output_2files.write('\n')
     file1 = open('result_TWS_Report_timestamp.txt', 'r').readlines()
     file2 = open('TWSmapJobNames.txt', 'r').readlines()
 
@@ -93,9 +101,16 @@ def TWS_textfile_processing():
                         print(k[1]+'BatchJob',y[1])
                         
                         compared_output_2files.writelines('\n')
-                        compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
+                        # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
+                        compared_output_2files.writelines(k[1]+','+'20'+y[1])
+
+                        
+                        
+                        #if 
                 except IndexError:
                     pass
+
+
 
                 # print(k)
                 # print(y)
@@ -114,9 +129,19 @@ def TWS_textfile_processing():
     outfile = open('compared_output_2files_dupsRemoved.txt', "w")
     for line in open("compared_output_2files.txt", "r"):
         if line not in lines_seen: # not a duplicate
-            outfile.write(line)
-            lines_seen.add(line)
+            if not line.isspace():
+                outfile.write(line)
+                lines_seen.add(line)
     outfile.close()
+
+    # with open('compared_output_2files_dupsRemoved.txt', 'rw') as file:
+    #     for line in file:
+    #         if not line.isspace():
+    #             file.write(line)
+
 
 
 TWS_textfile_processing()
+
+
+
