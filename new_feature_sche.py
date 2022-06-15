@@ -11,7 +11,8 @@ import glob
 import os.path
 import schedule
 import time
-
+from datetime import date
+from datetime import timedelta
 
 def win32_new():
 
@@ -35,8 +36,17 @@ def win32_new():
         my_file = open("result_TWS_Report.txt", "a+")
         with open(filepath, 'r') as fp:
             for l_no, line in enumerate(fp):
-            
-                   
+                # search string
+                # if checkE in line:
+                #     #print('string found in a file')
+                #     #print('Line Number:', l_no)
+                #     #print('Line:', line)
+                #     print(line.strip())
+                #     # don't look for next 
+                    
+                #     my_file.writelines(line)
+                    
+
                 if checkW in line:
                     #print(line.strip().split(' '))
                     line1 = line.strip().split(' ')
@@ -60,15 +70,22 @@ def win32_new():
 
         my_file.close()
         now1 = datetime.datetime.now()
+        yesterday = now1 - timedelta(days = 1)
         todayMMDD = now1.strftime('%m%d')
+        yesterdayMMDD = yesterday.strftime('%m%d')
+        
         my_file = open('result_TWS_Report_timestamp.txt', "a+")
         with open('result_TWS_Report.txt', 'r') as fp:
             for l_no, line in enumerate(fp):
                 if todayMMDD in line:
                     print('timestp++++')
                     print(line)
-
                     my_file.writelines(line)
+
+                if yesterdayMMDD in line:
+                    print(line)
+                    my_file.writelines(line)
+                
         
         my_file.close()
 
@@ -76,8 +93,8 @@ def win32_new():
         #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
 
         compared_output_2files = open("compared_output_2files.txt", "a+")
-        compared_output_2files.write("\t\t::::::::::: Ventende batchjobs :::::::::::")
-        compared_output_2files.write('\n')
+        # compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
+        # compared_output_2files.write('\n')
         file1 = open('result_TWS_Report_timestamp.txt', 'r').readlines()
         file2 = open('TWSmapJobNames.txt', 'r').readlines()
 
@@ -98,9 +115,16 @@ def win32_new():
                             print(k[1]+'BatchJob',y[1])
                             
                             compared_output_2files.writelines('\n')
-                            compared_output_2files.writelines(k[1] + 'BatchJob'+ "      " + "{ "+y[1]+" }")
+                            # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
+                            compared_output_2files.writelines(k[1]+','+'20'+y[1])
+
+                            
+                            
+                            #if 
                     except IndexError:
                         pass
+
+
 
                     # print(k)
                     # print(y)
@@ -119,72 +143,82 @@ def win32_new():
         outfile = open('compared_output_2files_dupsRemoved.txt', "w")
         for line in open("compared_output_2files.txt", "r"):
             if line not in lines_seen: # not a duplicate
-                outfile.write(line)
-                lines_seen.add(line)
+                if not line.isspace():
+                    outfile.write(line)
+                    lines_seen.add(line)
         outfile.close()
 
-    # def TWS_textfile_processing():
-    #     checkW= 'STATUS(W)'
-    #     filepath = 'DP5PLST1.TXT'
+        # with open('compared_output_2files_dupsRemoved.txt', 'rw') as file:
+        #     for line in file:
+        #         if not line.isspace():
+        #             file.write(line)
 
-    #     my_file = open("result_TWS_Report.txt", "a+")
-    #     with open(filepath, 'r') as fp:
-    #         for l_no, line in enumerate(fp):
-    #             # search string
-    #             # if checkE in line:
-              
 
-    #             if checkW in line:
-    #                 #print(line.strip().split(' '))
-    #                 line1 = line.strip().split(' ')
-    #                 line2 = line1[3]
-    #                 line3 = line2[5:-1]
+    def time1():
+        now1 = datetime.datetime.now()
+        yesterday = now1 - timedelta(days = 1)
+        todayMMDD = now1.strftime('%d')
+        yesterdayMMDD = yesterday.strftime('%d')
 
-    #                 print(line3)
+        print(todayMMDD)
+        print(yesterdayMMDD)
+        print(type(int(todayMMDD)))
+
+        value00 = '00'
+        value01 = '01'
+        value02 = '02'
+        value03 = '03'
+        value04 = '04'
+        value05 = '05'
+        value06 = '06'
+        value07 = '07'
+
+        my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
+        with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
+            try:
+                for l_no, line in enumerate(fp):
+                    line1 = line.strip().split(',')
+                    line2 = line1[1]
+                    line3 = line2[6:-4]
+                    if int(line3) == int(yesterdayMMDD):
+                        line4 = line2[8:-2]
+                        if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
+                            print('yesterday output ')
+                            print(line1)
+                            print(line)
+                            my_file_time.writelines(line)
+                            # my_file_time.writelines('\n')
+
+                    if int(line3) == int(todayMMDD):
+                        line4 = line2[8:-2]
+                        # if int(line4) == 0 or int(line4) == 1 or int(line4) == 2 or int(line4) == 3 or int(line4) == 7 or int(line4) == 22 or int(line4) == 23:
+                        if line4 == value00 or line4 == value02 or line4 == value03 or line4 == value04 or line4 == value05 or line4 == value06 or line4 == value07 or line4 == value01:    
+                            print('today jobs ')
+                            print(line1)
+                            print(line)
+                            my_file_time.writelines(line)
+                            # my_file_time.writelines('\n')
+
 
                     
-    #                 my_file.writelines(line3)
-    #                 my_file.writelines('\n')
-    #             # if checkERR in line:
-    #             #     print(line.strip())
-                    
-    #             #     my_file.writelines(line)
-
-    #     my_file.close()
+                    # if todayMMDD in line:
 
 
-    #     #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
+                    # # print(line)
+                    # line1 = line.strip().split(',')
+                    # # print(line1)
+                    # line2 = line1[1]
+                    # # print(line2)
+                    # line3 = line2[8:-2]
+                    # print(line3)
+                    # if int(line3) == 17:
+                    #     print('outputttttttttttttt')
+                    #     print(line1)
+                    #     print(line)
 
-    #     compared_output_2files = open("compared_output_2files.txt", "a+")
-    #     compared_output_2files.write("\t\t::::::::::: Ventende batchjobs :::::::::::")
-    #     compared_output_2files.write('\n')
-    #     file1 = open('result_TWS_Report.txt', 'r').readlines()
-    #     file2 = open('TWSmapJobNames.txt', 'r').readlines()
-
-    #     # print(file1)
-
-    #     # print(file2)
-    #     for j in file2:
-    #         for i in file1:
-    #             if i.strip() in j:
-    #                 #print(j.strip())
-    #                 # print(j.strip().split(','))
-    #                 k = j.strip().split(',')
-    #                 print(k[1] + 'BatchJob')
-    #                 compared_output_2files.writelines(k[1] + 'BatchJob')
-    #                 compared_output_2files.writelines('\n')
-
-    #     compared_output_2files.close()
-
-
-    #     lines_seen = set() # holds lines already seen
-    #     outfile = open('compared_output_2files_dupsRemoved.txt', "w")
-    #     for line in open("compared_output_2files.txt", "r"):
-    #         if line not in lines_seen: # not a duplicate
-    #             outfile.write(line)
-    #             lines_seen.add(line)
-    #     outfile.close()
-
+            except IndexError:
+                pass
+        my_file_time.close()
 
 
 
@@ -402,7 +436,7 @@ def win32_new():
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n\n WE have received both the files.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n\n::::::::::: Ventende batchjobs :::::::::::\n\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\n\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\nRegards\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n:::Ventende Jobs:::\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\nRegards\nKeylane "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -529,6 +563,7 @@ def win32_new():
     file_remove('compared_output_2files_dupsRemoved.txt')
     file_remove('DP5PLST1.txt')
     file_remove('test.csv')
+    file_remove('compared_output_2files_dupsRemoved_Time_Filtered.txt')
 
     # Running the first script to pull the email attachments on every run 
     Pull_Attachments()
@@ -536,6 +571,7 @@ def win32_new():
 
     if os.path.isfile('test.csv') and os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
+        time1()
         csvfile_processing()
         Send_email_Both_files_present()
         time = datetime.datetime.now()
@@ -570,7 +606,7 @@ def win32_new():
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("14:52").do(win32_new)
+schedule.every().day.at("16:38").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 
