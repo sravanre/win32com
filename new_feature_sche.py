@@ -183,39 +183,33 @@ def win32_new():
                     line3 = line2[6:-4]
                     if int(line3) == int(yesterdayMMDD):
                         line4 = line2[8:-2]
-                        if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
-                            print('yesterday output ')
-                            print(line1)
-                            print(line)
-                            my_file_time.writelines(line)
+                        # if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
+                        for i in range(8,24):
+                            if line4 == '0'+str(i):
+                                print('yesterday output , time window 8,9,AM ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line)
                             # my_file_time.writelines('\n')
+                            elif line4 == str(i):
+                                print('yesterday output,10 ,11,12,13,14,15 ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line1[0]+"    "+line1[1])
+                                my_file_time.writelines('\n')  
 
                     if int(line3) == int(todayMMDD):
                         line4 = line2[8:-2]
                         # if int(line4) == 0 or int(line4) == 1 or int(line4) == 2 or int(line4) == 3 or int(line4) == 7 or int(line4) == 22 or int(line4) == 23:
-                        if line4 == value00 or line4 == value02 or line4 == value03 or line4 == value04 or line4 == value05 or line4 == value06 or line4 == value07 or line4 == value01:    
-                            print('today jobs ')
-                            print(line1)
-                            print(line)
-                            my_file_time.writelines(line)
-                            # my_file_time.writelines('\n')
-
-
-                    
-                    # if todayMMDD in line:
-
-
-                    # # print(line)
-                    # line1 = line.strip().split(',')
-                    # # print(line1)
-                    # line2 = line1[1]
-                    # # print(line2)
-                    # line3 = line2[8:-2]
-                    # print(line3)
-                    # if int(line3) == 17:
-                    #     print('outputttttttttttttt')
-                    #     print(line1)
-                    #     print(line)
+                        # if line4 == value00 or line4 == value02 or line4 == value03 or line4 == value04 or line4 == value05 or line4 == value06 or line4 == value07 or line4 == value01:    
+                        for i in range(0,8):
+                            if line4 == '0'+str(i):
+                                print('today jobs ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line1[0]+"    "+line1[1])
+                                my_file_time.writelines('\n')
+                          
 
             except IndexError:
                 pass
@@ -607,7 +601,7 @@ def win32_new():
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("19:16").do(win32_new)
+schedule.every().day.at("14:42").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 
