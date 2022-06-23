@@ -143,9 +143,10 @@ def win32_new():
         outfile = open('compared_output_2files_dupsRemoved.txt', "w")
         for line in open("compared_output_2files.txt", "r"):
             if line not in lines_seen: # not a duplicate
-                if not line.isspace():
-                    outfile.write(line)
-                    lines_seen.add(line)
+                if 'BatchReport' not in line and 'DmReconcile' not in line:
+                    if not line.isspace():
+                        outfile.write(line)
+                        lines_seen.add(line)
         outfile.close()
 
         # with open('compared_output_2files_dupsRemoved.txt', 'rw') as file:
@@ -595,13 +596,13 @@ def win32_new():
         print(f'Email sent as NO Batch Report file , no TWS report received yet,  at {time} ')
 
 
-
+# Running the code for infinite loop
 
 
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("14:42").do(win32_new)
+schedule.every().day.at("15:21").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 

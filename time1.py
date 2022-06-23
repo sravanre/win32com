@@ -22,18 +22,18 @@ yesterday = now1 - timedelta(days = 1)
 todayMMDD = now1.strftime('%d')
 yesterdayMMDD = yesterday.strftime('%d')
 
-print(todayMMDD)
-print(yesterdayMMDD)
+print(todayMMDD)  
+print(yesterdayMMDD)  
 print(type(int(todayMMDD)))
 
-value00 = '00'
-value01 = '01'
-value02 = '02'
-value03 = '03'
-value04 = '04'
-value05 = '05'
-value06 = '06'
-value07 = '07'
+# value00 = '00'
+# value01 = '01'
+# value02 = '02'
+# value03 = '03'
+# value04 = '04'
+# value05 = '05'
+# value06 = '06'
+# value07 = '07'
 
 my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
 with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
