@@ -465,7 +465,7 @@ def win32_new():
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
         
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards,  "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards,  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
         mail.Display()
@@ -602,7 +602,7 @@ def win32_new():
 schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
 schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
 schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("15:21").do(win32_new)
+schedule.every().day.at("12:26").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 
