@@ -165,14 +165,6 @@ def win32_new():
         print(yesterdayMMDD)
         print(type(int(todayMMDD)))
 
-        value00 = '00'
-        value01 = '01'
-        value02 = '02'
-        value03 = '03'
-        value04 = '04'
-        value05 = '05'
-        value06 = '06'
-        value07 = '07'
 
         my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
         with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
@@ -390,7 +382,18 @@ def win32_new():
                         print(attachment.FileName)
                         attachment.SaveAsFile(os.path.join(path, str(attachment)))
         
-        save_attachments('Liva batchrapport 202206')
+        # save_attachments('Liva batchrapport 202205')
+        try:
+            print('trying to next june month')
+            save_attachments('Liva batchrapport 202205')
+            save_attachments('Liva batchrapport 202206')
+            save_attachments('Liva batchrapport 202207')
+            
+        
+        except IndexError:
+            pass
+
+
         save_attachments('STATUS PAA PLP APPLIKATIONER')
 
         # changing the name of the files .csv to test.csv  
@@ -421,7 +424,7 @@ def win32_new():
         mail = outlook.CreateItem(0)
         #mail.From = 'sravan.kumar.reddy@keylane.com'
         mail.To = 'sravan.kumar.reddy@keylane.com'
-        # mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
+        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
@@ -432,7 +435,7 @@ def win32_new():
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n\n WE have received both the files.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n\n::::::::::: Ventende batchjobs :::::::::::\n\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\nRegards\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -453,7 +456,7 @@ def win32_new():
 
         mail = outlook.CreateItem(0)
         mail.To = 'sravan.kumar.reddy@keylane.com'
-        # mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
+        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
@@ -465,11 +468,11 @@ def win32_new():
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
         
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards,  "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        mail.Display()
-        # mail.Send()
+        # mail.Display()
+        mail.Send()
 
     def Send_email_only_Batch_report_csv_file_present():
         path = os.getcwd()
@@ -483,7 +486,7 @@ def win32_new():
 
         mail = outlook.CreateItem(0)
         mail.To = 'sravan.kumar.reddy@keylane.com'
-        # mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
+        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
@@ -493,12 +496,12 @@ def win32_new():
 
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nIngen TWS-rapport modtaget om morgenen, men kun Batch Job-rapport modtaget. \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nIngen TWS-rapport modtaget om morgenen, men kun Batch Job-rapport modtaget. \n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\n\n\nMed venlig hilsen,\nKeylane "
         
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        mail.Display()
-        # mail.Send()
+        # mail.Display()
+        mail.Send()
 
         
     def Send_email_as_both_files_are_missing():
@@ -514,16 +517,16 @@ def win32_new():
 
         mail = outlook.CreateItem(0)
         mail.To = 'sravan.kumar.reddy@keylane.com'
-        # mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
+        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
         # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nRegards, "
-        mail.Display()
-        # mail.Send()
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nMed venlig hilsen, "
+        # mail.Display()
+        mail.Send()
 
 
     def file_remove(filename):
@@ -562,15 +565,15 @@ def win32_new():
     file_remove('compared_output_2files_dupsRemoved_Time_Filtered.txt')
 
     # Running the first script to pull the email attachments on every run 
+    time = datetime.datetime.now()
+    print(f'Script started at  {time} ')
     Pull_Attachments()
-    
 
     if os.path.isfile('test.csv') and os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
         time1()
         csvfile_processing()
         Send_email_Both_files_present()
-        time = datetime.datetime.now()
         print(f'Email sent for both the files at {time} ')
         
         #exit the program as both the files are there and output is received 
@@ -580,29 +583,27 @@ def win32_new():
     elif os.path.isfile('test.csv'):
         csvfile_processing()
         Send_email_only_Batch_report_csv_file_present()
-        time = datetime.datetime.now()
         print(f'Email sent for only the Batch Report only, at {time}')
 
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
+        time1()
         Send_email_only_TWS_txt_file_present()
-        time = datetime.datetime.now()
         print(f'Email sent for only the TWS report only, at {time} ')
     
     else:
         Send_email_as_both_files_are_missing()
-        time = datetime.datetime.now()
         print(f'Email sent as NO Batch Report file , no TWS report received yet,  at {time} ')
 
 
 # Running the code for infinite loop
 
 
-schedule.every().day.at("10:50").do(win32_new)    # 7:20 AM Copenhagen time
-schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
-schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-schedule.every().day.at("12:26").do(win32_new)
+schedule.every().day.at("07:22").do(win32_new)    # 7:20 AM Copenhagen time
+# schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
+# schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
+# schedule.every().day.at("13:04").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
 
