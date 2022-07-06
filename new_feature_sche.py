@@ -2,7 +2,6 @@
 from fpdf import FPDF
 import os
 import pathlib
-#import pandas as pd
 import subprocess
 import datetime
 import os
@@ -45,7 +44,6 @@ def win32_new():
                 #     # don't look for next 
                     
                 #     my_file.writelines(line)
-                    
 
                 if checkW in line:
                     #print(line.strip().split(' '))
@@ -118,20 +116,8 @@ def win32_new():
                             # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
                             compared_output_2files.writelines(k[1]+','+'20'+y[1])
 
-                            
-                            
-                            #if 
                     except IndexError:
                         pass
-
-
-
-                    # print(k)
-                    # print(y)
-                    
-                    # print(k[1] + 'BatchJob'+ y[1])
-                    # compared_output_2files.writelines(k[1] + 'BatchJob'+ "       " +"{ " +y[1]+ " }")
-                    # compared_output_2files.writelines('\n')
 
             
         compared_output_2files.close()
@@ -249,6 +235,7 @@ def win32_new():
         warning_result = os.getcwd() + "/warning_result.txt"
         inprogress_result = os.getcwd() + "/inprogress_result.txt"
         waiting_result = os.getcwd() + "/waiting_result.txt"
+        critical_Result = os.getcwd() + "/critical_result.txt"
 
         # search operation 
         my_file = open(textfilepath, "a+")
@@ -256,7 +243,8 @@ def win32_new():
         error_file = open(error_result, "a+")
         inprogress_file = open(inprogress_result, "a+")
         # waiting_file = open(waiting_result, "a+")
-        warning_file = open(warning_result, "a+")        
+        warning_file = open(warning_result, "a+")   
+        critical_file = open(critical_Result, "a+")     
 
         with open(filepath, 'r') as fp:
             print("\t\t\t\t\t::::ERROR JOB LIST ::::::")               
@@ -277,6 +265,23 @@ def win32_new():
                             error_file.writelines("\n\t\t::::::::::: Fejlet batchjobs :::::::::::")
                             error_file.write('\n')
                             error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+
+    ## Code for creating a list of Critical job Errors 
+
+        with open(filepath, 'r') as fp:
+            print("\t\t\t\t\t::::Critical JOB Error LIST ::::::")               
+                
+            for l_no, line in enumerate(fp):
+                for x in check_error:
+                    if str(x) in line:
+                        line1=line.strip()
+                        line2=line1.split(',')
+                        if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
+                                    
+                            if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
+                                critical_file.writelines(line2[1])    
+                                    
+
 
 
         with open(filepath, 'r') as fp:
@@ -340,7 +345,7 @@ def win32_new():
                 lines_seen.add(line)
         outfile.close()
 
-        # removing error file dups removed # Removing the duplicates in the Error jobs final ist 
+        # removing error file dups removed
 
         lines_seen = set() # holds lines already seen
         outfile = open('error_file_dupsremoved.txt', "w")
@@ -350,8 +355,6 @@ def win32_new():
                 lines_seen.add(line)
         outfile.close()
 
-        # Removing the duplicates in the Warnings jobs final ist
-
         lines_seen = set() # holds lines already seen
         outfile = open('warning_file_dupsremoved.txt', "w")
         for line in open("warning_result.txt", "r"):
@@ -360,7 +363,6 @@ def win32_new():
                 lines_seen.add(line)
         outfile.close()
 
-        # Removing the duplicates in the Inprogress jobs final ist
 
         lines_seen = set() # holds lines already seen
         outfile = open('inprogress_file_dupsremoved.txt', "w")
@@ -381,7 +383,7 @@ def win32_new():
         my_mailbox = 'Liva Operations'
 
         outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-        inbox = outlook.Folders['Liva Operations'].Folders['indbakke']
+        inbox = outlook.Folders['liva operations'].Folders['indbakke']
         messages = inbox.Items
 
         print(inbox.Name)
@@ -396,9 +398,8 @@ def win32_new():
         # save_attachments('Liva batchrapport 202205')
         try:
             print('trying to next june month')
-            save_attachments('Liva batchrapport 202205')
-            save_attachments('Liva batchrapport 202206')
             save_attachments('Liva batchrapport 202207')
+            save_attachments('Liva batchrapport 202208')
             
         
         except IndexError:
@@ -434,19 +435,14 @@ def win32_new():
 
         mail = outlook.CreateItem(0)
         #mail.From = 'sravan.kumar.reddy@keylane.com'
-        mail.To = 'sravan.kumar.reddy@keylane.com'
-        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com; Carsten.Hald@keylane.com; Maja.Blom.Nielsen@keylane.com; Richardt.Lisbygd@keylane.com '
+        mail.To = 'liva-operations@keylane.com'
+        # mail.CC = 'liva-operations@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
-
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n\n WE have received both the files.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
-
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n\n::::::::::: Ventende batchjobs :::::::::::\n\n{open('compared_output_2files_dupsRemoved.txt','r').read()}\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('error_file_dupsremoved.txt','r').read()}\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -466,20 +462,14 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        mail.To = 'sravan.kumar.reddy@keylane.com'
-        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com; Carsten.Hald@keylane.com; Maja.Blom.Nielsen@keylane.com; Richardt.Lisbygd@keylane.com '
-        #mail.CC = 'sravan.r@comakeit.com'
+        mail.To = 'liva-operations@keylane.com'
+        # mail.CC = 'liva-operations@keylane.com'
+        # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
-
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
-
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
-        
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
         # mail.Display()
@@ -496,23 +486,20 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        mail.To = 'sravan.kumar.reddy@keylane.com'
-        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com; Carsten.Hald@keylane.com; Maja.Blom.Nielsen@keylane.com; Richardt.Lisbygd@keylane.com '
-        #mail.CC = 'sravan.r@comakeit.com'
+        mail.To = 'liva-operations@keylane.com'
+        # mail.CC = 'liva-operations@keylane.com'
+        # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
-
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('error_file_dupsremoved.txt','r').read()}\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nIngen TWS-rapport modtaget om morgenen, men kun Batch Job-rapport modtaget. \n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
         
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        mail.Display()
-        # mail.Send()
+        # mail.Display()
+        mail.Send()
 
         
     def Send_email_as_both_files_are_missing():
@@ -527,14 +514,12 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        mail.To = 'sravan.kumar.reddy@keylane.com'
-        mail.CC = 'Ahmed.Fikry@keylane.com; Kim.Faurdal@keylane.com; Eva.Hegelund@keylane.com; Mahesh.Sanikommu@keylane.com; Carsten.Hald@keylane.com; Maja.Blom.Nielsen@keylane.com; Richardt.Lisbygd@keylane.com '
-        #mail.CC = 'sravan.r@comakeit.com'
+        mail.To = 'liva-operations@keylane.com'
+        # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}."
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
         # mail.Display()
         mail.Send()
@@ -547,15 +532,6 @@ def win32_new():
         else:
             print(f"File doesn't exist : {filename}")
 
-
-
-    # if os.path.isfile('test.csv'):
-    #     os.remove('test.csv')
-    #     print('removing old test.csv')
-
-    # if os.path.isfile('DP5PLST1.txt'):
-    #     os.remove('DP5PLST1.txt')
-    #     print('removing old TWS report')
 
 
     # Deleting all the old files on every run 
@@ -574,6 +550,7 @@ def win32_new():
     file_remove('DP5PLST1.txt')
     file_remove('test.csv')
     file_remove('compared_output_2files_dupsRemoved_Time_Filtered.txt')
+    file_remove('critical_result.txt')
 
     # Running the first script to pull the email attachments on every run 
     time = datetime.datetime.now()
@@ -610,13 +587,12 @@ def win32_new():
 
 # Running the code for infinite loop
 
+schedule.every().monday.at("07:15").do(win32_new)
+schedule.every().tuesday.at("07:15").do(win32_new)
+schedule.every().wednesday.at("19:36").do(win32_new)
+schedule.every().thursday.at("07:15").do(win32_new)
+schedule.every().friday.at("07:15").do(win32_new)
 
-schedule.every().day.at("07:22").do(win32_new)    # 7:20 AM Copenhagen time
-# schedule.every().day.at("11:00").do(win32_new)    # 7:30 AM Copenhagen time
-# schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
-# schedule.every().day.at("13:04").do(win32_new)
-# schedule.every().day.at("15:37").do(win32_new)
-schedule.every().day.at("13:36").do(win32_new)
 
 while True:
 
