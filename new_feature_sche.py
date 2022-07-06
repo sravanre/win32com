@@ -340,7 +340,7 @@ def win32_new():
                 lines_seen.add(line)
         outfile.close()
 
-        # removing error file dups removed
+        # removing error file dups removed # Removing the duplicates in the Error jobs final ist 
 
         lines_seen = set() # holds lines already seen
         outfile = open('error_file_dupsremoved.txt', "w")
@@ -350,6 +350,8 @@ def win32_new():
                 lines_seen.add(line)
         outfile.close()
 
+        # Removing the duplicates in the Warnings jobs final ist
+
         lines_seen = set() # holds lines already seen
         outfile = open('warning_file_dupsremoved.txt', "w")
         for line in open("warning_result.txt", "r"):
@@ -358,13 +360,15 @@ def win32_new():
                 lines_seen.add(line)
         outfile.close()
 
+        # Removing the duplicates in the Inprogress jobs final ist
 
         lines_seen = set() # holds lines already seen
         outfile = open('inprogress_file_dupsremoved.txt', "w")
         for line in open("inprogress_result.txt", "r"):
             if line not in lines_seen: # not a duplicate
-                outfile.write(line)
-                lines_seen.add(line)
+                if "BatchReportBatchJob" not in line:
+                    outfile.write(line)
+                    lines_seen.add(line)
         outfile.close()
 
 
@@ -446,8 +450,8 @@ def win32_new():
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        # mail.Display()
-        mail.Send()
+        mail.Display()
+        # mail.Send()
         
 
     def Send_email_only_TWS_txt_file_present():
@@ -507,8 +511,8 @@ def win32_new():
         
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        # mail.Display()
-        mail.Send()
+        mail.Display()
+        # mail.Send()
 
         
     def Send_email_as_both_files_are_missing():
@@ -612,14 +616,11 @@ schedule.every().day.at("07:22").do(win32_new)    # 7:20 AM Copenhagen time
 # schedule.every().day.at("11:15").do(win32_new)    # 7:45 AM Copenhagen time
 # schedule.every().day.at("13:04").do(win32_new)
 # schedule.every().day.at("15:37").do(win32_new)
-schedule.every().day.at("15:19").do(win32_new)
+schedule.every().day.at("13:36").do(win32_new)
 
 while True:
 
     schedule.run_pending()
     time.sleep(1)
-
-
-
 
 
