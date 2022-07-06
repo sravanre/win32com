@@ -5,11 +5,14 @@ import keys
 
 client = Client(keys.account_sid, keys.auth_token)
 
+alert content
+
 message = client.messages.create(
-    body="new message from the Twilio to sravan kumar ",
+    body= {open('inprogress_file_dupsremoved.txt','r').read()},
     from_=keys.twilio_number,
-    to=keys.mahesh_number
+    to=keys.sravan_number
 )
 
 
 print(message.body)
+
