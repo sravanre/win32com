@@ -12,6 +12,9 @@ import schedule
 import time
 from datetime import date
 from datetime import timedelta
+from twilio.rest import Client
+import keys
+
 
 def win32_new():
 
@@ -334,6 +337,7 @@ def win32_new():
         inprogress_file.close()
         # waiting_file.close()
         warning_file.close()
+        critical_file.close()
 
         ### removing the duplicates on the text file itself
 
@@ -532,6 +536,27 @@ def win32_new():
         else:
             print(f"File doesn't exist : {filename}")
 
+    # SMS functionality for the Critical jobs
+
+    def twilio_SMS():
+        client = Client(keys.account_sid, keys.auth_token)
+        filepath_critical_result = os.getcwd() + "/critical_result.txt"
+
+        alert = open('critical_result.txt', 'r')
+        alertMessage = alert.read()
+        alert.close()
+        # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
+        if os.path.getsize(filepath_critical_result) != 0: 
+
+            message = client.messages.create(
+                body= f'Here is the list of the critical job that has come under the error \n************\n{alertMessage}',
+                from_=keys.twilio_number,
+                to=keys.sravan_number
+            )
+            print(message.body)
+        else:
+            print("There are no Critical jobs found")
+
 
 
     # Deleting all the old files on every run 
@@ -563,6 +588,7 @@ def win32_new():
         csvfile_processing()
         Send_email_Both_files_present()
         print(f'Email sent for both the files at {time} ')
+        twilio_SMS()
         
         #exit the program as both the files are there and output is received 
         # exit()
@@ -590,7 +616,7 @@ def win32_new():
 schedule.every().monday.at("07:15").do(win32_new)
 schedule.every().tuesday.at("07:15").do(win32_new)
 schedule.every().wednesday.at("19:36").do(win32_new)
-schedule.every().thursday.at("07:15").do(win32_new)
+schedule.every().thursday.at("11:37").do(win32_new)
 schedule.every().friday.at("07:15").do(win32_new)
 
 
