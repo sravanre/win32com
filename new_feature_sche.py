@@ -549,10 +549,12 @@ def win32_new():
         if os.path.getsize(filepath_critical_result) != 0: 
 
             message = client.messages.create(
-                body= f'Here is the list of the critical job that has come under the error \n************\n{alertMessage}',
+                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
                 from_=keys.twilio_number,
                 to=keys.sravan_number
             )
+
+            
             print(message.body)
         else:
             print("There are no Critical jobs found")
