@@ -443,7 +443,7 @@ def win32_new():
         # mail.CC = 'liva-operations@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
-        mail.Subject = f"Liva morgenrapport {today}."
+        mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('error_file_dupsremoved.txt','r').read()}\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
@@ -470,7 +470,7 @@ def win32_new():
         # mail.CC = 'liva-operations@keylane.com'
         # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
-        mail.Subject = f"Liva morgenrapport {today}."
+        mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
@@ -494,7 +494,7 @@ def win32_new():
         # mail.CC = 'liva-operations@keylane.com'
         # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
-        mail.Subject = f"Liva morgenrapport {today}."
+        mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
 
@@ -521,7 +521,7 @@ def win32_new():
         mail.To = 'liva-operations@keylane.com'
         # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
-        mail.Subject = f"Liva morgenrapport {today}."
+        mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
@@ -554,7 +554,7 @@ def win32_new():
                 to=keys.sravan_number
             )
 
-            
+
             print(message.body)
         else:
             print("There are no Critical jobs found")
