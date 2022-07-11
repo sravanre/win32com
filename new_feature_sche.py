@@ -295,20 +295,21 @@ def win32_new():
             for l_no, line in enumerate(fp):
                 for x in inprogress:
                     if str(x) in line:
-                        line1=line.strip()
-                        line2=line1.split(',')
-                        if x in line2[9]:
-                            print(line2[1]+" = "+line2[8])
-                            #print(line2[1])
-                            my_file.writelines('\n')
-                            # my_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
-                            my_file.write('\n')
-                            my_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
+                        if "BatchReportBatchJob" not in line:
+                            line1=line.strip()
+                            line2=line1.split(',')
+                            if x in line2[9]:
+                                print(line2[1]+" = "+line2[8])
+                                #print(line2[1])
+                                my_file.writelines('\n')
+                                # my_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
+                                my_file.write('\n')
+                                my_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
 
-                            inprogress_file.writelines('\n')
-                            inprogress_file.writelines("\n\t\t::::::::::: Igangværende batchjobs :::::::::::")
-                            inprogress_file.write('\n')
-                            inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")      
+                                inprogress_file.writelines('\n')
+                                inprogress_file.writelines("\n\t\t::::::::::: Igangværende batchjobs :::::::::::")
+                                inprogress_file.write('\n')
+                                inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")      
 
 
         with open(filepath, 'r') as fp:
@@ -372,7 +373,7 @@ def win32_new():
         outfile = open('inprogress_file_dupsremoved.txt', "w")
         for line in open("inprogress_result.txt", "r"):
             if line not in lines_seen: # not a duplicate
-                if "BatchReportBatchJob" not in line:
+                # if "BatchReportBatchJob" not in line:
                     outfile.write(line)
                     lines_seen.add(line)
         outfile.close()
@@ -446,7 +447,7 @@ def win32_new():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('error_file_dupsremoved.txt','r').read()}\n\n{open('warning_file_dupsremoved.txt','r').read()}\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. {open('error_file_dupsremoved.txt','r').read()}\n{open('warning_file_dupsremoved.txt','r').read()}\n{open('inprogress_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -615,7 +616,7 @@ def win32_new():
 
 # Running the code for infinite loop
 
-schedule.every().monday.at("07:15").do(win32_new)
+schedule.every().monday.at("13:02").do(win32_new)
 schedule.every().tuesday.at("07:15").do(win32_new)
 schedule.every().wednesday.at("19:36").do(win32_new)
 schedule.every().thursday.at("11:37").do(win32_new)
