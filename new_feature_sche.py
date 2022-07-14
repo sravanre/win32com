@@ -552,6 +552,12 @@ def win32_new():
             message = client.messages.create(
                 body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
                 from_=keys.twilio_number,
+                to=keys.richardt_number
+            )
+
+            message = client.messages.create(
+                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+                from_=keys.twilio_number,
                 to=keys.sravan_number
             )
 
@@ -616,10 +622,10 @@ def win32_new():
 
 # Running the code for infinite loop
 
-schedule.every().monday.at("13:02").do(win32_new)
+schedule.every().monday.at("13:54").do(win32_new)
 schedule.every().tuesday.at("07:15").do(win32_new)
-schedule.every().wednesday.at("19:36").do(win32_new)
-schedule.every().thursday.at("11:37").do(win32_new)
+schedule.every().wednesday.at("10:40").do(win32_new)
+schedule.every().thursday.at("10:38").do(win32_new)
 schedule.every().friday.at("07:15").do(win32_new)
 
 
