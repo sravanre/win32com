@@ -1,4 +1,5 @@
 
+from csv import excel_tab
 from fpdf import FPDF
 import os
 import pathlib
@@ -249,6 +250,49 @@ def win32_new():
         warning_file = open(warning_result, "a+")   
         critical_file = open(critical_Result, "a+")     
 
+
+
+
+        checkERR_0010= 'ERR(0010)'
+        checkERR_0100= 'ERR(0100)'
+        filepath_TWS_report = 'DP5PLST1.TXT'
+        ErrorListFromTWSReport = []
+        ErrorListFromTWSReport_WithReadableNames = []
+        with open(filepath_TWS_report, 'r') as fp:
+            for l_no, line in enumerate(fp):
+                if checkERR_0010 in line or checkERR_0100 in line:
+                    line1 = line.strip().split(' ')
+            # print(line1)
+                    line2 = line1[5]
+                    line3 = line2[5:-1]
+                    line4 = line1[6]
+                    line5 = line4[3:-1]
+                    line6 = line1[8]
+                   
+            # print(line5)
+                    print(line3)
+                    print(type(line3))
+                    ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
+        print('       the list ErrList from the TWS report with the Error code 0010')
+        print(ErrorListFromTWSReport)
+
+        file2 = open('TWSmapJobNames.txt', 'r').readlines()
+        for j in file2:
+            k = j.strip().split(',')
+            for i in ErrorListFromTWSReport:
+                y=i.strip().split(':')
+                try:
+                    if y[0] == k[0]:
+                        print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
+                        ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  error captured from TWS report")
+                except IndexError:
+                    pass
+
+
+
+
+
+
         with open(filepath, 'r') as fp:
             print("\t\t\t\t\t::::ERROR JOB LIST ::::::")               
         
@@ -379,11 +423,33 @@ def win32_new():
         outfile.close()
 
 
+                # adding the Error names (code =10) into the final error file at the end, 
+        if len(ErrorListFromTWSReport_WithReadableNames) != 0:
+            filepath_error_from_TWS_result = os.getcwd() + "/error_file_dupsremoved.txt"
+            if os.path.getsize(filepath_error_from_TWS_result) != 0: 
+                outfile_final_Error_file = open('error_file_dupsremoved.txt', "a+")
+                for i in ErrorListFromTWSReport_WithReadableNames:
+                    outfile_final_Error_file.writelines('\n')
+                    outfile_final_Error_file.writelines(i)
+                outfile_final_Error_file.close()
+            else:
+                outfile_final_Error_file = open('error_file_dupsremoved.txt', "a+")
+                outfile_final_Error_file.writelines("\n\t\t::::::::::: Fejlet batchjobs :::::::::::")
+                for i in ErrorListFromTWSReport_WithReadableNames:
+                    outfile_final_Error_file.writelines('\n')
+                    outfile_final_Error_file.writelines(i)
+
+
+
+
+
+
 
     def Pull_Attachments():
 
         path = os.getcwd()
         today = datetime.date.today()
+        # today = datetime.date.fromisoformat('2022-07-06')     ## this is to run the program for any given date by executing for that particular day 
 
         my_mailbox = 'Liva Operations'
 
@@ -447,7 +513,7 @@ def win32_new():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. {open('error_file_dupsremoved.txt','r').read()}\n{open('warning_file_dupsremoved.txt','r').read()}\n{open('inprogress_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('error_file_dupsremoved.txt','r').read()}\n{open('warning_file_dupsremoved.txt','r').read()}\n{open('inprogress_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -477,8 +543,8 @@ def win32_new():
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        # mail.Display()
-        mail.Send()
+        mail.Display()
+        # mail.Send()
 
     def Send_email_only_Batch_report_csv_file_present():
         path = os.getcwd()
@@ -503,8 +569,8 @@ def win32_new():
         
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-        # mail.Display()
-        mail.Send()
+        mail.Display()
+        # mail.Send()
 
         
     def Send_email_as_both_files_are_missing():
@@ -526,8 +592,9 @@ def win32_new():
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
-        # mail.Display()
-        mail.Send()
+        
+        mail.Display()
+        # mail.Send()
 
 
     def file_remove(filename):
@@ -565,6 +632,21 @@ def win32_new():
             print(message.body)
         else:
             print("There are no Critical jobs found")
+
+    def twilio_SMS_not_able_to_access_emailsForAttachments():
+        client = Client(keys.account_sid, keys.auth_token)
+        
+        alertMessage = "Automatic Batch Reporting Script is not able to access the outlook, Script is running but Outlook is not accessible and not able to download the attachments, Take Immediate action by checking the server"
+        # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
+        
+        message = client.messages.create(
+            body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+            from_=keys.twilio_number,
+            to=keys.sravan_number
+        )
+        print(message.body)
+        
+
 
 
 
@@ -617,12 +699,13 @@ def win32_new():
     
     else:
         Send_email_as_both_files_are_missing()
-        print(f'Email sent as NO Batch Report file , no TWS report received yet,  at {time} ')
+        print(f'Email sent as NO Batch Report file , NO TWS report received yet,  at {time} ')
+        twilio_SMS_not_able_to_access_emailsForAttachments()
 
 
 # Running the code for infinite loop
 
-schedule.every().monday.at("13:54").do(win32_new)
+schedule.every().monday.at("17:30").do(win32_new)
 schedule.every().tuesday.at("07:15").do(win32_new)
 schedule.every().wednesday.at("10:40").do(win32_new)
 schedule.every().thursday.at("10:38").do(win32_new)

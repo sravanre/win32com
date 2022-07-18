@@ -15,11 +15,6 @@ PLPAACDUNITFUND,FundMerge
 PLPAABDSHRPRICES,FundPriceImport
 PLPABZPAFREPORTI,PafReporting
 PLPAAODTRANSFP2,P41ediCreateDeliviery
-PLPACCDDMMAPPER,DmProductMapper
-PLPACCDDMMAPPER,DmMapper
-PLPACCDDMMAPPER,DmValuationMapper
-PLPACCDDMMAPPER,SAS Efter DmMapper
-PLPACCDDMMAPPER,DmReconcile
 PLPAATMACCPROJEM,EndMonth Sidste kalenderdag 00:01
 PLPAAHDACCSTRAT,AccountStrategyPayablesReceiverWaiting
 PLPAAIDPAYOUTSAP,SapPayment
@@ -174,9 +169,7 @@ PLPAAUMINTRISKBO,InteresRiskBonus
 PLPABTPOLICYSERV,SyncronizePolicyServiceDepartment
 PLPAEUMAGREEMENT,AgreementValidationExport
 PLPAAQDNEEDSADVA,NeedsAdvance
-PLPAEWWQUOTEDEL,QouteDeletion
 PLPAERDPRAAC,PolicyRollbackAfterAgreementChange
-PLPAEWWQUOTEDEL,GdprDatamartDeletion
 :::::  Diverse jobs  :::
 PLPAPCDPIFUPDATE,PifUpdate
 PLPADZDPIF2UPDAT,Pif2Update
