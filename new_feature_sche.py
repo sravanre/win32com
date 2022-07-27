@@ -80,6 +80,11 @@ def win32_new():
         yesterday = now1 - timedelta(days = 1)
         todayMMDD = now1.strftime('%m%d')
         yesterdayMMDD = yesterday.strftime('%m%d')
+
+        One_Day_before_yesterday = now1 - timedelta(days = 2)
+        print(One_Day_before_yesterday)
+        One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%m%d')
+        print(One_Day_before_yesterdayMMDD)
         
         my_file = open('result_TWS_Report_timestamp.txt', "a+")
         with open('result_TWS_Report.txt', 'r') as fp:
@@ -90,6 +95,10 @@ def win32_new():
                     my_file.writelines(line)
 
                 if yesterdayMMDD in line:
+                    print(line)
+                    my_file.writelines(line)
+
+                if One_Day_before_yesterdayMMDD in line:
                     print(line)
                     my_file.writelines(line)
                 
@@ -162,6 +171,11 @@ def win32_new():
         print(yesterdayMMDD)
         print(type(int(todayMMDD)))
 
+        One_Day_before_yesterday = now1 - timedelta(days = 2)
+        print(One_Day_before_yesterday)
+        One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%m%d')
+        print(One_Day_before_yesterdayMMDD)
+
 
         my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
         with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
@@ -199,7 +213,22 @@ def win32_new():
                                 # print(line)
                                 my_file_time.writelines(line1[0]+"    "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')
-                          
+
+                    if int(line3) == int(One_Day_before_yesterdayMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('One_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"    "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"    "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+
 
             except IndexError:
                 pass
@@ -453,8 +482,8 @@ def win32_new():
     def Pull_Attachments():
 
         path = os.getcwd()
-        today = datetime.date.today()
-        # today = datetime.date.fromisoformat('2022-07-26')     ## this is to run the program for any given date by executing for that particular day 
+        # today = datetime.date.today()
+        today = datetime.date.fromisoformat('2022-07-11')     ## this is to run the program for any given date by executing for that particular day 
 
         my_mailbox = 'Liva Operations'
 
@@ -710,12 +739,12 @@ def win32_new():
 
 # Running the code for infinite loop
 
-schedule.every().monday.at("14:25").do(win32_new)
-schedule.every().tuesday.at("10:40").do(win32_new)
-schedule.every().wednesday.at("12:16").do(win32_new)
-schedule.every().thursday.at("10:38").do(win32_new)
-schedule.every().friday.at("07:15").do(win32_new)
-schedule.every().day.at("09:29").do(win32_new)        # to run everyday
+# schedule.every().monday.at("14:25").do(win32_new)
+# schedule.every().tuesday.at("10:40").do(win32_new)
+# schedule.every().wednesday.at("12:16").do(win32_new)
+# schedule.every().thursday.at("10:38").do(win32_new)
+# schedule.every().friday.at("07:15").do(win32_new)
+schedule.every().day.at("11:50").do(win32_new)        # to run everyday
 
 
 
