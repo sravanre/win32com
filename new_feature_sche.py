@@ -1,5 +1,6 @@
 
 from csv import excel_tab
+import string
 from fpdf import FPDF
 import os
 import pathlib
@@ -16,6 +17,10 @@ from datetime import timedelta
 from twilio.rest import Client
 import keys
 
+liva_operation = 'liva operations'
+liva_operation_mail = 'liva-operations@keylane.com'
+liva_operation_send = 'liva-operations@keylane.com'
+# liva_operation_send = 'liva-batch-rapportering@keylane.com'
 
 def win32_new():
 
@@ -98,7 +103,7 @@ def win32_new():
         # compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
         # compared_output_2files.write('\n')
         file1 = open('result_TWS_Report_timestamp.txt', 'r').readlines()
-        file2 = open('TWSmapJobNames.txt', 'r').readlines()
+        file2 = open('TWSmapJobNames_Ventende.txt', 'r').readlines()
 
         # print(file1)
         # try:
@@ -118,7 +123,7 @@ def win32_new():
                             
                             compared_output_2files.writelines('\n')
                             # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
-                            compared_output_2files.writelines(k[1]+','+'20'+y[1])
+                            compared_output_2files.writelines(k[1]+'BatchJob'+','+'20'+y[1])
 
                     except IndexError:
                         pass
@@ -180,7 +185,7 @@ def win32_new():
                                 print('yesterday output,10 ,11,12,13,14,15 ')
                                 print(line1)
                                 # print(line)
-                                my_file_time.writelines(line1[0]+"    "+line1[1])
+                                my_file_time.writelines(line1[0]+"    "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')  
 
                     if int(line3) == int(todayMMDD):
@@ -192,7 +197,7 @@ def win32_new():
                                 print('today jobs ')
                                 print(line1)
                                 # print(line)
-                                my_file_time.writelines(line1[0]+"    "+line1[1])
+                                my_file_time.writelines(line1[0]+"    "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')
                           
 
@@ -284,7 +289,7 @@ def win32_new():
                 try:
                     if y[0] == k[0]:
                         print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
-                        ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  error captured from TWS report")
+                        ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
                 except IndexError:
                     pass
 
@@ -375,7 +380,7 @@ def win32_new():
                             warning_file.writelines('\n')
                             warning_file.writelines("\n\t\t::::::::::: Advarsel i batchjobs :::::::::::")
                             warning_file.write('\n')
-                            warning_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")                                  
+                            warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " }")                                  
 
         my_file.close()
         error_file.close()
@@ -449,12 +454,12 @@ def win32_new():
 
         path = os.getcwd()
         today = datetime.date.today()
-        # today = datetime.date.fromisoformat('2022-07-06')     ## this is to run the program for any given date by executing for that particular day 
+        # today = datetime.date.fromisoformat('2022-07-26')     ## this is to run the program for any given date by executing for that particular day 
 
         my_mailbox = 'Liva Operations'
 
         outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
-        inbox = outlook.Folders['liva operations'].Folders['indbakke']
+        inbox = outlook.Folders[liva_operation].Folders['indbakke']
         messages = inbox.Items
 
         print(inbox.Name)
@@ -505,8 +510,7 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        #mail.From = 'sravan.kumar.reddy@keylane.com'
-        mail.To = 'liva-operations@keylane.com'
+        mail.To = liva_operation_send
         # mail.CC = 'liva-operations@keylane.com'
         #mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
@@ -533,7 +537,7 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        mail.To = 'liva-operations@keylane.com'
+        mail.To = liva_operation_send
         # mail.CC = 'liva-operations@keylane.com'
         # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
@@ -557,7 +561,7 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        mail.To = 'liva-operations@keylane.com'
+        mail.To = liva_operation_send
         # mail.CC = 'liva-operations@keylane.com'
         # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
@@ -585,7 +589,7 @@ def win32_new():
 
 
         mail = outlook.CreateItem(0)
-        mail.To = 'liva-operations@keylane.com'
+        mail.To = liva_operation_send
         # mail.CC = 'sravan.r@comakeit.com'
         # mail.Subject = 'Liva morgenrapport'+ today  
         mail.Subject = f"Liva morgenrapport {today}"
@@ -671,6 +675,7 @@ def win32_new():
     # Running the first script to pull the email attachments on every run 
     time = datetime.datetime.now()
     print(f'Script started at  {time} ')
+    # Pulling the attachments can be controlled from here
     Pull_Attachments()
 
     if os.path.isfile('test.csv') and os.path.isfile('DP5PLST1.txt'):
@@ -689,7 +694,7 @@ def win32_new():
         csvfile_processing()
         Send_email_only_Batch_report_csv_file_present()
         print(f'Email sent for only the Batch Report only, at {time}')
-
+        twilio_SMS()
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
@@ -705,11 +710,13 @@ def win32_new():
 
 # Running the code for infinite loop
 
-schedule.every().monday.at("17:30").do(win32_new)
-schedule.every().tuesday.at("07:15").do(win32_new)
-schedule.every().wednesday.at("10:40").do(win32_new)
+schedule.every().monday.at("14:25").do(win32_new)
+schedule.every().tuesday.at("10:40").do(win32_new)
+schedule.every().wednesday.at("12:16").do(win32_new)
 schedule.every().thursday.at("10:38").do(win32_new)
 schedule.every().friday.at("07:15").do(win32_new)
+schedule.every().day.at("09:29").do(win32_new)        # to run everyday
+
 
 
 while True:
