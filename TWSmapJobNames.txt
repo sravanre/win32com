@@ -143,12 +143,7 @@ PLPACQMBILLING,PbsBillingRequest
 PLPACQMBILLING,BillingRequestPrint
 PLPAEMLIFECERT,TopLifeCertificatePrintBatchJob
 :::::::::Data Warehouse :::::::::::::
-PLPACCDDMMAPPER,DmProductMapper
 PLPACCDDMMAPPER,DmMapper
-PLPACCDDMMAPPER,DmValuationMapper
-PLPACCDDMMAPPER,DmReconcile
-PLPACCDDMMAPPER,SAS Efter DmMapper  
-PLPACCDDMMAPPER,DmValuationMapper
 PLTADQDPRODUCTM1,DmProductMapper
 PLTADQDPRODUCTM2,DmProductMapper
 PLTADQDPRODUCTM3,DmProductMapper
