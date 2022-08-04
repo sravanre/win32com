@@ -761,13 +761,14 @@ def win32_new():
 # schedule.every().wednesday.at("12:16").do(win32_new)
 # schedule.every().thursday.at("10:38").do(win32_new)
 # schedule.every().friday.at("07:15").do(win32_new)
-schedule.every().day.at("10:57").do(win32_new)        # to run everyday
-
-
 
 while True:
-
-    schedule.run_pending()
+    
+    if datetime.datetime.now().strftime("%H:%M:%S") == "16:36:01":
+        win32_new()
     time.sleep(1)
     
+    
+    
+
 
