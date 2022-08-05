@@ -361,7 +361,15 @@ def win32_new():
                             error_file.writelines('\n')
                             error_file.writelines("\n\t\t::::::::::: Fejlet batchjobs :::::::::::")
                             error_file.write('\n')
-                            error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+                            if line2[9] == '31':
+                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByException}")
+                            elif line2[9] == '32':
+                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByFatalError }")
+                            elif line2[9] == '33':
+                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - StopRequest}")
+                            else:
+                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+
 
     ## Code for creating a list of Critical job Errors 
 
@@ -422,11 +430,20 @@ def win32_new():
                             # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
                             my_file.write('\n')
                             my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
-
-                            warning_file.writelines('\n')
+                            
+                            # warning_file.writelines('\n')
                             warning_file.writelines("\n\t\t::::::::::: Advarsel i batchjobs :::::::::::")
                             warning_file.write('\n')
-                            warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " }")                                  
+                            if line2[9] == '21':
+                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                            elif line2[9] == '22':
+                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - InternalValidationFailure }")
+                            elif line2[9] == '23':
+                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                            else:
+                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " }")
+
+                                                              
 
         my_file.close()
         error_file.close()
@@ -754,6 +771,19 @@ def win32_new():
         twilio_SMS_not_able_to_access_emailsForAttachments()
 
 
+def win32_test_mail():
+
+    today = datetime.date.today()
+    my_mailbox = 'Liva Operations'
+    outlook = win32com.client.Dispatch("Outlook.Application")
+    outlookapi = outlook.GetNamespace('MAPI')
+    mail = outlook.CreateItem(0)
+    mail.To = 'sravan.kumar.reddy@keylane.com'
+    mail.Subject = f"Liva morgenrapport {today}.- Mail is working ."
+    mail.HTMLBody = '<h3>This is HTML Body</h3>'
+    mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport."
+    mail.Send()
+
 # Running the code for infinite loop
 
 # schedule.every().monday.at("14:25").do(win32_new)
@@ -761,7 +791,9 @@ def win32_new():
 # schedule.every().wednesday.at("12:16").do(win32_new)
 # schedule.every().thursday.at("10:38").do(win32_new)
 # schedule.every().friday.at("07:15").do(win32_new)
-schedule.every().day.at("10:57").do(win32_new)        # to run everyday
+
+schedule.every().day.at("10:00").do(win32_test_mail)
+schedule.every().day.at("11:52").do(win32_new)        # to run everyday
 
 
 
