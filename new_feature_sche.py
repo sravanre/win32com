@@ -76,71 +76,72 @@ def win32_new():
                 #     my_file.writelines(line)
 
         my_file.close()
-        now1 = datetime.datetime.now()
-        yesterday = now1 - timedelta(days = 1)
-        todayMMDD = now1.strftime('%m%d')
-        yesterdayMMDD = yesterday.strftime('%m%d')
-
-        One_Day_before_yesterday = now1 - timedelta(days = 2)
-        print(One_Day_before_yesterday)
-        One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%m%d')
-        print(One_Day_before_yesterdayMMDD)
         
-        my_file = open('result_TWS_Report_timestamp.txt', "a+")
-        with open('result_TWS_Report.txt', 'r') as fp:
-            for l_no, line in enumerate(fp):
-                if todayMMDD in line:
-                    print('timestp++++')
-                    print(line)
-                    my_file.writelines(line)
+        # now1 = datetime.datetime.now()
+        # yesterday = now1 - timedelta(days = 1)
+        # todayMMDD = now1.strftime('%m%d')
+        # yesterdayMMDD = yesterday.strftime('%m%d')
 
-                if yesterdayMMDD in line:
-                    print(line)
-                    my_file.writelines(line)
+        # One_Day_before_yesterday = now1 - timedelta(days = 2)
+        # print(One_Day_before_yesterday)
+        # One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%m%d')
+        # print(One_Day_before_yesterdayMMDD)
+        
+        # my_file = open('result_TWS_Report_timestamp.txt', "a+")
+        # with open('result_TWS_Report.txt', 'r') as fp:
+        #     for l_no, line in enumerate(fp):
+        #         if todayMMDD in line:
+        #             print('timestp++++')
+        #             print(line)
+        #             my_file.writelines(line)
 
-                if One_Day_before_yesterdayMMDD in line:
-                    print(line)
-                    my_file.writelines(line)
+        #         if yesterdayMMDD in line:
+        #             print(line)
+        #             my_file.writelines(line)
+
+        #         if One_Day_before_yesterdayMMDD in line:
+        #             print(line)
+        #             my_file.writelines(line)
                 
         
-        my_file.close()
+        # my_file.close()
 
 
         #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
 
         compared_output_2files = open("compared_output_2files.txt", "a+")
-        # compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
-        # compared_output_2files.write('\n')
-        file1 = open('result_TWS_Report_timestamp.txt', 'r').readlines()
+            # compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
+            # compared_output_2files.write('\n')
+        file1 = open('result_TWS_Report.txt', 'r').readlines()
         file2 = open('TWSmapJobNames_Ventende.txt', 'r').readlines()
 
-        # print(file1)
-        # try:
-        # print(file2)
+            # print(file1)
+            # try:
+            # print(file2)
         for j in file2:
             k = j.strip().split(',')            
             for i in file1:
-                    y = i.strip().split(',')
-                    # print(k)
-                    # print(y)
-                    try:
-                        if y[0] in k[0]:
-                    #print(j.strip())
-                    # print(j.strip().split(','))
-                    # k = j.strip().split(',')
-                            print(k[1]+'BatchJob',y[1])
-                            
-                            compared_output_2files.writelines('\n')
-                            # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
-                            compared_output_2files.writelines(k[1]+'BatchJob'+','+'20'+y[1])
+                y = i.strip().split(',')
+                        # print(k)
+                        # print(y)
+                try:
+                    if y[0] in k[0]:
+                        #print(j.strip())
+                        # print(j.strip().split(','))
+                        # k = j.strip().split(',')
+                        print(k[1]+'BatchJob',y[1])
+                                
+                        compared_output_2files.writelines('\n')
+                                # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
+                        compared_output_2files.writelines(k[1]+'BatchJob'+','+'20'+y[1])
 
-                    except IndexError:
-                        pass
+                except IndexError:
+                    pass
 
-            
+                
         compared_output_2files.close()
-        
-        
+            
+            
 
 
         lines_seen = set() # holds lines already seen
@@ -154,11 +155,11 @@ def win32_new():
         outfile.close()
 
 
-        
-        # with open('compared_output_2files_dupsRemoved.txt', 'rw') as file:
-        #     for line in file:
-        #         if not line.isspace():
-        #             file.write(line)
+            
+            # with open('compared_output_2files_dupsRemoved.txt', 'rw') as file:
+            #     for line in file:
+            #         if not line.isspace():
+            #             file.write(line)
 
 
     def time1():
@@ -175,6 +176,15 @@ def win32_new():
         print(One_Day_before_yesterday)
         One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%d')
         print(One_Day_before_yesterdayMMDD)
+        # 3 days back 
+        Three_day_back = now1 - timedelta(days = 3)
+        Three_day_backMMDD = Three_day_back.strftime('%d')
+
+        Four_day_back = now1 - timedelta(days = 4)
+        Four_day_backMMDD = Four_day_back.strftime('%d')
+
+        Five_day_back = now1 - timedelta(days = 4)
+        Five_day_backMMDD = Five_day_back.strftime('%d')
 
 
         my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
@@ -194,29 +204,27 @@ def win32_new():
                                 print('today jobs from mornign 00 to 07')
                                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')
-                    else:
-                        my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                        my_file_time.writelines('\n')
+                    # else:
+                    #     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                    #     my_file_time.writelines('\n')                      
 
-                        
-
-                    # if int(line3) == int(yesterdayMMDD):
-                    #     line4 = line2[8:-2]
-                    #     # if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
-                    #     for i in range(0,24):
-                    #         if line4 == '0'+str(i):
-                    #             print('yesterday output , time window 8,9,AM ')
-                    #             print(line1)
-                    #             # print(line)
-                    #             my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                    #             my_file_time.writelines('\n')  
-                    #         # my_file_time.writelines('\n')
-                    #         elif line4 == str(i):
-                    #             print('yesterday output,10 ,11,12,13,14,15 ')
-                    #             print(line1)
-                    #             # print(line)
-                    #             my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                    #             my_file_time.writelines('\n')  
+                    elif int(line3) == int(yesterdayMMDD):
+                        line4 = line2[8:-2]
+                        # if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
+                        for i in range(0,24):
+                            if line4 == '0'+str(i):
+                                print('yesterday output , time window 8,9,AM ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                my_file_time.writelines('\n')  
+                            # my_file_time.writelines('\n')
+                            elif line4 == str(i):
+                                print('yesterday output,10 ,11,12,13,14,15 ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                my_file_time.writelines('\n')  
 
                     # elif int(line3) == int(todayMMDD):
                     #     line4 = line2[8:-2]
@@ -230,20 +238,65 @@ def win32_new():
                     #             my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                     #             my_file_time.writelines('\n')
 
-                    # elif int(line3) == int(One_Day_before_yesterdayMMDD):
-                    #       line4 = line2[8:-2]
-                    #       for i in range(0,24):
-                    #             if line4 == '0'+str(i):
-                    #                 print('One_Day_before_yesterday jobs ')
-                    #                 print(line1)
-                    #                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                    #                 my_file_time.writelines('\n')
-                    #             elif line4 == str(i):
-                    #                 print('yesterday output,10 ,11,12,13,14,15 ')
-                    #                 print(line1)
-                    #                 # print(line)
-                    #                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                    #                 my_file_time.writelines('\n')
+                    elif int(line3) == int(One_Day_before_yesterdayMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('One_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+
+                    elif int(line3) == int(Three_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('three_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                    
+                    elif int(line3) == int(Four_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('four_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+
+                    elif int(line3) == int(Five_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('five_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
 
 
             except:
@@ -253,8 +306,7 @@ def win32_new():
 
         file_empty_check = open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r').readlines()
         if len(file_empty_check) == 2:
-            open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()
-    
+            open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()    
 
 
 
@@ -793,7 +845,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("11:52").do(win32_new)        # to run everyday
+schedule.every().day.at("14:19").do(win32_new)        # to run everyday
 
 
 
