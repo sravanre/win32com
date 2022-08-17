@@ -357,12 +357,13 @@ def win32_new():
 
         checkERR_0010= 'ERR(0010)'
         checkERR_0100= 'ERR(0100)'
+        checkERR_0023= 'ERR(0023)'
         filepath_TWS_report = 'DP5PLST1.TXT'
         ErrorListFromTWSReport = []
         ErrorListFromTWSReport_WithReadableNames = []
         with open(filepath_TWS_report, 'r') as fp:
             for l_no, line in enumerate(fp):
-                if checkERR_0010 in line or checkERR_0100 in line:
+                if checkERR_0010 in line or checkERR_0100 in line or checkERR_0023 in line:
                     line1 = line.strip().split(' ')
             # print(line1)
                     line2 = line1[5]
@@ -405,6 +406,7 @@ def win32_new():
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
                             print(line2[1])
+                            tempListTop = ['TopBenefitEndPrint', 'TopCpsReportingPrint', 'TopDssReportingFilesImport', 'TopHealthRelationExport', 'TopIrteReportingCorrectionPrint', 'TopIrteReportingPrint', 'TopLifeCertificatePrintBatchJob', 'TopOsirMetaDataUpdate', 'TopTestCVRSelfServiceServices', 'TopUnitLinkYieldReport']
                             my_file.writelines('\n')
                             # my_file.writelines("\n\t\t\t\t::::::::::: Fejlet batchjobs :::::::::::")
                             my_file.write('\n')
@@ -414,13 +416,28 @@ def win32_new():
                             error_file.writelines("\n\t\t::::::::::: Fejlet batchjobs :::::::::::")
                             error_file.write('\n')
                             if line2[9] == '31':
-                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByException}")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " - TerminatedByException }")
+                                else:
+                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByException }")
+
                             elif line2[9] == '32':
-                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByFatalError }")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " - TerminatedByFatalError }")
+                                else:
+                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByFatalError }")
+                                                       
                             elif line2[9] == '33':
-                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - StopRequest}")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " - StopRequest }")
+                                else:
+                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - StopRequest }")
+                               
                             else:
-                                error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " }")
+                                else:
+                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
 
 
     ## Code for creating a list of Critical job Errors 
@@ -471,6 +488,7 @@ def win32_new():
             print("\t\t\t\t\t::::WARNING JOB LIST ::::::")               
             # my_file.writelines('\n')
             # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
+            
             for l_no, line in enumerate(fp):
                 for x in warning:
                     if str(x) in line:
@@ -482,18 +500,34 @@ def win32_new():
                             # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
                             my_file.write('\n')
                             my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
-                            
+
+                            tempListTop = ['TopBenefitEndPrint', 'TopCpsReportingPrint', 'TopDssReportingFilesImport', 'TopHealthRelationExport', 'TopIrteReportingCorrectionPrint', 'TopIrteReportingPrint', 'TopLifeCertificatePrintBatchJob', 'TopOsirMetaDataUpdate', 'TopTestCVRSelfServiceServices', 'TopUnitLinkYieldReport']
                             # warning_file.writelines('\n')
                             warning_file.writelines("\n\t\t::::::::::: Advarsel i batchjobs :::::::::::")
                             warning_file.write('\n')
                             if line2[9] == '21':
-                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                                else:
+                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+
                             elif line2[9] == '22':
-                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - InternalValidationFailure }")
-                            elif line2[9] == '23':
-                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " - InternalValidationFailure }")
+                                else:
+                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - InternalValidationFailure }")
+
+                            elif line2[9] == '23':                                
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                else:
+                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - CompletedWithErrors }")
+
                             else:
-                                warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " }")
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " }")
+                                else:
+                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " }")
 
                                                               
 
@@ -569,6 +603,9 @@ def win32_new():
 
         path = os.getcwd()
         today = datetime.date.today()
+        nowD = datetime.datetime.now()
+        YYYYMM = nowD.strftime('%Y%m')
+        
         # today = datetime.date.fromisoformat('2022-07-11')     ## this is to run the program for any given date by executing for that particular day 
 
         my_mailbox = 'Liva Operations'
@@ -579,6 +616,8 @@ def win32_new():
 
         print(inbox.Name)
 
+        # Function to search the today's subjected email and attachment . 
+
         def save_attachments(subject):
             for message in messages:
                 if subject in message.Subject and message.Senton.date() == today:
@@ -588,9 +627,10 @@ def win32_new():
         
         # save_attachments('Liva batchrapport 202205')
         try:
-            print('trying to next june month')
-            save_attachments('Liva batchrapport 202207')
-            save_attachments('Liva batchrapport 202208')
+            print(f'trying to next {YYYYMM} month')
+            # save_attachments('Liva batchrapport 202208')
+            # save_attachments('Liva batchrapport 202209')
+            save_attachments(f"Liva batchrapport {YYYYMM}")
             
         
         except IndexError:
@@ -845,7 +885,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("14:19").do(win32_new)        # to run everyday
+schedule.every().day.at("20:38").do(win32_new)        # to run everyday
 
 
 
