@@ -15,7 +15,6 @@ PLPAACDUNITFUND,FundMerge
 PLPAABDSHRPRICES,FundPriceImport
 PLPABZPAFREPORTI,PafReporting
 PLPAAODTRANSFP2,P41ediCreateDeliviery
-PLPAATMACCPROJEM,EndMonth Sidste kalenderdag 00:01
 PLPAAHDACCSTRAT,AccountStrategyPayablesReceiverWaiting
 PLPAAIDPAYOUTSAP,SapPayment
 PLPAAIDPAYOUTSAP,SapPaymentNemKonto
@@ -36,7 +35,6 @@ PLPABCDPBSPAYSIM,PbsBetalingsServiceImport
 PLPABDDPBSINFOIM,PBSInfoServiceImport
 PLPAAEDTAXCRUN,StartTaxCardSubscription
 PLPAAJDDB9669PAY,Db9669PaymentImport
-PLPABFDPAYFROMDB,DbPaymentImport hverdage
 PLPADPDP41PAYINP,P41AccountPaymentImport
 PLPAEQDPAYIMPORT,CardPaymentImport
  :::::::Monthly BAtCH jobs :::::::::::::
@@ -48,7 +46,6 @@ PLPABXDRAFTAGREE,TerminateAgreements
 PLPABXDRAFTAGREE,CancelActiveDraftAgreement
 PLPAAZMUBILLREMI,UmbrellaBillingRemainder
 PLPABRRETIREPRNT,RetirementPrint
-PLPAATMACCPROJEM,EndMonth Første kalenderdag 00:01
 PLPAAPMPROVISION,CommissionPaymentPrimoMonth 
 PLPAFDWDSSIMPORT,TopDssReportingFilesImport
 PLPAFBWUNITLINK,TopUnitLinkYieldReport
@@ -61,7 +58,7 @@ PLPAELMCPSPRINT,TopCpsReportingPrint
 PLPACSMREMUNERAT,ExternalCostExportSpec
 PLPACLMRUNPAYREP,RunningPayablesReporting
 PLPAAFMPOSTWAITA,ExternalCostAccountStrategy
-PLPAASMACCPROJPR,Primo 5. sidste hverdag 00:01
+PLPAASMACCPROJPR,Primo
 PLPAAYMPBILLREMI,PbsBillingReminder
 PLPAEOMTOPBENEND,TopBenefitEndPrint
 PLPABTPOLICYSERV,SyncronizePolicyServiceDepartment
@@ -71,7 +68,6 @@ PLPABAMCVRFSTREM,CVRFirstRemainderPrint
 PLPAEWWQUOTEDEL,PersonDeletion
 PLPAEWWQUOTEDEL,GdprDatamartDeletion
 PLPADIMDISQPAY,DisqualifyingPaymentsReporting
-PLPADHMASKATALD,IncomeTaxcode45PreReporting
 PLPADHMASKATALD,IncomeTaxcode45Reporting
 PLPABWMREBALANCI,Rebalancing
 PLPABBMCVRSECREM,CVRSecondRemainderPrint
@@ -82,10 +78,7 @@ PLPAARMACCPROJUL,Ultimo
 PLPACGMPEREREPOR,PereReporting
 PLPABSRESIGNATIN,ResignationInfoPrint
 PLPAAXMPOLICNETR,PbsBillingReceipt
-PLPACQMBILLING,Billing
 PLPACQMBILLING,BillingRequest
-PLPACQMBILLING,PbsBillingRequest
-PLPACQMBILLING,BillingRequestPrint
 :::::: Yearly batch jobs
 PLPADYYIRTEPRINT,TopIrteReportingPrint
 PLPADGYINDLAAN,IndlaanAccount13TaxReporting
@@ -100,47 +93,19 @@ PLPADJYINDLAACOR,IndlaanAccount13TaxCorrection
 PLPADDYCRSREPORT,CrsReporting
 PLPADCYFATCAREPO,FatcaReporting
 ::::::Vederlag og provision;;;;
-PLPAAPMPROVISION,CommissionPaymentPrimoMonth
-PLPAATMACCPROJEM,EndMonth Første kalenderdag
-PLPAAFMPOSTWAITA,ExternalCostAccountStrategy
-PLPACSMREMUNERAT,ExternalCostExportSpec
-PLPABGMAPCEXPOLI,APCExportPolicyData
 :::::Kurser og handler::::::
-PLPAACDUNITFUND,TotalInvestmentInventory
-PLPAACDUNITFUND,FundMerge
-PLPAFBWUNITLINK,TopUnitLinkYieldReport
-;;;;;SKAT EIndkomst jobs;;;;; 
-PLPABYMTAXREPORT,AIncomeTaxReporting
-PLPADHMASKATALD,IncomeTaxcode45Reporting
+:::::SKAT EIndkomst jobs;;;;; 
 ::: SKAT eKapital jobs ;:::
 PLPADBWPENDIVREP,IrteCorrection
 PLPAENMPEREOPH,PereOphReporting
 :::Indbetaling alle kilder:::::
 PLPAESDHEAPDEPOS,HeapDeposites
-PLPABEDSAPPAYIMP,SapPaymentImport
 PLPABFDPAYFROMDB,DbPaymentImport
 ::::::: Udbetaling og regnskab :::::
-PLPABVSAPPAYMENT,SapPaymentReciept
-hverdage 05:00
-PLPAAHDACCSTRAT,AccountStrategyPayablesReceiverWaiting
-PLPAAIDPAYOUTSAP,SapPayment
-Efter AccountStrategy
-PLPAAIDPAYOUTSAP,SapPaymentNemKonto
-Efter SapPayment
-PLPACRDPAYOUTSPC,PaymentSpecPrint
-PLPAAKDBOOKING,OiAccountItemExport
-PLPAAKDBOOKING,OiAccountBalanceExport
 ::::::GTI filbaserede opdateringer:::::
 PLPABQGTISKIFCPR,GTISkiftCpr
 :::::Print og opkrævning:::::::
-PLPAELMCPSPRINT,TopCpsReportingPrint
 PLPPABRETIREPRNT,RetirementPrint
-PLPAAYMPBILLREMI,PbsBillingReminder
-PLPABAMCVRFSTREM,CVRFirstRemainderPrint
-PLPACQMBILLING,BillingRequest
-PLPAEOMTOPBENEND,TopBenefitEndPrint
-PLPACQMBILLING,PbsBillingRequest
-PLPACQMBILLING,BillingRequestPrint
 PLPAEMLIFECERT,TopLifeCertificatePrintBatchJob
 :::::::::Data Warehouse :::::::::::::
 PLPACCDDMMAPPER,DmMapper
@@ -154,19 +119,10 @@ PLTADQDPRODUCTM7,DmProductMapper
 PLTADQDPRODUCTM8,DmProductMapper
 PLTADQDPRODUCTM9,DmProductMapper
 ::::::::Housekeeping::::::::::
-PLPABXDRAFTAGREE,TerminateAgreements
-PLPABXDRAFTAGREE,CancelQuoteAgreements
-PLPABXDRAFTAGREE,CancelDraftAgreements
-PLPABXDRAFTAGREE,CancelActiveQuoteAgreements
-PLPAASMACCPROJPR,Primo
 PLPAATMACCPROJEM,EndMonth
-PLPAAUMINTRISKBO,InteresRiskBonus
-PLPABTPOLICYSERV,SyncronizePolicyServiceDepartment
 PLPAEUMAGREEMENT,AgreementValidationExport
-PLPAAQDNEEDSADVA,NeedsAdvance
 PLPAERDPRAAC,PolicyRollbackAfterAgreementChange
 :::::  Diverse jobs  :::
 PLPAPCDPIFUPDATE,PifUpdate
 PLPADZDPIF2UPDAT,Pif2Update
 :::PEP ::::
-PLPACLMRUNPAYREP,RunningPayablesReporting

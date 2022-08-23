@@ -353,29 +353,33 @@ def win32_new():
         critical_file = open(critical_Result, "a+")     
 
 
-
-
-        checkERR_0010= 'ERR(0010)'
-        checkERR_0100= 'ERR(0100)'
-        checkERR_0023= 'ERR(0023)'
+        # TODO:  add exception handling  on for checkERR 
+        checkERR= 'ERR('
+        # checkERR_0010= 'ERR(0010)'
+        # checkERR_0100= 'ERR(0100)'
+        # checkERR_0023= 'ERR(0023)'
         filepath_TWS_report = 'DP5PLST1.TXT'
         ErrorListFromTWSReport = []
         ErrorListFromTWSReport_WithReadableNames = []
         with open(filepath_TWS_report, 'r') as fp:
             for l_no, line in enumerate(fp):
-                if checkERR_0010 in line or checkERR_0100 in line or checkERR_0023 in line:
-                    line1 = line.strip().split(' ')
-            # print(line1)
-                    line2 = line1[5]
-                    line3 = line2[5:-1]
-                    line4 = line1[6]
-                    line5 = line4[3:-1]
-                    line6 = line1[8]
-                   
-            # print(line5)
-                    print(line3)
-                    print(type(line3))
-                    ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
+                # if checkERR_0010 in line or checkERR_0100 in line or checkERR_0023 in line:
+                try: 
+                    if checkERR in line:
+                        line1 = line.strip().split(' ')
+                # print(line1)
+                        line2 = line1[5]
+                        line3 = line2[5:-1]
+                        line4 = line1[6]
+                        line5 = line4[3:-1]
+                        line6 = line1[8]
+                    
+                # print(line5)
+                        print(line3)
+                        print(type(line3))
+                        ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
+                except:
+                    pass
         print('       the list ErrList from the TWS report with the Error code 0010')
         print(ErrorListFromTWSReport)
 
@@ -410,34 +414,34 @@ def win32_new():
                             my_file.writelines('\n')
                             # my_file.writelines("\n\t\t\t\t::::::::::: Fejlet batchjobs :::::::::::")
                             my_file.write('\n')
-                            my_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+                            my_file.writelines(line2[1] + "       { Error_code = " +line2[9] + " }")
 
                             error_file.writelines('\n')
                             error_file.writelines("\n\t\t::::::::::: Fejlet batchjobs :::::::::::")
                             error_file.write('\n')
                             if line2[9] == '31':
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " - TerminatedByException }")
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { Error_code = " +line2[9] + " - TerminatedByException }")
                                 else:
-                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByException }")
+                                    error_file.writelines(line2[1] + "       { Error_code = " +line2[9] + " - TerminatedByException }")
 
                             elif line2[9] == '32':
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " - TerminatedByFatalError }")
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { Error_code = " +line2[9] + " - TerminatedByFatalError }")
                                 else:
-                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - TerminatedByFatalError }")
+                                    error_file.writelines(line2[1] + "       { Error_code = " +line2[9] + " - TerminatedByFatalError }")
                                                        
                             elif line2[9] == '33':
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " - StopRequest }")
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { Error_code = " +line2[9] + " - StopRequest }")
                                 else:
-                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " - StopRequest }")
+                                    error_file.writelines(line2[1] + "       { Error_code = " +line2[9] + " - StopRequest }")
                                
                             else:
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    error_file.writelines(line2[1].removeprefix("Top") + "       { error_code = " +line2[9] + " }")
+                                    error_file.writelines(line2[1].removeprefix("Top") + "       { Error_code = " +line2[9] + " }")
                                 else:
-                                    error_file.writelines(line2[1] + "       { error_code = " +line2[9] + " }")
+                                    error_file.writelines(line2[1] + "       { Error_code = " +line2[9] + " }")
 
 
     ## Code for creating a list of Critical job Errors 
@@ -470,6 +474,7 @@ def win32_new():
                         if "BatchReportBatchJob" not in line:
                             line1=line.strip()
                             line2=line1.split(',')
+                            tempListTop = ['TopBenefitEndPrint', 'TopCpsReportingPrint', 'TopDssReportingFilesImport', 'TopHealthRelationExport', 'TopIrteReportingCorrectionPrint', 'TopIrteReportingPrint', 'TopLifeCertificatePrintBatchJob', 'TopOsirMetaDataUpdate', 'TopTestCVRSelfServiceServices', 'TopUnitLinkYieldReport']
                             if x in line2[9]:
                                 print(line2[1]+" = "+line2[8])
                                 #print(line2[1])
@@ -481,7 +486,11 @@ def win32_new():
                                 inprogress_file.writelines('\n')
                                 inprogress_file.writelines("\n\t\t::::::::::: Igangværende batchjobs :::::::::::")
                                 inprogress_file.write('\n')
-                                inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")      
+                                if line2[1].startswith('Top') and line2[1] not in tempListTop:
+                                    inprogress_file.writelines(line2[1].removeprefix("Top") + "   ( "+line2[8] + "% )")
+                                else:
+                                    inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
+
 
 
         with open(filepath, 'r') as fp:
@@ -603,6 +612,7 @@ def win32_new():
 
         path = os.getcwd()
         today = datetime.date.today()
+        # today = datetime.date(2022, M, Date)     ## set a specific date to test that dates file
         nowD = datetime.datetime.now()
         YYYYMM = nowD.strftime('%Y%m')
         
@@ -885,7 +895,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("20:38").do(win32_new)        # to run everyday
+schedule.every().day.at("16:47").do(win32_new)        # to run everyday
 
 
 
