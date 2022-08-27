@@ -895,7 +895,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("16:47").do(win32_new)        # to run everyday
+schedule.every().day.at("10:38").do(win32_new)        # to run everyday
 
 
 
