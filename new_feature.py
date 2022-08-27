@@ -104,7 +104,7 @@ def TWS_textfile_processing():
 
 def csvfile_processing():
 
-    check_error = ['31', '32', '33', '34', '35', '36', '37', '38', '39']
+    check_error = ['41', '32', '33', '34', '35', '36', '37', '38', '39']
     inprogress = ['-1']
     warning = ['21', '22', '23', '24', '25', '26', '27', '28', '29']
     complete_warning = ['10']
@@ -186,7 +186,7 @@ def csvfile_processing():
                         inprogress_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
                         inprogress_file.write('\n')
                         inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")      
-
+# sample
 
     with open(filepath, 'r') as fp:
         print("\t\t\t\t\t::::WARNING JOB LIST ::::::")               
