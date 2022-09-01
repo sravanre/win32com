@@ -361,40 +361,42 @@ def win32_new():
         filepath_TWS_report = 'DP5PLST1.TXT'
         ErrorListFromTWSReport = []
         ErrorListFromTWSReport_WithReadableNames = []
-        with open(filepath_TWS_report, 'r') as fp:
-            for l_no, line in enumerate(fp):
-                # if checkERR_0010 in line or checkERR_0100 in line or checkERR_0023 in line:
-                try: 
-                    if checkERR in line:
-                        line1 = line.strip().split(' ')
-                # print(line1)
-                        line2 = line1[5]
-                        line3 = line2[5:-1]
-                        line4 = line1[6]
-                        line5 = line4[3:-1]
-                        line6 = line1[8]
-                    
-                # print(line5)
-                        print(line3)
-                        print(type(line3))
-                        ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
-                except:
-                    pass
-        print('       the list ErrList from the TWS report with the Error code 0010')
-        print(ErrorListFromTWSReport)
+        try:
+            with open(filepath_TWS_report, 'r') as fp:
+                for l_no, line in enumerate(fp):
+                    # if checkERR_0010 in line or checkERR_0100 in line or checkERR_0023 in line:
+                    try: 
+                        if checkERR in line:
+                            line1 = line.strip().split(' ')
+                    # print(line1)
+                            line2 = line1[5]
+                            line3 = line2[5:-1]
+                            line4 = line1[6]
+                            line5 = line4[3:-1]
+                            line6 = line1[8]
+                        
+                    # print(line5)
+                            print(line3)
+                            print(type(line3))
+                            ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
+                    except:
+                        pass
+            print('       the list ErrList from the TWS report with the Error code 0010')
+            print(ErrorListFromTWSReport)
 
-        file2 = open('TWSmapJobNames.txt', 'r').readlines()
-        for j in file2:
-            k = j.strip().split(',')
-            for i in ErrorListFromTWSReport:
-                y=i.strip().split(':')
-                try:
-                    if y[0] == k[0]:
-                        print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
-                        ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
-                except IndexError:
-                    pass
-
+            file2 = open('TWSmapJobNames.txt', 'r').readlines()
+            for j in file2:
+                k = j.strip().split(',')
+                for i in ErrorListFromTWSReport:
+                    y=i.strip().split(':')
+                    try:
+                        if y[0] == k[0]:
+                            print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
+                            ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
+                    except IndexError:
+                        pass
+        except FileNotFoundError:
+            print("TWS file is not present in this run")                    
 
 
 
@@ -612,7 +614,7 @@ def win32_new():
 
         path = os.getcwd()
         today = datetime.date.today()
-        # today = datetime.date(2022, M, Date)     ## set a specific date to test that dates file
+        # today = datetime.date(2022, 8, 29)     ## set a specific date to test that dates file
         nowD = datetime.datetime.now()
         YYYYMM = nowD.strftime('%Y%m')
         
@@ -709,7 +711,7 @@ def win32_new():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\n Ingen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\nIngen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
         mail.Display()
@@ -766,6 +768,30 @@ def win32_new():
         # mail.Send()
 
 
+    def Send_email_Both_files_with_no_error():
+        path = os.getcwd()
+        today = datetime.date.today()
+
+        my_mailbox = 'Liva Operations'
+
+        outlook = win32com.client.Dispatch("Outlook.Application")
+        outlookapi = outlook.GetNamespace('MAPI')
+
+
+        mail = outlook.CreateItem(0)
+        mail.To = liva_operation_send
+        # mail.CC = 'sravan.r@comakeit.com'
+        # mail.Subject = 'Liva morgenrapport'+ today  
+        mail.Subject = f"Liva morgenrapport {today}"
+        mail.HTMLBody = '<h3>This is HTML Body</h3>'
+        # mail.Body = 'Godmorgen'
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\nBatchkørsler er kørt igennem uden advarsler (returkode 23) eller fejl. Intet at rapportere.\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        
+        mail.Display()
+        # mail.Send()
+
+
+
     def file_remove(filename):
         if os.path.isfile(filename):
             os.remove(filename)
@@ -785,11 +811,11 @@ def win32_new():
         # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
         if os.path.getsize(filepath_critical_result) != 0: 
 
-            message = client.messages.create(
-                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
-                from_=keys.twilio_number,
-                to=keys.richardt_number
-            )
+            # message = client.messages.create(
+            #     body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+            #     from_=keys.twilio_number,
+            #     to=keys.richardt_number
+            # )
 
             message = client.messages.create(
                 body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
@@ -815,8 +841,6 @@ def win32_new():
         )
         print(message.body)
         
-
-
 
 
     # Deleting all the old files on every run 
@@ -847,25 +871,37 @@ def win32_new():
         TWS_textfile_processing()
         time1()
         csvfile_processing()
-        Send_email_Both_files_present()
-        print(f'Email sent for both the files at {time} ')
-        twilio_SMS()
-        
+        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0:
+            Send_email_Both_files_present()
+            print(f'Email sent for both the files at {time} ')
+            twilio_SMS()
+
+        else:
+            Send_email_Both_files_with_no_error()
+            print(f'Email sent for both the files, there were no errors to report at {time} ')
         #exit the program as both the files are there and output is received 
         # exit()
 
-
+#TODO : change the send email with no errors to mention that other file was missing eventhough there were no errors
     elif os.path.isfile('test.csv'):
         csvfile_processing()
-        Send_email_only_Batch_report_csv_file_present()
-        print(f'Email sent for only the Batch Report only, at {time}')
-        twilio_SMS()
+        if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0:
+            Send_email_only_Batch_report_csv_file_present()
+            print(f'Email sent for only the Batch Report only, at {time}')
+            twilio_SMS()
+        else:
+            Send_email_Both_files_with_no_error()
+            print(f'Email sent for only the Batch Report file, there were no errors to report at {time}')
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
         time1()
-        Send_email_only_TWS_txt_file_present()
-        print(f'Email sent for only the TWS report only, at {time} ')
+        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0: 
+            Send_email_only_TWS_txt_file_present()
+            print(f'Email sent for only the TWS report only, at {time} ')
+        else:
+            Send_email_Both_files_with_no_error()
+            print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
     
     else:
         Send_email_as_both_files_are_missing()
@@ -895,7 +931,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:38").do(win32_new)        # to run everyday
+schedule.every().day.at("11:05").do(win32_new)        # to run everyday
 
 
 
