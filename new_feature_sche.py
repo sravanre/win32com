@@ -811,11 +811,11 @@ def win32_new():
         # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
         if os.path.getsize(filepath_critical_result) != 0: 
 
-            # message = client.messages.create(
-            #     body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
-            #     from_=keys.twilio_number,
-            #     to=keys.richardt_number
-            # )
+            message = client.messages.create(
+                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+                from_=keys.twilio_number,
+                to=keys.richardt_number
+            )
 
             message = client.messages.create(
                 body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
@@ -835,9 +835,35 @@ def win32_new():
         # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
         
         message = client.messages.create(
-            body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+            body= f'Take immediate action to handle this \n************\n{alertMessage}',
             from_=keys.twilio_number,
             to=keys.sravan_number
+        )
+        print(message.body)
+    
+    def twilio_SMS_TWS_file_missing():
+        client = Client(keys.account_sid, keys.auth_token)
+        
+        alertMessage = "Morning report sent only with TWS file, Batch report is not received yet in the mailbox. Please check is Liva Batch system is working properly!"
+        # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
+        
+        message = client.messages.create(
+            body= f'Take immediate action to handle this \n************\n{alertMessage}',
+            from_=keys.twilio_number,
+            to=keys.richardt_number
+        )
+        print(message.body)
+
+    def twilio_SMS_Batch_report_file_missing():
+        client = Client(keys.account_sid, keys.auth_token)
+        
+        alertMessage = "Morning report sent only with Batch report, TWS report is not received yet in the mailbox. Please check is Liva Batch system is working properly!"
+        # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
+        
+        message = client.messages.create(
+            body= f'Take immediate action to handle this \n************\n{alertMessage}',
+            from_=keys.twilio_number,
+            to=keys.richardt_number
         )
         print(message.body)
         
@@ -882,16 +908,18 @@ def win32_new():
         #exit the program as both the files are there and output is received 
         # exit()
 
-#TODO : change the send email with no errors to mention that other file was missing eventhough there were no errors
+            #TODO : change the send email with no errors to mention that other file was missing eventhough there were no errors
     elif os.path.isfile('test.csv'):
         csvfile_processing()
         if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0:
             Send_email_only_Batch_report_csv_file_present()
             print(f'Email sent for only the Batch Report only, at {time}')
             twilio_SMS()
+            twilio_SMS_Batch_report_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the Batch Report file, there were no errors to report at {time}')
+            twilio_SMS_Batch_report_file_missing()
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
@@ -899,9 +927,11 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
             print(f'Email sent for only the TWS report only, at {time} ')
+            twilio_SMS_TWS_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
+            twilio_SMS_TWS_file_missing()
     
     else:
         Send_email_as_both_files_are_missing()
@@ -931,7 +961,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("11:05").do(win32_new)        # to run everyday
+schedule.every().day.at("10:37").do(win32_new)        # to run everyday
 
 
 
