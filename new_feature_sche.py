@@ -823,6 +823,12 @@ def win32_new():
                 to=keys.sravan_number
             )
 
+            message = client.messages.create(
+                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+                from_=keys.twilio_number,
+                to=keys.ahmed_number
+            )
+
 
             print(message.body)
         else:
@@ -852,6 +858,12 @@ def win32_new():
             from_=keys.twilio_number,
             to=keys.richardt_number
         )
+
+        message = client.messages.create(
+            body= f'Take immediate action to handle this \n************\n{alertMessage}',
+            from_=keys.twilio_number,
+            to=keys.ahmed_number
+        )
         print(message.body)
 
     def twilio_SMS_Batch_report_file_missing():
@@ -864,6 +876,12 @@ def win32_new():
             body= f'Take immediate action to handle this \n************\n{alertMessage}',
             from_=keys.twilio_number,
             to=keys.richardt_number
+        )
+
+        message = client.messages.create(
+            body= f'Take immediate action to handle this \n************\n{alertMessage}',
+            from_=keys.twilio_number,
+            to=keys.ahmed_number
         )
         print(message.body)
         
