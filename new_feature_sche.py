@@ -494,6 +494,17 @@ def win32_new():
                                 else:
                                     inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
 
+        
+        length_of_warning_jobname = []
+        with open(filepath, 'r') as fp:
+            for l_no, line in enumerate(fp):
+                for x in warning:
+                    if str(x) in line:
+                        line1=line.strip()
+                        line2=line1.split(',')
+                        if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
+                            print(line2[1])
+                            length_of_warning_jobname.append(line2[1])
 
 
         with open(filepath, 'r') as fp:
@@ -531,10 +542,17 @@ def win32_new():
 
                             elif line2[9] == '23':                                
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*13+ "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                    else:
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_warning_jobname, key=len))+10 - len(line2[1])+3) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
                                 else:
-                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - CompletedWithErrors }")
-
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1] + " "*10 + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                    else:
+#                                 warning_file.writelines(line2[1] + " "*(len(max(length_of_jobname, key=len)) - len(line2[1]) + len(line2[1]) + 15) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                        warning_file.writelines(line2[1] + " "*(len(max(length_of_warning_jobname, key=len))+10 - len(line2[1])) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                    
                             else:
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
                                     warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " }")
@@ -980,7 +998,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:40").do(win32_new)        # to run everyday
+schedule.every().day.at("15:29").do(win32_new)        # to run everyday
 
 
 
