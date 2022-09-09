@@ -226,18 +226,7 @@ def win32_new():
                                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')  
 
-                    # elif int(line3) == int(todayMMDD):
-                    #     line4 = line2[8:-2]
-                    #     # if int(line4) == 0 or int(line4) == 1 or int(line4) == 2 or int(line4) == 3 or int(line4) == 7 or int(line4) == 22 or int(line4) == 23:
-                    #     # if line4 == value00 or line4 == value02 or line4 == value03 or line4 == value04 or line4 == value05 or line4 == value06 or line4 == value07 or line4 == value01:    
-                    #     for i in range(0,8):
-                    #         if line4 == '0'+str(i):
-                    #             print('today jobs ')
-                    #             print(line1)
-                    #             # print(line)
-                    #             my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                    #             my_file_time.writelines('\n')
-
+                    
                     elif int(line3) == int(One_Day_before_yesterdayMMDD):
                           line4 = line2[8:-2]
                           for i in range(0,24):
@@ -447,6 +436,7 @@ def win32_new():
 
 
     ## Code for creating a list of Critical job Errors 
+        ## TODO -- right now we are not capturing the Critical jobs for Warning Code 21 - 29 
 
         with open(filepath, 'r') as fp:
             print("\t\t\t\t\t::::Critical JOB Error LIST ::::::")               
@@ -460,7 +450,18 @@ def win32_new():
                                     
                             if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
                                 critical_file.writelines('\n')
-                                critical_file.writelines(line2[1]) 
+                                critical_file.writelines(line2[1])
+
+                for x in inprogress:
+                    if str(x) in line:
+                        line1=line.strip()
+                        line2=line1.split(',')
+                        if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
+                                    
+                            if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
+                                critical_file.writelines('\n')
+                                critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job")
+                 
                                     
 
 
@@ -614,7 +615,7 @@ def win32_new():
 
         path = os.getcwd()
         today = datetime.date.today()
-        # today = datetime.date(2022, 8, 29)     ## set a specific date to test that dates file
+        # today = datetime.date(2022, 8, 25)     ## set a specific date to test that dates file
         nowD = datetime.datetime.now()
         YYYYMM = nowD.strftime('%Y%m')
         
@@ -639,7 +640,7 @@ def win32_new():
         
         # save_attachments('Liva batchrapport 202205')
         try:
-            print(f'trying to next {YYYYMM} month')
+            print(f'trying the script for  {YYYYMM} month')
             # save_attachments('Liva batchrapport 202208')
             # save_attachments('Liva batchrapport 202209')
             save_attachments(f"Liva batchrapport {YYYYMM}")
@@ -979,7 +980,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:37").do(win32_new)        # to run everyday
+schedule.every().day.at("10:40").do(win32_new)        # to run everyday
 
 
 
