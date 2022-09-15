@@ -382,6 +382,7 @@ def win32_new():
                         if y[0] == k[0]:
                             print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
                             ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
+                        
                     except IndexError:
                         pass
         except FileNotFoundError:
@@ -450,7 +451,7 @@ def win32_new():
                                     
                             if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
                                 critical_file.writelines('\n')
-                                critical_file.writelines(line2[1])
+                                critical_file.writelines(line2[1] + "     ( This is a critical job failed with Error code: " + line2[9] + ")")
 
                 for x in inprogress:
                     if str(x) in line:
@@ -460,9 +461,19 @@ def win32_new():
                                     
                             if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
                                 critical_file.writelines('\n')
-                                critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job")
+                                critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job and is showing in Inprogress")
                  
                                     
+        length_of_inprogress_jobname = []
+        with open(filepath, 'r') as fp:
+            for l_no, line in enumerate(fp):
+                for x in inprogress:
+                    if str(x) in line:
+                        if "BatchReportBatchJob" not in line:
+                            line1=line.strip()
+                            line2=line1.split(',')
+                            if x in line2[9]:
+                                length_of_inprogress_jobname.append(line2[1])
 
 
 
@@ -490,9 +501,16 @@ def win32_new():
                                 inprogress_file.writelines("\n\t\t::::::::::: Igangværende batchjobs :::::::::::")
                                 inprogress_file.write('\n')
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    inprogress_file.writelines(line2[1].removeprefix("Top") + "   ( "+line2[8] + "% )")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        inprogress_file.writelines(line2[1].removeprefix("Top") + " "*13 +"( "+line2[8] + "% )")
+                                    else:
+                                        inprogress_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_inprogress_jobname, key=len))+10 - len(line2[1])+3) +"( "+line2[8] + "% )")
                                 else:
-                                    inprogress_file.writelines(line2[1] + "   ( "+line2[8] + "% )")
+                                    if len(line2[1]) == len(max(length_of_inprogress_jobname, key=len)):
+                                        inprogress_file.writelines(line2[1] + " "*10 +"( "+line2[8] + "% )")
+                                    else:
+                                        inprogress_file.writelines(line2[1] + " "*(len(max(length_of_inprogress_jobname, key=len))+10 - len(line2[1])) +"( "+line2[8] + "% )")
+
 
         
         length_of_warning_jobname = []
@@ -503,7 +521,7 @@ def win32_new():
                         line1=line.strip()
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
-                            print(line2[1])
+                            # print(line2[1])
                             length_of_warning_jobname.append(line2[1])
 
 
@@ -530,34 +548,55 @@ def win32_new():
                             warning_file.write('\n')
                             if line2[9] == '21':
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*13+ "{ Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                                    else:
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10 +3) + "{ Warning_code = " +line2[9] + " - ExternalValidationFailure }")
                                 else:
-                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1] + " "*10 + "{ Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+                                    else:
+                                        warning_file.writelines(line2[1] + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10) + "{ Warning_code = " +line2[9] + " - ExternalValidationFailure }")
+
 
                             elif line2[9] == '22':
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " - InternalValidationFailure }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*13+ "{ Warning_code = " +line2[9] + " - InternalValidationFailure }")
+                                    else:
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10 +3) + "{ Warning_code = " +line2[9] + " - InternalValidationFailure }")
                                 else:
-                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " - InternalValidationFailure }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1] + " "*10 + "{ Warning_code = " +line2[9] + " - InternalValidationFailure }")
+                                    else:
+                                        warning_file.writelines(line2[1] + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10) + "{ Warning_code = " +line2[9] + " - InternalValidationFailure }")
+
+
 
                             elif line2[9] == '23':                                
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
                                     if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
                                         warning_file.writelines(line2[1].removeprefix("Top") + " "*13+ "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
                                     else:
-                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_warning_jobname, key=len))+10 - len(line2[1])+3) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10 +3) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
                                 else:
                                     if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
                                         warning_file.writelines(line2[1] + " "*10 + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
                                     else:
 #                                 warning_file.writelines(line2[1] + " "*(len(max(length_of_jobname, key=len)) - len(line2[1]) + len(line2[1]) + 15) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
-                                        warning_file.writelines(line2[1] + " "*(len(max(length_of_warning_jobname, key=len))+10 - len(line2[1])) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
+                                        warning_file.writelines(line2[1] + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10) + "{ Warning_code = " +line2[9] + " - CompletedWithErrors }")
                                     
                             else:
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    warning_file.writelines(line2[1].removeprefix("Top") + "       { Warning_code = " +line2[9] + " }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*13 + "{ Warning_code = " +line2[9] + " }")
+                                    else:
+                                        warning_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10 +3) + "{ Warning_code = " +line2[9] + " }")
                                 else:
-                                    warning_file.writelines(line2[1] + "       { Warning_code = " +line2[9] + " }")
+                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                        warning_file.writelines(line2[1] + " "*10 + "{ Warning_code = " +line2[9] + " }")
+                                    else:
+                                        warning_file.writelines(line2[1] + " "*(len(max(length_of_warning_jobname, key=len))- len(line2[1])+10) +"{ Warning_code = " +line2[9] + " }")
 
                                                               
 
@@ -567,6 +606,8 @@ def win32_new():
         # waiting_file.close()
         warning_file.close()
         critical_file.close()
+
+
 
         ### removing the duplicates on the text file itself
 
@@ -998,7 +1039,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("15:29").do(win32_new)        # to run everyday
+schedule.every().day.at("10:43").do(win32_new)        # to run everyday
 
 
 

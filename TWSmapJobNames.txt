@@ -11,7 +11,7 @@ PLPACDDPIFUPDATE,PifUpdate
 PLPACZDBATCHREPO,BatchReport
 PLPABYTAXREPORT,AIncomeTaxReporting
 PLPAACDUNITFUND,TotalInvestmentInventory
-PLPAACDUNITFUND,FundMerge
+PLPAACDUNITFUND,FundMerge m.m.
 PLPAABDSHRPRICES,FundPriceImport
 PLPABZPAFREPORTI,PafReporting
 PLPAAODTRANSFP2,P41ediCreateDeliviery
@@ -126,3 +126,7 @@ PLPAERDPRAAC,PolicyRollbackAfterAgreementChange
 PLPAPCDPIFUPDATE,PifUpdate
 PLPADZDPIF2UPDAT,Pif2Update
 :::PEP ::::
+PLPAFFMVIRKDKCOL,VirkDkCollectCompanies
+
+
+PLPAADDTIME      Start job after midnight
