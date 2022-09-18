@@ -7,7 +7,7 @@ PLPAALDEXTRACT,SqlReporting
 PLPABVSAPPAYMENT,SapPaymentReceipt
 PLPACTDP41EDIMET,P41EdiBanksImport
 PLPACTDP41EDIMET,P41EdiFundsImport
-PLPACDDPIFUPDATE,PifUpdate
+PLPACDDPIFUPDATE,PIF Update
 PLPACZDBATCHREPO,BatchReport
 PLPABYTAXREPORT,AIncomeTaxReporting
 PLPAACDUNITFUND,TotalInvestmentInventory
@@ -38,11 +38,7 @@ PLPAAJDDB9669PAY,Db9669PaymentImport
 PLPADPDP41PAYINP,P41AccountPaymentImport
 PLPAEQDPAYIMPORT,CardPaymentImport
  :::::::Monthly BAtCH jobs :::::::::::::
-PLPABXDRAFTAGREE,CancelDraftAgreements E. CancelActiveQuoteAgreements
-PLPABXDRAFTAGREE,CancelQuoteAgreements
-PLPABXDRAFTAGREE,CancelActiveQuoteAgreements
 PLPABHDAPCEXCOST,APCExternalCostTransaction
-PLPABXDRAFTAGREE,TerminateAgreements
 PLPABXDRAFTAGREE,CancelActiveDraftAgreement
 PLPAAZMUBILLREMI,UmbrellaBillingRemainder
 PLPABRRETIREPRNT,RetirementPrint
@@ -83,8 +79,8 @@ PLPACQMBILLING,BillingRequest
 PLPADYYIRTEPRINT,TopIrteReportingPrint
 PLPADGYINDLAAN,IndlaanAccount13TaxReporting
 PLPACXMBINCOMREP,BIncomeTaxReporting
-PLPAEMYLIFECERT,TopLifeCertificatePrintBatchJob
-PLPADRNONBANKDAY,NonBankDays
+PLPAEMYLIFECERT,TopLifeCertificatePrint
+PLPADRNONBANKDAY,NonBankDays(Ikke Bankdage)
 PLPAEHYUDKEXPORT,UdkExport
 PLPAEIYUDKRECEIP,UdkReceipt
 PLPACUYCPSREPORT,CpsReporting
@@ -127,6 +123,41 @@ PLPAPCDPIFUPDATE,PifUpdate
 PLPADZDPIF2UPDAT,Pif2Update
 :::PEP ::::
 PLPAFFMVIRKDKCOL,VirkDkCollectCompanies
+PLPAFCAPENDIVADH,PenDivAdHocCorrection
+
+PLPABODGTISKIFTL,GTISkiftLandekode 
+PLPABPDGTISKIFTS,GTISkiftStatus
+PLPABRMRETIREPRN,RetirementPrint   
+PLPABSMRESIGNATI,ResignationInfoPrint     
+PLPABTMPOLICYSER,SyncronizePolicyServiceD 
+PLPABVDSAPPAYMEN,SapPaymentReceipt        
+PLPABZDPAFREPORT,PafReporting  
+PLPADQDPRODUCTM1,DmProductMapper at 10.00 
+PLPADQDPRODUCTM2,DmProductMapper at 11.00 
+PLPADQDPRODUCTM3,DmProductMapper at 12.00 
+PLPADQDPRODUCTM4,DmProductMapper at 13.00 
+PLPADQDPRODUCTM5,DmProductMapper at 14.00 
+PLPADQDPRODUCTM6,DmProductMapper at 15.00 
+PLPADQDPRODUCTM7,DmProductMapper at 16.00 
+PLPADQDPRODUCTM8,DmProductMapper at 17.00 
+PLPADQDPRODUCTM9,DmProductMapper at 18.00 
+PLPADSYENDPALYR,EndPalYear 
+PLPADTNMANCOMP,AdHocManualCompensation 
+PLPADUNPOLONHOLD,AdHocPoliciesOnHold
+PLPADVNROLLBACK,AdHocRollBack
+PLPAEAACRSCORREC,CrsCorrection 
+PLPAEBACRSDELETE,CrsDeletion
+PLPAECAFATCACOR,FatcaCorrection
+PLPAEEACOSTCLOSE,YearlyCostCloseInfo 
+PLPAEJDHEAPRECEI,Bestil indb pension var
+PLPAEXABINCOMCOR,TaxCorrectionPrevYears 
+PLPAEYACPSCORREC,CpsCorrectionPrevYears
+PLPAEZAASKATALD,In. Taxcode45 PrevYears
+PLPAFGAMLREP,AMLReporting  
 
 
-PLPAADDTIME      Start job after midnight
+PLPACADFROMNETS,NETSIMPORT
+PLPACKDFROMNETS,NETSIMPORT 603 ETT   (only Top job - not Liva job) 
+PLPACODFROMNETS,NETSIMPORT 621 ETT   (only Top job - not Liva job)  
+PLPADFDTIME2,Start job after midnight  (only Top job - not Liva job)
+PLPAADDTIME,Start job after midnight
