@@ -501,7 +501,7 @@ def win32_new():
                                 inprogress_file.writelines("\n\t\t::::::::::: Igangværende batchjobs :::::::::::")
                                 inprogress_file.write('\n')
                                 if line2[1].startswith('Top') and line2[1] not in tempListTop:
-                                    if len(line2[1]) == len(max(length_of_warning_jobname, key=len)):
+                                    if len(line2[1]) == len(max(length_of_inprogress_jobname, key=len)):
                                         inprogress_file.writelines(line2[1].removeprefix("Top") + " "*13 +"( "+line2[8] + "% )")
                                     else:
                                         inprogress_file.writelines(line2[1].removeprefix("Top") + " "*(len(max(length_of_inprogress_jobname, key=len))+10 - len(line2[1])+3) +"( "+line2[8] + "% )")
@@ -650,6 +650,7 @@ def win32_new():
 
                 # adding the Error names (code =10) into the final error file at the end, 
         if len(ErrorListFromTWSReport_WithReadableNames) != 0:
+            ErrorListFromTWSReport_WithReadableNames = list(set(ErrorListFromTWSReport_WithReadableNames))   ## removing the duplicates in the list 
             filepath_error_from_TWS_result = os.getcwd() + "/error_file_dupsremoved.txt"
             if os.path.getsize(filepath_error_from_TWS_result) != 0: 
                 outfile_final_Error_file = open('error_file_dupsremoved.txt', "a+")
@@ -877,11 +878,11 @@ def win32_new():
                 to=keys.richardt_number
             )
 
-            message = client.messages.create(
-                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
-                from_=keys.twilio_number,
-                to=keys.sravan_number
-            )
+            # message = client.messages.create(
+            #     body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
+            #     from_=keys.twilio_number,
+            #     to=keys.sravan_number
+            # )
 
             message = client.messages.create(
                 body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
