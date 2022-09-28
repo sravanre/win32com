@@ -24,7 +24,9 @@ mail.HTMLBody = '<h3>This is HTML Body</h3>'
 # mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n\n\n{open('suleiman.html','r').read()}Regards, "
 mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\n\n{open('result_morning_batch_report_dupsremoved.txt','r').read()}\n\n\nRegards, "
 
+mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n::::::::::: Fejlet batchjobs :::::::::::\n{open('error_file_dupsremoved.txt','r').read()}\n\n ELLER\n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu” \n\n::::::::::: Advarsel i batchjobs :::::::::::\n{open('warning_file_dupsremoved.txt','r').read()}\n\nELLER \n\nHvis både Liva batchreport og TWS rapport IKKE er kommet inden, så skal der stå ”Ingen status, da TWS-rapporten ikke er sendt og batchjob BatchReport ikke er kørt endnu”\n\n\n::::::::::: Igangværende batchjobs :::::::::::\n\n{open('inprogress_file_dupsremoved.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, så kan vagttelefonen 32 95 93 22 benyttes i tidsrum mandag til fredag kl. 08.00 - 16.00 eller skriv til liva-operations@keylane.com. \n\n\nRegards, "
+
 # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
-#mail.Display()
-mail.Send()
+mail.Display()
+# mail.Send()
