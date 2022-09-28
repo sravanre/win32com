@@ -183,8 +183,11 @@ def win32_new():
         Four_day_back = now1 - timedelta(days = 4)
         Four_day_backMMDD = Four_day_back.strftime('%d')
 
-        Five_day_back = now1 - timedelta(days = 4)
+        Five_day_back = now1 - timedelta(days = 5)
         Five_day_backMMDD = Five_day_back.strftime('%d')
+
+        Six_day_back = now1 - timedelta(days = 6)
+        Six_day_backMMDD = Six_day_back.strftime('%d')
 
 
         my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
@@ -236,7 +239,7 @@ def win32_new():
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('yesterday output,10 ,11,12,13,14,15 ')
+                                    print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
                                     print(line1)
                                     # print(line)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
@@ -287,6 +290,22 @@ def win32_new():
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
 
+
+                    elif int(line3) == int(Six_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('Six_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                    
 
             except:
                 pass
@@ -449,7 +468,7 @@ def win32_new():
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
                                     
-                            if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
+                            if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] or 'ExecutePortfolioTrades' in line2[1]:
                                 critical_file.writelines('\n')
                                 critical_file.writelines(line2[1] + "     ( This is a critical job failed with Error code: " + line2[9] + ")")
 
@@ -459,7 +478,7 @@ def win32_new():
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
                                     
-                            if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] :
+                            if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] or 'ExecutePortfolioTrades' in line2[1]:
                                 critical_file.writelines('\n')
                                 critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job and is showing in Inprogress")
                  
@@ -1040,7 +1059,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:43").do(win32_new)        # to run everyday
+schedule.every().day.at("10:50").do(win32_new)        # to run everyday
 
 
 
