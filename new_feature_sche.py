@@ -533,6 +533,7 @@ def win32_new():
 
         
         length_of_warning_jobname = []
+        errorList = []
         with open(filepath, 'r') as fp:
             for l_no, line in enumerate(fp):
                 for x in warning:
@@ -542,6 +543,51 @@ def win32_new():
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
                             # print(line2[1])
                             length_of_warning_jobname.append(line2[1])
+                            errorList.append(line2[1])
+
+        
+        errorDictionary = {'Db9669PaymentImport':'Der kan være indbetalinger, der ikke er lagt ind i Liva.'
+                  ,'EndMonth':'Der ligger kernejob på fejl, som kan have en påvirkning på dagens flow. Vi undersøger årsagen.' 
+                  ,'Ultimo':'Der ligger kernejob på fejl, som kan have en påvirkning på dagens flow. Vi undersøger årsagen.'
+                  ,'Primo':'Der ligger kernejob på fejl, som kan have en påvirkning på dagens flow. Vi undersøger årsagen.'
+                  ,'Billing':'Der ligger kernejob på fejl, som kan have en påvirkning på dagens flow. Vi undersøger årsagen.'
+                  ,'BundleWaitingTrades':'Forventede handler ligger på fejl. Det betyder, at fil til Kapitalforvaltningen er forsinket.'
+                  ,'OiAccountItemExport':'Afstemningsfil til regnskab ligger på fejl og er derfor ikke dannet.'
+                  ,'OiAccountBalanceExport':'Afstemningsfil til regnskab ligger på fejl og er derfor ikke dannet.'
+                  ,'SapPayment':'Udbetalingsjob ligger på fejl. Det kan påvirke hele udbetalingsflowet.'
+                  ,'SapPaymentNemKonto':'Udbetalingsjob ligger på fejl. Det kan påvirke hele udbetalingsflowet.'
+                  ,'FundPriceImport':'Handelsflowet er fejlet og der er ikke dannet fil til Kapitalforvaltningen'
+                  ,'ExecutePortfolioTrades':'Handelsflowet er fejlet og der er ikke dannet fil til Kapitalforvaltningen'
+                  ,}
+
+        print("check this sravan: errorDictionarykeys() and errorList ")
+        print(errorDictionary.keys())
+        print(errorList)
+        HeaderCriticalErrorJob = []
+        for i in range(len(errorList)):
+            print(i)
+            if errorList[i].removesuffix("BatchJob") in errorDictionary.keys():
+                print(errorDictionary[errorList[i].removesuffix("BatchJob")])
+                HeaderCriticalErrorJob.append(errorDictionary[errorList[i].removesuffix("BatchJob")])
+            else:
+                print("nothing matched")
+        
+        if len(HeaderCriticalErrorJob) != 0:
+            print("sucess")
+            HeaderCriticalErrorJob.insert(0,'Bemærk:')
+            HeaderCriticalErrorJob.insert(len(HeaderCriticalErrorJob),'Ny status forventes kl. 10.')
+    
+        else:
+            print("failuter")
+
+        
+        outputFileCriticalError = open('Outputfile_result_new.txt', "w")
+        for line in HeaderCriticalErrorJob:
+            outputFileCriticalError.writelines(line)
+            outputFileCriticalError.writelines('\n')
+
+        outputFileCriticalError.close()
+
 
 
         with open(filepath, 'r') as fp:
@@ -685,6 +731,12 @@ def win32_new():
                     outfile_final_Error_file.writelines(i)
 
 
+        # list for the critical job list 
+
+        
+
+
+
 
 
 
@@ -764,7 +816,7 @@ def win32_new():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('error_file_dupsremoved.txt','r').read()}\n{open('warning_file_dupsremoved.txt','r').read()}\n{open('inprogress_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n{open('Outputfile_result_new.txt','r').read()}{open('error_file_dupsremoved.txt','r').read()}\n{open('warning_file_dupsremoved.txt','r').read()}\n{open('inprogress_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
 
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
@@ -964,6 +1016,9 @@ def win32_new():
             to=keys.ahmed_number
         )
         print(message.body)
+
+
+    
         
 
 
@@ -980,8 +1035,8 @@ def win32_new():
     file_remove('result_morning_batch_report.txt')
     file_remove('warning_result.txt')
     file_remove('compared_output_2files_dupsRemoved.txt')
-    file_remove('DP5PLST1.txt')
-    file_remove('test.csv')
+    # file_remove('DP5PLST1.txt')
+    # file_remove('test.csv')
     file_remove('compared_output_2files_dupsRemoved_Time_Filtered.txt')
     file_remove('critical_result.txt')
 
@@ -989,16 +1044,20 @@ def win32_new():
     time = datetime.datetime.now()
     print(f'Script started at  {time} ')
     # Pulling the attachments can be controlled from here
-    Pull_Attachments()
+    # Pull_Attachments()
+
+
+
+
 
     if os.path.isfile('test.csv') and os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
         time1()
         csvfile_processing()
-        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0:
+        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0:
             Send_email_Both_files_present()
             print(f'Email sent for both the files at {time} ')
-            twilio_SMS()
+            # twilio_SMS()
 
         else:
             Send_email_Both_files_with_no_error()
@@ -1012,12 +1071,12 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0:
             Send_email_only_Batch_report_csv_file_present()
             print(f'Email sent for only the Batch Report only, at {time}')
-            twilio_SMS()
-            twilio_SMS_Batch_report_file_missing()
+            # twilio_SMS()
+            # twilio_SMS_Batch_report_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the Batch Report file, there were no errors to report at {time}')
-            twilio_SMS_Batch_report_file_missing()
+            # twilio_SMS_Batch_report_file_missing()
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
@@ -1025,16 +1084,16 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
             print(f'Email sent for only the TWS report only, at {time} ')
-            twilio_SMS_TWS_file_missing()
+            # twilio_SMS_TWS_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
-            twilio_SMS_TWS_file_missing()
+            # twilio_SMS_TWS_file_missing()
     
     else:
         Send_email_as_both_files_are_missing()
         print(f'Email sent as NO Batch Report file , NO TWS report received yet,  at {time} ')
-        twilio_SMS_not_able_to_access_emailsForAttachments()
+        # twilio_SMS_not_able_to_access_emailsForAttachments()
 
 
 def win32_test_mail():
@@ -1059,7 +1118,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:50").do(win32_new)        # to run everyday
+schedule.every().day.at("23:40").do(win32_new)        # to run everyday
 
 
 
