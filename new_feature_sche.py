@@ -455,8 +455,8 @@ def win32_new():
                                     error_file.writelines(line2[1] + "       { Error_code = " +line2[9] + " }")
 
 
-    ## Code for creating a list of Critical job Errors 
-        ## TODO -- right now we are not capturing the Critical jobs for Warning Code 21 - 29 
+            ## Code for creating a list of Critical job Errors 
+            ## TODO -- right now we are not capturing the Critical jobs for Warning Code 21 - 29 
 
         with open(filepath, 'r') as fp:
             print("\t\t\t\t\t::::Critical JOB Error LIST ::::::")               
@@ -482,7 +482,7 @@ def win32_new():
                                 critical_file.writelines('\n')
                                 critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job and is showing in Inprogress")
                  
-                                    
+        inprogressList = []                            
         length_of_inprogress_jobname = []
         with open(filepath, 'r') as fp:
             for l_no, line in enumerate(fp):
@@ -493,7 +493,32 @@ def win32_new():
                             line2=line1.split(',')
                             if x in line2[9]:
                                 length_of_inprogress_jobname.append(line2[1])
+                                inprogressList.append(line2[1])
+        
 
+        inprogressDictionary = {'EndMonth':'Der afvikles stadig kernejob i Liva. Det har en påvirkning på performance så længe jobbet og dets efterfølgere afvikler.' 
+                     ,'Ultimo':'Der afvikles stadig kernejob i Liva. Det har en påvirkning på performance så længe jobbet og dets efterfølgere afvikler.'
+                     ,'Primo':'Der afvikles stadig kernejob i Liva. Det har en påvirkning på performance så længe jobbet og dets efterfølgere afvikler.'
+                     ,'Billing':'Opkrævningsflowet er ikke afsluttet endnu.'
+                     ,'BundleWaitingTrades':'Forventede handler afvikler stadig. Det betyder, at fil til Kapitalforvaltningen er forsinket.'
+                     ,'OiAccountItemExport':'Der afvikles stadig jobs fra Udbetalingsflowet og det er derfor forsinket.'
+                     ,'OiAccountBalanceExport':'Der afvikles stadig jobs fra Udbetalingsflowet og det er derfor forsinket.'
+                     ,'SapPayment':'Der afvikles stadig jobs fra Udbetalingsflowet og det er derfor forsinket.'
+                       ,'SapPaymentNemKonto':'Der afvikles stadig jobs fra Udbetalingsflowet og det er derfor forsinket.'
+                       ,'FundPriceImport':'Handelsflowet er stadig kørende og der er ikke dannet fil til Kapitalforvaltningen.'
+                       ,'ExecutePortfolioTrades':'Handelsflowet er stadig kørende og der er ikke dannet fil til Kapitalforvaltningen.'
+                       }
+
+        HeaderCriticalErrorJob = []
+        for i in range(len(inprogressList)):
+            print(i)
+            if inprogressList[i].removesuffix("BatchJob") in inprogressDictionary.keys():
+                print(inprogressDictionary[inprogressList[i].removesuffix("BatchJob")])
+                HeaderCriticalErrorJob.append(inprogressDictionary[inprogressList[i].removesuffix("BatchJob")])
+            else:
+                print("nothing matched")
+
+        
 
 
         with open(filepath, 'r') as fp:
@@ -531,7 +556,7 @@ def win32_new():
                                         inprogress_file.writelines(line2[1] + " "*(len(max(length_of_inprogress_jobname, key=len))+10 - len(line2[1])) +"( "+line2[8] + "% )")
 
 
-        
+        # critical job with error code >29 , code for messages to print on top of the email.
         length_of_warning_jobname = []
         errorList = []
         with open(filepath, 'r') as fp:
@@ -563,7 +588,7 @@ def win32_new():
         print("check this sravan: errorDictionarykeys() and errorList ")
         print(errorDictionary.keys())
         print(errorList)
-        HeaderCriticalErrorJob = []
+        
         for i in range(len(errorList)):
             print(i)
             if errorList[i].removesuffix("BatchJob") in errorDictionary.keys():
@@ -572,15 +597,16 @@ def win32_new():
             else:
                 print("nothing matched")
         
+        #adding the line Bemark and last line to the end of the list with this 
         if len(HeaderCriticalErrorJob) != 0:
             print("sucess")
             HeaderCriticalErrorJob.insert(0,'Bemærk:')
             HeaderCriticalErrorJob.insert(len(HeaderCriticalErrorJob),'Ny status forventes kl. 10.')
     
         else:
-            print("failuter")
+            print("failure not found")
 
-        
+        # writing the list to a file 
         outputFileCriticalError = open('Outputfile_result_new.txt', "w")
         for line in HeaderCriticalErrorJob:
             outputFileCriticalError.writelines(line)
@@ -1118,7 +1144,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("23:40").do(win32_new)        # to run everyday
+schedule.every().day.at("10:37").do(win32_new)        # to run everyday
 
 
 
