@@ -22,6 +22,8 @@ liva_operation_mail = 'liva-operations@keylane.com'
 liva_operation_send = 'liva-operations@keylane.com'
 # liva_operation_send = 'liva-batch-rapportering@keylane.com'
 
+HeaderCriticalErrorJob = []
+
 def win32_new():
 
     # removing the files before every new execution 
@@ -314,7 +316,55 @@ def win32_new():
 
         file_empty_check = open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r').readlines()
         if len(file_empty_check) == 2:
-            open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()    
+            open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()   
+
+
+        ## Waiting code for printing the danish messages at the HEADER of the files. 
+
+        waitingDictionary = {'EndMonth':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
+                    ,'Primo':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
+                    ,'Ultimo':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
+                    ,'Billing':'Opkrævninger er ikke foretaget endnu.'
+                    ,'BundleWaitingTrades':'Forventede handler er ikke afviklet. Det betyder, at fil til Kapitalforvaltningen er forsinket.'
+                    ,'OiAccountItemExport':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'OiAccountBalanceExport':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'SapPayment':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'SapPaymentNemKonto':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'FundPriceImport':'Handelsflowet er ikke startet. Årsag undersøges.'
+                    ,'ExecutePortfolioTrades':'Handelsflowet er ikke startet. Årsag undersøges.'}
+
+        # HeaderCriticalErrorJob = []
+        WaitingJobListTimeFiltered = []
+        file_empty_check = open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r').readlines()
+        with open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r') as fp:
+            for l_no,line in enumerate(fp):
+                try:
+                    line1 = line.strip().split(' ')
+                    print(line1[0])
+                    WaitingJobListTimeFiltered.append(line1[0])
+                except AttributeError:
+                    pass
+        
+        for i in range(len(WaitingJobListTimeFiltered)):
+            print(i)
+            if WaitingJobListTimeFiltered[i].removesuffix("BatchJob") in waitingDictionary.keys():
+                print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
+                HeaderCriticalErrorJob.append(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
+            
+            else:
+                print("nothing matched")
+        
+        print(HeaderCriticalErrorJob)
+        # return HeaderCriticalErrorJob    ## i am going to write this into a file
+        # outputFileCriticalError = open('Outputfile_result_new.txt', "w")
+        # for line in HeaderCriticalErrorJob:
+        #     outputFileCriticalError.writelines(line)
+        #     outputFileCriticalError.writelines('\n')
+
+        # outputFileCriticalError.close()
+            
+         
+
 
 
 
@@ -444,7 +494,7 @@ def win32_new():
         
 
        
-        HeaderCriticalErrorJob = []     
+        # HeaderCriticalErrorJob = []     
         for i in range(len(WarningErrorList)):
             print(i)
             if WarningErrorList[i].removesuffix("BatchJob") in errorDictionary.keys():
@@ -578,6 +628,15 @@ def win32_new():
         else:
             print("failure not found")
         
+        # writing the list to a file for critical batch job names danish Names 
+        outputFileCriticalError = open('Outputfile_result_new.txt', "w")
+        for line in HeaderCriticalErrorJob:
+            outputFileCriticalError.writelines(line)
+            outputFileCriticalError.writelines('\n')
+
+        outputFileCriticalError.close()
+
+
 
 
         with open(filepath, 'r') as fp:
@@ -617,14 +676,7 @@ def win32_new():
 
 
 
-        # writing the list to a file for critical batch job names danish Names 
-        outputFileCriticalError = open('Outputfile_result_new.txt', "w")
-        for line in HeaderCriticalErrorJob:
-            outputFileCriticalError.writelines(line)
-            outputFileCriticalError.writelines('\n')
-
-        outputFileCriticalError.close()
-
+        
 
 
         with open(filepath, 'r') as fp:
@@ -1155,7 +1207,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("14:39").do(win32_new)        # to run everyday
+schedule.every().day.at("16:22").do(win32_new)        # to run everyday
 
 
 
