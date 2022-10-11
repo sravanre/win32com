@@ -23,7 +23,7 @@ liva_operation_send = 'liva-operations@keylane.com'
 # liva_operation_send = 'liva-batch-rapportering@keylane.com'
 
 def win32_new():
-
+    
     # removing the files before every new execution 
 
     textfile = pathlib.Path("result_TWS_Report.txt")
@@ -1059,7 +1059,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:50").do(win32_new)        # to run everyday
+schedule.every().day.at("10:40").do(win32_new)        # to run everyday
 
 
 
