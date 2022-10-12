@@ -458,9 +458,24 @@ def win32_new():
             print("TWS file is not present in this run")                    
 
 
-        # critical job with error code >39, code for messages to print on top of the email.
-        # critical job with error code >29 , code for messages to print on top of the email.
+        # critical job with error code >39, code for messages to print on top of the email. check_Error = [30 - 39]
+        # critical job with error code >29 , code for messages to print on top of the email. warning = [21 - 29 ]
         length_of_warning_jobname = []
+        with open(filepath, 'r') as fp:
+            for l_no, line in enumerate(fp):
+                for x in warning:
+                    if str(x) in line:
+                        line1=line.strip()
+                        line2=line1.split(',')
+                        if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
+                            # print(line2[1])
+                            length_of_warning_jobname.append(line2[1])
+                            print('printing the array for length of warning jobname')
+                            print(length_of_warning_jobname)
+
+        # seperating both the list generation 
+
+
         WarningErrorList = []
         with open(filepath, 'r') as fp:
             for l_no, line in enumerate(fp):
@@ -470,8 +485,9 @@ def win32_new():
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
                             # print(line2[1])
-                            length_of_warning_jobname.append(line2[1])
                             WarningErrorList.append(line2[1])
+                            print("print the failed job list ie here warningErrorList")
+                            print(WarningErrorList)
 
         
         errorDictionary = {'Db9669PaymentImport':'Der kan være indbetalinger, der ikke er lagt ind i Liva.'
@@ -1157,7 +1173,7 @@ def win32_new():
             #TODO : change the send email with no errors to mention that other file was missing eventhough there were no errors
     elif os.path.isfile('test.csv'):
         csvfile_processing()
-        if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0:
+        if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0:
             Send_email_only_Batch_report_csv_file_present()
             print(f'Email sent for only the Batch Report only, at {time}')
             # twilio_SMS()
@@ -1170,7 +1186,7 @@ def win32_new():
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
         time1()
-        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0: 
+        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
             print(f'Email sent for only the TWS report only, at {time} ')
             # twilio_SMS_TWS_file_missing()
@@ -1207,7 +1223,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("16:22").do(win32_new)        # to run everyday
+schedule.every().day.at("18:44").do(win32_new)        # to run everyday
 
 
 
