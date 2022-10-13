@@ -23,6 +23,7 @@ liva_operation_send = 'liva-operations@keylane.com'
 # liva_operation_send = 'liva-batch-rapportering@keylane.com'
 
 HeaderCriticalErrorJob = []
+WaitingJobListTimeFiltered = []
 
 def win32_new():
 
@@ -142,10 +143,51 @@ def win32_new():
 
                 
         compared_output_2files.close()
+
+        ## this is to add the critical batch to Header file , but the job name is gettiing added instead of the message against the jobname
+
+        ErrorListToAddToHeader = []
+        ErrorListToAddToHeaderWithReadableNames = []
+        checkERR= ['ERR(0030)','ERR(0031)','ERR(0032)','ERR(0033)','ERR(0034)','ERR(0035)','ERR(0036)','ERR(0037)','ERR(0038)','ERR(0039)','ERR(0100']
+        try:
+            with open(filepath, 'r') as fp:
+                for l_no, line in enumerate(fp):
+                    try:
+                        for i in range(len(checkERR)):
+                            if checkERR[i] in line:
+                                line1 = line.strip().split(' ')
+                                line2 = line1[5]
+                                line3 = line2[5:-1]
+                                line4 = line1[6]
+                                line5 = line4[3:-1]
+                                ErrorListToAddToHeader.append(line3)
+                                print(line3 + "sravan sravan")
+                    except:
+                        pass
+            print(ErrorListToAddToHeader)
+
+            file2 = open('TWSmapJobNames.txt', 'r').readlines()
+            for j in file2:
+                k = j.strip().split(',')
+                for i in ErrorListToAddToHeader:
+                    y=i.strip().split(':')
+                    try:
+                        if y[0] == k[0]:
+                            ErrorListToAddToHeaderWithReadableNames.append(k[1])
+                    
+                    except:
+                        pass
+            print(ErrorListToAddToHeaderWithReadableNames)
+        except FileNotFoundError:
+            print("TWS file is not present in this run")
+
+        CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
+        for i in ErrorListToAddToHeaderWithReadableNames:
+            if i in CriticalBatchListTemp:
+                HeaderCriticalErrorJob.append(i)
+
             
             
-
-
         lines_seen = set() # holds lines already seen
         outfile = open('compared_output_2files_dupsRemoved.txt', "w")
         for line in open("compared_output_2files.txt", "r"):
@@ -331,10 +373,11 @@ def win32_new():
                     ,'SapPayment':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
                     ,'SapPaymentNemKonto':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
                     ,'FundPriceImport':'Handelsflowet er ikke startet. Årsag undersøges.'
-                    ,'ExecutePortfolioTrades':'Handelsflowet er ikke startet. Årsag undersøges.'}
+                    ,'ExecutePortfolioTrades':'Handelsflowet er ikke startet. Årsag undersøges.'
+                    ,'Db9669PaymentImport':'Der kan være indbetalinger, der ikke er lagt ind i Liva.'}
 
         # HeaderCriticalErrorJob = []
-        WaitingJobListTimeFiltered = []
+        # WaitingJobListTimeFiltered = []
         file_empty_check = open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r').readlines()
         with open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r') as fp:
             for l_no,line in enumerate(fp):
@@ -362,9 +405,9 @@ def win32_new():
         #     outputFileCriticalError.writelines('\n')
 
         # outputFileCriticalError.close()
-            
-         
 
+
+               
 
 
 
@@ -594,7 +637,13 @@ def win32_new():
                             if 'EndMonthBatchJob' in line2[1] or 'BundleWaitingTrades' in line2[1] or 'OiAccountItemExport' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Db9669PaymentImport' in line2[1] or 'Ultimo' in line2[1] or 'OiAccountBalanceExport' in line2[1] or 'Billing' in line2[1] or 'Primo' in line2[1] or 'SapPayment' in line2[1] or 'SapPaymentNemKonto' in line2[1] or 'ExecutePortfolioTrades' in line2[1]:
                                 critical_file.writelines('\n')
                                 critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job and is showing in Inprogress")
-                 
+
+        #Adding the critical job found in the TWS report for >29  error code and writing them to the critical_Result file
+        for i in range(len(ErrorListFromTWSReport_WithReadableNames)):
+            critical_file.writelines('\n')
+            critical_file.writelines(ErrorListFromTWSReport_WithReadableNames[i])
+
+
         inprogressList = []                            
         length_of_inprogress_jobname = []
         with open(filepath, 'r') as fp:
@@ -643,6 +692,8 @@ def win32_new():
     
         else:
             print("failure not found")
+
+        print(HeaderCriticalErrorJob)
         
         # writing the list to a file for critical batch job names danish Names 
         outputFileCriticalError = open('Outputfile_result_new.txt', "w")
@@ -1223,7 +1274,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("18:44").do(win32_new)        # to run everyday
+schedule.every().day.at("21:59:59").do(win32_new)        # to run everyday
 
 
 
