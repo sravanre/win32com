@@ -24,6 +24,9 @@ liva_operation_send = 'liva-operations@keylane.com'
 
 HeaderCriticalErrorJob = []
 WaitingJobListTimeFiltered = []
+CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
+CriticalBatchListTempFullName = ['EndMonthBatchJob','BundleWaitingTradesBatchJob','OiAccountItemExportBatchJob','OiAccountBalanceExportBatchJob','Db9669PaymentImportBatchJob','UltimoBatchJob','BillingBatchJob','PrimoBatchJob','SapPaymentBatchJob','SapPaymentNemKontoBatchJob','ExecutePortfolioTradesBatchJob']
+
 
 def win32_new():
 
@@ -144,7 +147,7 @@ def win32_new():
                 
         compared_output_2files.close()
 
-        ## this is to add the critical batch to Header file , but the job name is gettiing added instead of the message against the jobname
+        ## this is to add the critical batch to Header file , but the job name is gettiing added instead of the message against the jobname , right now not writing to the email
 
         ErrorListToAddToHeader = []
         ErrorListToAddToHeaderWithReadableNames = []
@@ -181,10 +184,11 @@ def win32_new():
         except FileNotFoundError:
             print("TWS file is not present in this run")
 
-        CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
-        for i in ErrorListToAddToHeaderWithReadableNames:
-            if i in CriticalBatchListTemp:
-                HeaderCriticalErrorJob.append(i)
+        
+        # CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
+        # for i in ErrorListToAddToHeaderWithReadableNames:
+        #     if i in CriticalBatchListTemp:
+        #         HeaderCriticalErrorJob.append(i)
 
             
             
@@ -389,7 +393,7 @@ def win32_new():
                     pass
         
         for i in range(len(WaitingJobListTimeFiltered)):
-            print(i)
+            print("wanting job : " + i)
             if WaitingJobListTimeFiltered[i].removesuffix("BatchJob") in waitingDictionary.keys():
                 print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
                 HeaderCriticalErrorJob.append(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
@@ -639,10 +643,24 @@ def win32_new():
                                 critical_file.writelines(line2[1] + "   ( "+line2[8] + "% )" + "  this is a critial job and is showing in Inprogress")
 
         #Adding the critical job found in the TWS report for >29  error code and writing them to the critical_Result file
-        for i in range(len(ErrorListFromTWSReport_WithReadableNames)):
-            critical_file.writelines('\n')
-            critical_file.writelines(ErrorListFromTWSReport_WithReadableNames[i])
+        try:
+            ErrorJobNameFromTWSToCheckCompareCriticalJob = []
+            if len(ErrorListFromTWSReport_WithReadableNames) != 0:
+                for i in ErrorListFromTWSReport_WithReadableNames:
+                    line1 = i.strip().split(' ')
+                    ErrorJobNameFromTWSToCheckCompareCriticalJob.append(line1[0])
+        except:
+            pass
 
+        try:
+            for i in range(len(ErrorJobNameFromTWSToCheckCompareCriticalJob)):
+                if ErrorJobNameFromTWSToCheckCompareCriticalJob[i] in CriticalBatchListTempFullName:               
+                    critical_file.writelines('\n')
+                    critical_file.writelines(ErrorJobNameFromTWSToCheckCompareCriticalJob[i])
+                else:
+                    print("not found and critical job in TWS report, check the critical_file in the folders")
+        except:
+            pass
 
         inprogressList = []                            
         length_of_inprogress_jobname = []
@@ -1274,7 +1292,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("21:59:59").do(win32_new)        # to run everyday
+schedule.every().day.at("16:20").do(win32_new)        # to run everyday
 
 
 
