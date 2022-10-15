@@ -393,7 +393,6 @@ def win32_new():
                     pass
         
         for i in range(len(WaitingJobListTimeFiltered)):
-            print("wanting job : " + i)
             if WaitingJobListTimeFiltered[i].removesuffix("BatchJob") in waitingDictionary.keys():
                 print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
                 HeaderCriticalErrorJob.append(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
@@ -651,16 +650,18 @@ def win32_new():
                     ErrorJobNameFromTWSToCheckCompareCriticalJob.append(line1[0])
         except:
             pass
+        
+        # this part writes the code into Critical file txt file , which is being used to send SMS , commenting it down until update from team. 
 
-        try:
-            for i in range(len(ErrorJobNameFromTWSToCheckCompareCriticalJob)):
-                if ErrorJobNameFromTWSToCheckCompareCriticalJob[i] in CriticalBatchListTempFullName:               
-                    critical_file.writelines('\n')
-                    critical_file.writelines(ErrorJobNameFromTWSToCheckCompareCriticalJob[i])
-                else:
-                    print("not found and critical job in TWS report, check the critical_file in the folders")
-        except:
-            pass
+        # try:
+        #     for i in range(len(ErrorJobNameFromTWSToCheckCompareCriticalJob)):
+        #         if ErrorJobNameFromTWSToCheckCompareCriticalJob[i] in CriticalBatchListTempFullName:               
+        #             critical_file.writelines('\n')
+        #             critical_file.writelines(ErrorJobNameFromTWSToCheckCompareCriticalJob[i])
+        #         else:
+        #             print("not found and critical job in TWS report, check the critical_file in the folders")
+        # except:
+        #     pass
 
         inprogressList = []                            
         length_of_inprogress_jobname = []
@@ -1209,16 +1210,17 @@ def win32_new():
     file_remove('result_morning_batch_report.txt')
     file_remove('warning_result.txt')
     file_remove('compared_output_2files_dupsRemoved.txt')
-    # file_remove('DP5PLST1.txt')
-    # file_remove('test.csv')
+    file_remove('DP5PLST1.txt')
+    file_remove('test.csv')
     file_remove('compared_output_2files_dupsRemoved_Time_Filtered.txt')
     file_remove('critical_result.txt')
+    file_remove('Outputfile_result_new.txt')
 
     # Running the first script to pull the email attachments on every run 
     time = datetime.datetime.now()
     print(f'Script started at  {time} ')
     # Pulling the attachments can be controlled from here
-    # Pull_Attachments()
+    Pull_Attachments()
 
 
 
@@ -1231,7 +1233,7 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0:
             Send_email_Both_files_present()
             print(f'Email sent for both the files at {time} ')
-            # twilio_SMS()
+            twilio_SMS()
 
         else:
             Send_email_Both_files_with_no_error()
@@ -1245,12 +1247,12 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0:
             Send_email_only_Batch_report_csv_file_present()
             print(f'Email sent for only the Batch Report only, at {time}')
-            # twilio_SMS()
-            # twilio_SMS_Batch_report_file_missing()
+            twilio_SMS()
+            twilio_SMS_Batch_report_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the Batch Report file, there were no errors to report at {time}')
-            # twilio_SMS_Batch_report_file_missing()
+            twilio_SMS_Batch_report_file_missing()
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing()
@@ -1258,16 +1260,16 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
             print(f'Email sent for only the TWS report only, at {time} ')
-            # twilio_SMS_TWS_file_missing()
+            twilio_SMS_TWS_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
-            # twilio_SMS_TWS_file_missing()
+            twilio_SMS_TWS_file_missing()
     
     else:
         Send_email_as_both_files_are_missing()
         print(f'Email sent as NO Batch Report file , NO TWS report received yet,  at {time} ')
-        # twilio_SMS_not_able_to_access_emailsForAttachments()
+        twilio_SMS_not_able_to_access_emailsForAttachments()
 
 
 def win32_test_mail():
@@ -1292,7 +1294,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("16:20").do(win32_new)        # to run everyday
+schedule.every().day.at("10:58").do(win32_new)        # to run everyday
 
 
 
