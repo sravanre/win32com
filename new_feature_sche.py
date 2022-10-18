@@ -409,6 +409,413 @@ def win32_new():
 
         # outputFileCriticalError.close()
 
+    def TWS_textfile_processing_Time1_Error_Header():
+        checkW= 'STATUS(W)'
+        filepath = 'DP5PLST1.TXT'
+
+        my_file = open("result_TWS_Report.txt", "a+")
+        with open(filepath, 'r') as fp:
+            for l_no, line in enumerate(fp):
+                # search string
+
+                if checkW in line:
+                    #print(line.strip().split(' '))
+                    line1 = line.strip().split(' ')
+                    line2 = line1[3]
+                    line3 = line2[5:-1]
+
+                    line4 = line1[4]
+                    line5 = line4[3:-1]
+                    
+                    # print(line5)
+                    print(line3,line5)
+
+                    
+                    my_file.writelines(line3+","+line5)
+                    
+                    my_file.writelines('\n')
+                # if checkERR in line:
+
+
+        my_file.close()
+
+        #comparing the two generated files and writing the output into the batch report on a new lines , file: diff1.py
+
+        compared_output_2files = open("compared_output_2files.txt", "a+")
+            # compared_output_2files.write("\t\t\t\t:::::::::::   WAITING JOBS   :::::::::::")
+            # compared_output_2files.write('\n')
+        file1 = open('result_TWS_Report.txt', 'r').readlines()
+        file2 = open('TWSmapJobNames_Ventende.txt', 'r').readlines()
+
+            # print(file1)
+            # try:
+            # print(file2)
+        for j in file2:
+            k = j.strip().split(',')            
+            for i in file1:
+                y = i.strip().split(',')
+                        # print(k)
+                        # print(y)
+                try:
+                    if y[0] in k[0]:
+                        #print(j.strip())
+                        # print(j.strip().split(','))
+                        # k = j.strip().split(',')
+                        print(k[1]+'BatchJob',y[1])
+                                
+                        compared_output_2files.writelines('\n')
+                                # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
+                        compared_output_2files.writelines(k[1]+'BatchJob'+','+'20'+y[1])
+
+                except IndexError:
+                    pass
+
+                
+        compared_output_2files.close()
+
+        ## this is to add the critical batch to Header file , but the job name is gettiing added instead of the message against the jobname , right now not writing to the email
+
+        ErrorListToAddToHeader = []
+        ErrorListToAddToHeaderWithReadableNames = []
+        checkERR= ['ERR(0030)','ERR(0031)','ERR(0032)','ERR(0033)','ERR(0034)','ERR(0035)','ERR(0036)','ERR(0037)','ERR(0038)','ERR(0039)','ERR(0100']
+        try:
+            with open(filepath, 'r') as fp:
+                for l_no, line in enumerate(fp):
+                    try:
+                        for i in range(len(checkERR)):
+                            if checkERR[i] in line:
+                                line1 = line.strip().split(' ')
+                                line2 = line1[5]
+                                line3 = line2[5:-1]
+                                line4 = line1[6]
+                                line5 = line4[3:-1]
+                                ErrorListToAddToHeader.append(line3)
+                                print(line3 + "sravan sravan")
+                    except:
+                        pass
+            print(ErrorListToAddToHeader)
+
+            file2 = open('TWSmapJobNames.txt', 'r').readlines()
+            for j in file2:
+                k = j.strip().split(',')
+                for i in ErrorListToAddToHeader:
+                    y=i.strip().split(':')
+                    try:
+                        if y[0] == k[0]:
+                            ErrorListToAddToHeaderWithReadableNames.append(k[1])
+                    
+                    except:
+                        pass
+            print(ErrorListToAddToHeaderWithReadableNames)
+        except FileNotFoundError:
+            print("TWS file is not present in this run")
+
+        
+        # CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
+        # for i in ErrorListToAddToHeaderWithReadableNames:
+        #     if i in CriticalBatchListTemp:
+        #         HeaderCriticalErrorJob.append(i)
+
+            
+            
+        lines_seen = set() # holds lines already seen
+        outfile = open('compared_output_2files_dupsRemoved.txt', "w")
+        for line in open("compared_output_2files.txt", "r"):
+            if line not in lines_seen: # not a duplicate
+                if 'BatchReport' not in line and 'DmReconcile' not in line:
+                    if not line.isspace():
+                        outfile.write(line)
+                        lines_seen.add(line)
+        outfile.close()
+
+
+        # adding the timefilter in the same block for this function , for the compared_output_2files_DupsRemoved, 
+        now1 = datetime.datetime.now()
+        yesterday = now1 - timedelta(days = 1)
+        todayMMDD = now1.strftime('%d')
+        yesterdayMMDD = yesterday.strftime('%d')
+
+        print(todayMMDD)
+        print(yesterdayMMDD)
+        print(type(int(todayMMDD)))
+
+        One_Day_before_yesterday = now1 - timedelta(days = 2)
+        print(One_Day_before_yesterday)
+        One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%d')
+        print(One_Day_before_yesterdayMMDD)
+        # 3 days back 
+        Three_day_back = now1 - timedelta(days = 3)
+        Three_day_backMMDD = Three_day_back.strftime('%d')
+
+        Four_day_back = now1 - timedelta(days = 4)
+        Four_day_backMMDD = Four_day_back.strftime('%d')
+
+        Five_day_back = now1 - timedelta(days = 5)
+        Five_day_backMMDD = Five_day_back.strftime('%d')
+
+        Six_day_back = now1 - timedelta(days = 6)
+        Six_day_backMMDD = Six_day_back.strftime('%d')
+
+
+        my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
+        with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
+            my_file_time.writelines("\n\t\t::::::::::: Ventende  batchjobs :::::::::::\n")
+            try:
+                for l_no, line in enumerate(fp):
+                    line1 = line.strip().split(',')
+                    line2 = line1[1]
+                    line3 = line2[6:-4]
+
+
+                    if int(line3) == int(todayMMDD):
+                        line4 = line2[8:-2]    ## matching only the hours field  
+                        for i in range(0,8):
+                            if line4 == '0'+str(i):
+                                print('today jobs from mornign 00 to 07')
+                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                my_file_time.writelines('\n')
+                    # else:
+                    #     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                    #     my_file_time.writelines('\n')                      
+
+                    elif int(line3) == int(yesterdayMMDD):
+                        line4 = line2[8:-2]
+                        # if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
+                        for i in range(0,24):
+                            if line4 == '0'+str(i):
+                                print('yesterday output , time window 8,9,AM ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                my_file_time.writelines('\n')  
+                            # my_file_time.writelines('\n')
+                            elif line4 == str(i):
+                                print('yesterday output,10 ,11,12,13,14,15 ')
+                                print(line1)
+                                # print(line)
+                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                my_file_time.writelines('\n')  
+
+                    
+                    elif int(line3) == int(One_Day_before_yesterdayMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('One_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+
+                    elif int(line3) == int(Three_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('three_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                    
+                    elif int(line3) == int(Four_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('four_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+
+                    elif int(line3) == int(Five_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('five_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+
+
+                    elif int(line3) == int(Six_day_backMMDD):
+                          line4 = line2[8:-2]
+                          for i in range(0,24):
+                                if line4 == '0'+str(i):
+                                    print('Six_Day_before_yesterday jobs ')
+                                    print(line1)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                elif line4 == str(i):
+                                    print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
+                                    
+
+            except:
+                pass
+        my_file_time.close()
+
+        # this was to empty the contents of the file so that the txt files doesn't have the starting 
+        # and ending lines in the mail 
+        file_empty_check = open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r').readlines()
+        if len(file_empty_check) == 2:
+            open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()   
+
+
+        ## Waiting code for printing the danish messages at the HEADER of the files. 
+
+        waitingDictionary = {'EndMonth':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
+                    ,'Primo':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
+                    ,'Ultimo':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
+                    ,'Billing':'Opkrævninger er ikke foretaget endnu.'
+                    ,'BundleWaitingTrades':'Forventede handler er ikke afviklet. Det betyder, at fil til Kapitalforvaltningen er forsinket.'
+                    ,'OiAccountItemExport':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'OiAccountBalanceExport':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'SapPayment':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'SapPaymentNemKonto':'Udbetalingsflowet er forsinket, da nogle jobs endnu ikke er afviklet.'
+                    ,'FundPriceImport':'Handelsflowet er ikke startet. Årsag undersøges.'
+                    ,'ExecutePortfolioTrades':'Handelsflowet er ikke startet. Årsag undersøges.'
+                    ,'Db9669PaymentImport':'Der kan være indbetalinger, der ikke er lagt ind i Liva.'}
+
+        # HeaderCriticalErrorJob = []
+        # WaitingJobListTimeFiltered = []
+        file_empty_check = open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r').readlines()
+        with open('compared_output_2files_dupsRemoved_Time_Filtered.txt', 'r') as fp:
+            for l_no,line in enumerate(fp):
+                try:
+                    line1 = line.strip().split(' ')
+                    print(line1[0])
+                    WaitingJobListTimeFiltered.append(line1[0])
+                except AttributeError:
+                    pass
+        
+        for i in range(len(WaitingJobListTimeFiltered)):
+            if WaitingJobListTimeFiltered[i].removesuffix("BatchJob") in waitingDictionary.keys():
+                print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
+                HeaderCriticalErrorJob.append(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
+            
+            else:
+                print("nothing matched")
+        
+        print(HeaderCriticalErrorJob)
+        # return HeaderCriticalErrorJob    ## i am going to write this into a file
+        # outputFileCriticalError = open('Outputfile_result_new.txt', "w")
+        # for line in HeaderCriticalErrorJob:
+        #     outputFileCriticalError.writelines(line)
+        #     outputFileCriticalError.writelines('\n')
+
+        # outputFileCriticalError.close()
+
+        if len(HeaderCriticalErrorJob) != 0:
+            print("sucess")
+            HeaderCriticalErrorJob.insert(0,'Bemærk:')
+            HeaderCriticalErrorJob.insert(len(HeaderCriticalErrorJob),'Ny status forventes kl. 10.')
+    
+        else:
+            print("failure not found")
+
+        print(HeaderCriticalErrorJob)
+        
+        # writing the list to a file for critical batch job names danish Names 
+        outputFileCriticalError = open('Outputfile_result_new.txt', "w")
+        for line in HeaderCriticalErrorJob:
+            outputFileCriticalError.writelines(line)
+            outputFileCriticalError.writelines('\n')
+
+        outputFileCriticalError.close()
+
+
+
+        # TODO:  add exception handling  on for checkERR 
+        checkERR= 'ERR('
+        # checkERR_0010= 'ERR(0010)'
+        filepath_TWS_report = 'DP5PLST1.TXT'
+        ErrorListFromTWSReport = []
+        ErrorListFromTWSReport_WithReadableNames = []
+        try:
+            with open(filepath_TWS_report, 'r') as fp:
+                for l_no, line in enumerate(fp):
+                    # if checkERR_0010 in line or checkERR_0100 in line or checkERR_0023 in line:
+                    try: 
+                        if checkERR in line:
+                            line1 = line.strip().split(' ')
+                    # print(line1)
+                            line2 = line1[5]
+                            line3 = line2[5:-1]
+                            line4 = line1[6]
+                            line5 = line4[3:-1]
+                            line6 = line1[8]
+                        
+                    # print(line5)
+                            print(line3)
+                            print(type(line3))
+                            ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
+                    except:
+                        pass
+            print('       the list ErrList from the TWS report with the Error code 0010')
+            print(ErrorListFromTWSReport)
+
+            file2 = open('TWSmapJobNames.txt', 'r').readlines()
+            for j in file2:
+                k = j.strip().split(',')
+                for i in ErrorListFromTWSReport:
+                    y=i.strip().split(':')
+                    try:
+                        if y[0] == k[0]:
+                            print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
+                            ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
+                        
+                    except IndexError:
+                        pass
+        except FileNotFoundError:
+            print("TWS file is not present in this run")    
+
+        # adding the Critical job  TODO 
+        # try:
+        #     ErrorJobNameFromTWSToCheckCompareCriticalJob = []
+        #     if len(ErrorListFromTWSReport_WithReadableNames) != 0:
+        #         for i in ErrorListFromTWSReport_WithReadableNames:
+        #             line1 = i.strip().split(' ')
+        #             ErrorJobNameFromTWSToCheckCompareCriticalJob.append(line1[0])
+        # except:
+        #     pass
+
+
+
+            # write the Error files list to the output file - error_file_dupsremoved.txt
+        if len(ErrorListFromTWSReport_WithReadableNames) != 0:
+                ErrorListFromTWSReport_WithReadableNamesDupsRemoved = list(set(ErrorListFromTWSReport_WithReadableNames))   ## removing the duplicates in the list 
+                outfile_final_Error_file = open('error_file_dupsremoved.txt', "w")
+                outfile_final_Error_file.writelines("\n\t\t::::::::::: Fejlet batchjobs :::::::::::")
+                for i in ErrorListFromTWSReport_WithReadableNamesDupsRemoved:
+                    outfile_final_Error_file.writelines('\n')
+                    outfile_final_Error_file.writelines(i)
+
+
+
 
                
 
@@ -1018,7 +1425,7 @@ def win32_new():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\nIngen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport. \n\n{open('Outputfile_result_new.txt','r').read()}{open('error_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\nIngen batchjobrapport modtaget om morgenen, men kun TWS-rapport modtages, og viser derfor kun Ventende job eller Aktuelle job \nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane  "
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
 
         mail.Display()
@@ -1238,9 +1645,8 @@ def win32_new():
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for both the files, there were no errors to report at {time} ')
-        #exit the program as both the files are there and output is received 
-        # exit()
-
+            #exit the program as both the files are there and output is received 
+            # exit()
             #TODO : change the send email with no errors to mention that other file was missing eventhough there were no errors
     elif os.path.isfile('test.csv'):
         csvfile_processing()
@@ -1255,16 +1661,15 @@ def win32_new():
             twilio_SMS_Batch_report_file_missing()
 
     elif os.path.isfile('DP5PLST1.txt'):
-        TWS_textfile_processing()
-        time1()
-        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0: 
+        TWS_textfile_processing_Time1_Error_Header()
+        if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
             print(f'Email sent for only the TWS report only, at {time} ')
-            twilio_SMS_TWS_file_missing()
+            # twilio_SMS_TWS_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
-            twilio_SMS_TWS_file_missing()
+            # twilio_SMS_TWS_file_missing()
     
     else:
         Send_email_as_both_files_are_missing()
@@ -1294,7 +1699,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:58").do(win32_new)        # to run everyday
+schedule.every().day.at("11:45").do(win32_new)        # to run everyday
 
 
 
