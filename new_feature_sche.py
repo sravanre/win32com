@@ -477,7 +477,7 @@ def win32_new():
 
         ErrorListToAddToHeader = []
         ErrorListToAddToHeaderWithReadableNames = []
-        checkERR= ['ERR(0030)','ERR(0031)','ERR(0032)','ERR(0033)','ERR(0034)','ERR(0035)','ERR(0036)','ERR(0037)','ERR(0038)','ERR(0039)','ERR(0100']
+        checkERR= ['ERR(0030)','ERR(0031)','ERR(0032)','ERR(0033)','ERR(0034)','ERR(0035)','ERR(0036)','ERR(0037)','ERR(0038)','ERR(0039)','ERR(0100)']
         try:
             with open(filepath, 'r') as fp:
                 for l_no, line in enumerate(fp):
@@ -1499,7 +1499,7 @@ def win32_new():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\nBatchkørsler er kørt igennem uden advarsler (returkode 23) eller fejl. Intet at rapportere.\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\nBatchkørsler er kørt igennem uden advarsler (returkode 23) eller fejl. Intet at rapportere.\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
         
         mail.Display()
         # mail.Send()
@@ -1665,11 +1665,11 @@ def win32_new():
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
             print(f'Email sent for only the TWS report only, at {time} ')
-            # twilio_SMS_TWS_file_missing()
+            twilio_SMS_TWS_file_missing()
         else:
             Send_email_Both_files_with_no_error()
             print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
-            # twilio_SMS_TWS_file_missing()
+            twilio_SMS_TWS_file_missing()
     
     else:
         Send_email_as_both_files_are_missing()
@@ -1699,7 +1699,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("11:45").do(win32_new)        # to run everyday
+schedule.every().day.at("10:40").do(win32_new)        # to run everyday
 
 
 
