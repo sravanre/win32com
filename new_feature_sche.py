@@ -237,6 +237,16 @@ def win32_new():
         Six_day_back = now1 - timedelta(days = 6)
         Six_day_backMMDD = Six_day_back.strftime('%d')
 
+        ## adjusting the orientation of the waiting jobs , vendente jobs
+        ## capturing the largest size of waiting job
+        length_of_waitingJobListFull = []
+        with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
+            for l_no, line in enumerate(fp):
+                line1 = line.strip()
+                line2 = line1.split(',')
+                length_of_waitingJobListFull.append(line2[0])
+
+
 
         my_file_time = open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "a+")
         with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
@@ -253,8 +263,15 @@ def win32_new():
                         for i in range(0,8):
                             if line4 == '0'+str(i):
                                 print('today jobs from mornign 00 to 07')
-                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                my_file_time.writelines('\n')
+                                if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                    print('yesterday output , time window 8,9,AM ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                    my_file_time.writelines('\n') 
+                                else:
+                                    my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
                     # else:
                     #     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                     #     my_file_time.writelines('\n')                      
@@ -264,18 +281,29 @@ def win32_new():
                         # if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
                         for i in range(0,24):
                             if line4 == '0'+str(i):
-                                print('yesterday output , time window 8,9,AM ')
-                                print(line1)
-                                # print(line)
-                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                my_file_time.writelines('\n')  
+                                if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                    print('yesterday output , time window 8,9,AM ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                    my_file_time.writelines('\n') 
+                                else:
+                                    my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
                             # my_file_time.writelines('\n')
                             elif line4 == str(i):
                                 print('yesterday output,10 ,11,12,13,14,15 ')
                                 print(line1)
                                 # print(line)
-                                my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                my_file_time.writelines('\n')  
+                                if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                    print('yesterday output , time window 8,9,AM ')
+                                    print(line1)
+                                    # print(line)
+                                    my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                    my_file_time.writelines('\n') 
+                                else:
+                                    my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                    my_file_time.writelines('\n')
 
                     
                     elif int(line3) == int(One_Day_before_yesterdayMMDD):
@@ -284,14 +312,26 @@ def win32_new():
                                 if line4 == '0'+str(i):
                                     print('One_Day_before_yesterday jobs ')
                                     print(line1)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        print(line1)
+                                        # print(line)
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                                 elif line4 == str(i):
                                     print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
                                     print(line1)
                                     # print(line)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        print(line1)
+                                        # print(line)
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
 
                     elif int(line3) == int(Three_day_backMMDD):
                           line4 = line2[8:-2]
@@ -299,14 +339,22 @@ def win32_new():
                                 if line4 == '0'+str(i):
                                     print('three_Day_before_yesterday jobs ')
                                     print(line1)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                                 elif line4 == str(i):
                                     print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
                                     print(line1)
                                     # print(line)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                     
                     elif int(line3) == int(Four_day_backMMDD):
                           line4 = line2[8:-2]
@@ -314,14 +362,22 @@ def win32_new():
                                 if line4 == '0'+str(i):
                                     print('four_Day_before_yesterday jobs ')
                                     print(line1)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                                 elif line4 == str(i):
                                     print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
                                     print(line1)
                                     # print(line)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
 
                     elif int(line3) == int(Five_day_backMMDD):
                           line4 = line2[8:-2]
@@ -329,14 +385,22 @@ def win32_new():
                                 if line4 == '0'+str(i):
                                     print('five_Day_before_yesterday jobs ')
                                     print(line1)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                                 elif line4 == str(i):
                                     print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
                                     print(line1)
                                     # print(line)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
 
 
                     elif int(line3) == int(Six_day_backMMDD):
@@ -345,14 +409,22 @@ def win32_new():
                                 if line4 == '0'+str(i):
                                     print('Six_Day_before_yesterday jobs ')
                                     print(line1)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                                 elif line4 == str(i):
                                     print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
                                     print(line1)
                                     # print(line)
-                                    my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
-                                    my_file_time.writelines('\n')
+                                    if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
+                                        my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n') 
+                                    else:
+                                        my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
+                                        my_file_time.writelines('\n')
                                     
 
             except:
@@ -1699,7 +1771,7 @@ def win32_test_mail():
 # schedule.every().friday.at("07:15").do(win32_new)
 
 schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("10:40").do(win32_new)        # to run everyday
+schedule.every().day.at("12:04").do(win32_new)        # to run everyday
 
 
 
