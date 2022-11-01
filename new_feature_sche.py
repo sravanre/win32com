@@ -1597,11 +1597,6 @@ def win32_new():
         # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
         if os.path.getsize(filepath_critical_result) != 0: 
 
-            message = client.messages.create(
-                body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
-                from_=keys.twilio_number,
-                to=keys.richardt_number
-            )
 
             # message = client.messages.create(
             #     body= f'LIVA batchjob have reported errors on critical batchjobs. Take immediate action to handle this \n************\n{alertMessage}',
@@ -1639,11 +1634,6 @@ def win32_new():
         alertMessage = "Morning report sent only with TWS file, Batch report is not received yet in the mailbox. Please check is Liva Batch system is working properly!"
         # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
         
-        message = client.messages.create(
-            body= f'Take immediate action to handle this \n************\n{alertMessage}',
-            from_=keys.twilio_number,
-            to=keys.richardt_number
-        )
 
         message = client.messages.create(
             body= f'Take immediate action to handle this \n************\n{alertMessage}',
@@ -1658,11 +1648,6 @@ def win32_new():
         alertMessage = "Morning report sent only with Batch report, TWS report is not received yet in the mailbox. Please check is Liva Batch system is working properly!"
         # if os.stat.getsize(filepath) != 0 and os.stat(filepath).st_size != 0:
         
-        message = client.messages.create(
-            body= f'Take immediate action to handle this \n************\n{alertMessage}',
-            from_=keys.twilio_number,
-            to=keys.richardt_number
-        )
 
         message = client.messages.create(
             body= f'Take immediate action to handle this \n************\n{alertMessage}',
