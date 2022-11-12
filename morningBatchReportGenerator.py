@@ -52,16 +52,16 @@ def win32_new():
             for l_no, line in enumerate(fp):
                 # search string
                 # if checkE in line:
-                #     #print('string found in a file')
-                #     #print('Line Number:', l_no)
-                #     #print('Line:', line)
-                #     print(line.strip())
+                #     ##print('string found in a file')
+                #     ##print('Line Number:', l_no)
+                #     ##print('Line:', line)
+                #     #print(line.strip())
                 #     # don't look for next 
                     
                 #     my_file.writelines(line)
 
                 if checkW in line:
-                    #print(line.strip().split(' '))
+                    ##print(line.strip().split(' '))
                     line1 = line.strip().split(' ')
                     line2 = line1[3]
                     line3 = line2[5:-1]
@@ -69,15 +69,15 @@ def win32_new():
                     line4 = line1[4]
                     line5 = line4[3:-1]
                     
-                    # print(line5)
-                    print(line3,line5)
+                    # #print(line5)
+                    #print(line3,line5)
 
                     
                     my_file.writelines(line3+","+line5)
                     
                     my_file.writelines('\n')
                 # if checkERR in line:
-                #     print(line.strip())
+                #     #print(line.strip())
                     
                 #     my_file.writelines(line)
 
@@ -89,24 +89,24 @@ def win32_new():
         # yesterdayMMDD = yesterday.strftime('%m%d')
 
         # One_Day_before_yesterday = now1 - timedelta(days = 2)
-        # print(One_Day_before_yesterday)
+        # #print(One_Day_before_yesterday)
         # One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%m%d')
-        # print(One_Day_before_yesterdayMMDD)
+        # #print(One_Day_before_yesterdayMMDD)
         
         # my_file = open('result_TWS_Report_timestamp.txt', "a+")
         # with open('result_TWS_Report.txt', 'r') as fp:
         #     for l_no, line in enumerate(fp):
         #         if todayMMDD in line:
-        #             print('timestp++++')
-        #             print(line)
+        #             #print('timestp++++')
+        #             #print(line)
         #             my_file.writelines(line)
 
         #         if yesterdayMMDD in line:
-        #             print(line)
+        #             #print(line)
         #             my_file.writelines(line)
 
         #         if One_Day_before_yesterdayMMDD in line:
-        #             print(line)
+        #             #print(line)
         #             my_file.writelines(line)
                 
         
@@ -121,21 +121,21 @@ def win32_new():
         file1 = open('result_TWS_Report.txt', 'r').readlines()
         file2 = open('TWSmapJobNames_Ventende.txt', 'r').readlines()
 
-            # print(file1)
+            # #print(file1)
             # try:
-            # print(file2)
+            # #print(file2)
         for j in file2:
             k = j.strip().split(',')            
             for i in file1:
                 y = i.strip().split(',')
-                        # print(k)
-                        # print(y)
+                        # #print(k)
+                        # #print(y)
                 try:
                     if y[0] in k[0]:
-                        #print(j.strip())
-                        # print(j.strip().split(','))
+                        ##print(j.strip())
+                        # #print(j.strip().split(','))
                         # k = j.strip().split(',')
-                        print(k[1]+'BatchJob',y[1])
+                        #print(k[1]+'BatchJob',y[1])
                                 
                         compared_output_2files.writelines('\n')
                                 # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
@@ -164,10 +164,10 @@ def win32_new():
                                 line4 = line1[6]
                                 line5 = line4[3:-1]
                                 ErrorListToAddToHeader.append(line3)
-                                print(line3 + "sravan sravan")
+                                #print(line3 + "sravan sravan")
                     except:
                         pass
-            print(ErrorListToAddToHeader)
+            #print(ErrorListToAddToHeader)
 
             file2 = open('TWSmapJobNames.txt', 'r').readlines()
             for j in file2:
@@ -180,7 +180,7 @@ def win32_new():
                     
                     except:
                         pass
-            print(ErrorListToAddToHeaderWithReadableNames)
+            # print(ErrorListToAddToHeaderWithReadableNames)
         except FileNotFoundError:
             print("TWS file is not present in this run")
 
@@ -216,14 +216,14 @@ def win32_new():
         todayMMDD = now1.strftime('%d')
         yesterdayMMDD = yesterday.strftime('%d')
 
-        print(todayMMDD)
-        print(yesterdayMMDD)
-        print(type(int(todayMMDD)))
+        #print(todayMMDD)
+        #print(yesterdayMMDD)
+        #print(type(int(todayMMDD)))
 
         One_Day_before_yesterday = now1 - timedelta(days = 2)
-        print(One_Day_before_yesterday)
+        #print(One_Day_before_yesterday)
         One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%d')
-        print(One_Day_before_yesterdayMMDD)
+        #print(One_Day_before_yesterdayMMDD)
         # 3 days back 
         Three_day_back = now1 - timedelta(days = 3)
         Three_day_backMMDD = Three_day_back.strftime('%d')
@@ -262,11 +262,11 @@ def win32_new():
                         line4 = line2[8:-2]    ## matching only the hours field  
                         for i in range(0,8):
                             if line4 == '0'+str(i):
-                                print('today jobs from mornign 00 to 07')
+                                #print('today jobs from mornign 00 to 07')
                                 if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
-                                    print('yesterday output , time window 8,9,AM ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('yesterday output , time window 8,9,AM ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                     my_file_time.writelines('\n') 
                                 else:
@@ -282,9 +282,9 @@ def win32_new():
                         for i in range(0,24):
                             if line4 == '0'+str(i):
                                 if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
-                                    print('yesterday output , time window 8,9,AM ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('yesterday output , time window 8,9,AM ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                     my_file_time.writelines('\n') 
                                 else:
@@ -292,13 +292,13 @@ def win32_new():
                                     my_file_time.writelines('\n')
                             # my_file_time.writelines('\n')
                             elif line4 == str(i):
-                                print('yesterday output,10 ,11,12,13,14,15 ')
-                                print(line1)
-                                # print(line)
+                                #print('yesterday output,10 ,11,12,13,14,15 ')
+                                #print(line1)
+                                # #print(line)
                                 if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
-                                    print('yesterday output , time window 8,9,AM ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('yesterday output , time window 8,9,AM ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                     my_file_time.writelines('\n') 
                                 else:
@@ -310,23 +310,23 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('One_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('One_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
-                                        print(line1)
-                                        # print(line)
+                                        #print(line1)
+                                        # #print(line)
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
                                     else:
                                         my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
-                                        print(line1)
-                                        # print(line)
+                                        #print(line1)
+                                        # #print(line)
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
                                     else:
@@ -337,8 +337,8 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('three_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('three_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -346,9 +346,9 @@ def win32_new():
                                         my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -360,8 +360,8 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('four_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('four_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -369,9 +369,9 @@ def win32_new():
                                         my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -383,8 +383,8 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('five_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('five_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -392,9 +392,9 @@ def win32_new():
                                         my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -407,8 +407,8 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('Six_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('Six_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -416,9 +416,9 @@ def win32_new():
                                         my_file_time.writelines(line1[0]+" "*(len(max(length_of_waitingJobListFull, key=len)) - len(line1[0])+13) + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     if len(line1[0]) == len(max(length_of_waitingJobListFull, key=len)):
                                         my_file_time.writelines(line1[0]+" "*13 + '{'+line1[1]+'}')
                                         my_file_time.writelines('\n') 
@@ -437,7 +437,7 @@ def win32_new():
             open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()   
 
 
-        ## Waiting code for printing the danish messages at the HEADER of the files. 
+        ## Waiting code for #printing the danish messages at the HEADER of the files. 
 
         waitingDictionary = {'EndMonth':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
                     ,'Primo':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
@@ -459,20 +459,20 @@ def win32_new():
             for l_no,line in enumerate(fp):
                 try:
                     line1 = line.strip().split(' ')
-                    print(line1[0])
+                    #print(line1[0])
                     WaitingJobListTimeFiltered.append(line1[0])
                 except AttributeError:
                     pass
         
         for i in range(len(WaitingJobListTimeFiltered)):
             if WaitingJobListTimeFiltered[i].removesuffix("BatchJob") in waitingDictionary.keys():
-                print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
+                #print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
                 HeaderCriticalErrorJob.append(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
             
             else:
                 print("nothing matched")
         
-        print(HeaderCriticalErrorJob)
+        #print(HeaderCriticalErrorJob)
         # return HeaderCriticalErrorJob    ## i am going to write this into a file
         # outputFileCriticalError = open('Outputfile_result_new.txt', "w")
         # for line in HeaderCriticalErrorJob:
@@ -491,7 +491,7 @@ def win32_new():
                 # search string
 
                 if checkW in line:
-                    #print(line.strip().split(' '))
+                    ##print(line.strip().split(' '))
                     line1 = line.strip().split(' ')
                     line2 = line1[3]
                     line3 = line2[5:-1]
@@ -499,8 +499,8 @@ def win32_new():
                     line4 = line1[4]
                     line5 = line4[3:-1]
                     
-                    # print(line5)
-                    print(line3,line5)
+                    # #print(line5)
+                    #print(line3,line5)
 
                     
                     my_file.writelines(line3+","+line5)
@@ -519,21 +519,21 @@ def win32_new():
         file1 = open('result_TWS_Report.txt', 'r').readlines()
         file2 = open('TWSmapJobNames_Ventende.txt', 'r').readlines()
 
-            # print(file1)
+            # #print(file1)
             # try:
-            # print(file2)
+            # #print(file2)
         for j in file2:
             k = j.strip().split(',')            
             for i in file1:
                 y = i.strip().split(',')
-                        # print(k)
-                        # print(y)
+                        # #print(k)
+                        # #print(y)
                 try:
                     if y[0] in k[0]:
-                        #print(j.strip())
-                        # print(j.strip().split(','))
+                        ##print(j.strip())
+                        # #print(j.strip().split(','))
                         # k = j.strip().split(',')
-                        print(k[1]+'BatchJob',y[1])
+                        #print(k[1]+'BatchJob',y[1])
                                 
                         compared_output_2files.writelines('\n')
                                 # compared_output_2files.writelines(k[1] + 'BatchJob'+ "    " +y[1])
@@ -562,10 +562,10 @@ def win32_new():
                                 line4 = line1[6]
                                 line5 = line4[3:-1]
                                 ErrorListToAddToHeader.append(line3)
-                                print(line3 + "sravan sravan")
+                                #print(line3 + "sravan sravan")
                     except:
                         pass
-            print(ErrorListToAddToHeader)
+            #print(ErrorListToAddToHeader)
 
             file2 = open('TWSmapJobNames.txt', 'r').readlines()
             for j in file2:
@@ -578,7 +578,7 @@ def win32_new():
                     
                     except:
                         pass
-            print(ErrorListToAddToHeaderWithReadableNames)
+            #print(ErrorListToAddToHeaderWithReadableNames)
         except FileNotFoundError:
             print("TWS file is not present in this run")
 
@@ -607,14 +607,14 @@ def win32_new():
         todayMMDD = now1.strftime('%d')
         yesterdayMMDD = yesterday.strftime('%d')
 
-        print(todayMMDD)
-        print(yesterdayMMDD)
-        print(type(int(todayMMDD)))
+        #print(todayMMDD)
+        #print(yesterdayMMDD)
+        #print(type(int(todayMMDD)))
 
         One_Day_before_yesterday = now1 - timedelta(days = 2)
-        print(One_Day_before_yesterday)
+        #print(One_Day_before_yesterday)
         One_Day_before_yesterdayMMDD = One_Day_before_yesterday.strftime('%d')
-        print(One_Day_before_yesterdayMMDD)
+        #print(One_Day_before_yesterdayMMDD)
         # 3 days back 
         Three_day_back = now1 - timedelta(days = 3)
         Three_day_backMMDD = Three_day_back.strftime('%d')
@@ -643,7 +643,7 @@ def win32_new():
                         line4 = line2[8:-2]    ## matching only the hours field  
                         for i in range(0,8):
                             if line4 == '0'+str(i):
-                                print('today jobs from mornign 00 to 07')
+                                #print('today jobs from mornign 00 to 07')
                                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')
                     # else:
@@ -655,16 +655,16 @@ def win32_new():
                         # if int(line4) == 17 or int(line4) == 18 or int(line4) == 19 or int(line4) == 20 or int(line4) == 21 or int(line4) == 22 or int(line4) == 23:
                         for i in range(0,24):
                             if line4 == '0'+str(i):
-                                print('yesterday output , time window 8,9,AM ')
-                                print(line1)
-                                # print(line)
+                                #print('yesterday output , time window 8,9,AM ')
+                                #print(line1)
+                                # #print(line)
                                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')  
                             # my_file_time.writelines('\n')
                             elif line4 == str(i):
-                                print('yesterday output,10 ,11,12,13,14,15 ')
-                                print(line1)
-                                # print(line)
+                                #print('yesterday output,10 ,11,12,13,14,15 ')
+                                #print(line1)
+                                # #print(line)
                                 my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                 my_file_time.writelines('\n')  
 
@@ -673,14 +673,14 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('One_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('One_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('One_Day_before_MICROSOyesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
 
@@ -688,14 +688,14 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('three_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('three_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('three_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                     
@@ -703,14 +703,14 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('four_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('four_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('four_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
 
@@ -718,14 +718,14 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('five_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('five_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('five_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
 
@@ -734,14 +734,14 @@ def win32_new():
                           line4 = line2[8:-2]
                           for i in range(0,24):
                                 if line4 == '0'+str(i):
-                                    print('Six_Day_before_yesterday jobs ')
-                                    print(line1)
+                                    #print('Six_Day_before_yesterday jobs ')
+                                    #print(line1)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                 elif line4 == str(i):
-                                    print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
-                                    print(line1)
-                                    # print(line)
+                                    #print('Six_Day_before_yesterday output,10 ,11,12,13,14,15 ')
+                                    #print(line1)
+                                    # #print(line)
                                     my_file_time.writelines(line1[0]+"       "+'{'+line1[1]+'}')
                                     my_file_time.writelines('\n')
                                     
@@ -757,7 +757,7 @@ def win32_new():
             open("compared_output_2files_dupsRemoved_Time_Filtered.txt", "w").close()   
 
 
-        ## Waiting code for printing the danish messages at the HEADER of the files. 
+        ## Waiting code for #printing the danish messages at the HEADER of the files. 
 
         waitingDictionary = {'EndMonth':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
                     ,'Primo':'Kernejob ikke er kørt som forventet. Årsagen undersøges, men der skal forventes potentielle performance påvirkninger, hvis jobbet bliver afviklet i dagstiden.'
@@ -779,20 +779,20 @@ def win32_new():
             for l_no,line in enumerate(fp):
                 try:
                     line1 = line.strip().split(' ')
-                    print(line1[0])
+                    #print(line1[0])
                     WaitingJobListTimeFiltered.append(line1[0])
                 except AttributeError:
                     pass
         
         for i in range(len(WaitingJobListTimeFiltered)):
             if WaitingJobListTimeFiltered[i].removesuffix("BatchJob") in waitingDictionary.keys():
-                print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
+                #print(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
                 HeaderCriticalErrorJob.append(waitingDictionary[WaitingJobListTimeFiltered[i].removesuffix("BatchJob")])
             
             else:
                 print("nothing matched")
         
-        print(HeaderCriticalErrorJob)
+        #print(HeaderCriticalErrorJob)
         # return HeaderCriticalErrorJob    ## i am going to write this into a file
         # outputFileCriticalError = open('Outputfile_result_new.txt', "w")
         # for line in HeaderCriticalErrorJob:
@@ -802,14 +802,14 @@ def win32_new():
         # outputFileCriticalError.close()
 
         if len(HeaderCriticalErrorJob) != 0:
-            print("sucess")
+            #print("sucess")
             HeaderCriticalErrorJob.insert(0,'Bemærk:')
             HeaderCriticalErrorJob.insert(len(HeaderCriticalErrorJob),'Ny status forventes kl. 10.')
     
         else:
             print("failure not found")
 
-        print(HeaderCriticalErrorJob)
+        #print(HeaderCriticalErrorJob)
         
         # writing the list to a file for critical batch job names danish Names 
         outputFileCriticalError = open('Outputfile_result_new.txt', "w")
@@ -834,21 +834,21 @@ def win32_new():
                     try: 
                         if checkERR in line:
                             line1 = line.strip().split(' ')
-                    # print(line1)
+                    # #print(line1)
                             line2 = line1[5]
                             line3 = line2[5:-1]
                             line4 = line1[6]
                             line5 = line4[3:-1]
                             line6 = line1[8]
                         
-                    # print(line5)
-                            print(line3)
-                            print(type(line3))
+                    # #print(line5)
+                            #print(line3)
+                            #print(type(line3))
                             ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
                     except:
                         pass
-            print('       the list ErrList from the TWS report with the Error code 0010')
-            print(ErrorListFromTWSReport)
+            #print('       the list ErrList from the TWS report with the Error code 0010')
+            #print(ErrorListFromTWSReport)
 
             file2 = open('TWSmapJobNames.txt', 'r').readlines()
             for j in file2:
@@ -857,7 +857,7 @@ def win32_new():
                     y=i.strip().split(':')
                     try:
                         if y[0] == k[0]:
-                            print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
+                            #print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
                             ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
                         
                     except IndexError:
@@ -951,21 +951,21 @@ def win32_new():
                     try: 
                         if checkERR in line:
                             line1 = line.strip().split(' ')
-                    # print(line1)
+                    # #print(line1)
                             line2 = line1[5]
                             line3 = line2[5:-1]
                             line4 = line1[6]
                             line5 = line4[3:-1]
                             line6 = line1[8]
                         
-                    # print(line5)
-                            print(line3)
-                            print(type(line3))
+                    # #print(line5)
+                            #print(line3)
+                            #print(type(line3))
                             ErrorListFromTWSReport.append(line3+":"+line5+":"+line6)
                     except:
                         pass
-            print('       the list ErrList from the TWS report with the Error code 0010')
-            print(ErrorListFromTWSReport)
+            #print('       the list ErrList from the TWS report with the Error code 0010')
+            #print(ErrorListFromTWSReport)
 
             file2 = open('TWSmapJobNames.txt', 'r').readlines()
             for j in file2:
@@ -974,7 +974,7 @@ def win32_new():
                     y=i.strip().split(':')
                     try:
                         if y[0] == k[0]:
-                            print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
+                            #print(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2])
                             ErrorListFromTWSReport_WithReadableNames.append(k[1]+'BatchJob'+'               {' +y[1]+ '}  '+ y[2] + "  From TWS report")
                         
                     except IndexError:
@@ -983,8 +983,8 @@ def win32_new():
             print("TWS file is not present in this run")                    
 
 
-        # critical job with error code >39, code for messages to print on top of the email. check_Error = [30 - 39]
-        # critical job with error code >29 , code for messages to print on top of the email. warning = [21 - 29 ]
+        # critical job with error code >39, code for messages to #print on top of the email. check_Error = [30 - 39]
+        # critical job with error code >29 , code for messages to #print on top of the email. warning = [21 - 29 ]
         length_of_warning_jobname = []
         with open(filepath, 'r') as fp:
             for l_no, line in enumerate(fp):
@@ -993,10 +993,10 @@ def win32_new():
                         line1=line.strip()
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
-                            # print(line2[1])
+                            # #print(line2[1])
                             length_of_warning_jobname.append(line2[1])
-                            print('printing the array for length of warning jobname')
-                            print(length_of_warning_jobname)
+                            #print('#printing the array for length of warning jobname')
+                            #print(length_of_warning_jobname)
 
         # seperating both the list generation 
 
@@ -1009,10 +1009,10 @@ def win32_new():
                         line1=line.strip()
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
-                            # print(line2[1])
+                            # #print(line2[1])
                             WarningErrorList.append(line2[1])
-                            print("print the failed job list ie here warningErrorList")
-                            print(WarningErrorList)
+                            #print("#print the failed job list ie here warningErrorList")
+                            #print(WarningErrorList)
 
         
         errorDictionary = {'Db9669PaymentImport':'Der kan være indbetalinger, der ikke er lagt ind i Liva.'
@@ -1029,17 +1029,17 @@ def win32_new():
                   ,'ExecutePortfolioTrades':'Handelsflowet er fejlet og der er ikke dannet fil til Kapitalforvaltningen'
                   ,}
 
-        print("check this sravan: errorDictionarykeys() and errorList ")
-        print(errorDictionary.keys())
-        print(WarningErrorList)
+        #print("check this sravan: errorDictionarykeys() and errorList ")
+        #print(errorDictionary.keys())
+        #print(WarningErrorList)
         
 
        
         # HeaderCriticalErrorJob = []     
         for i in range(len(WarningErrorList)):
-            print(i)
+            #print(i)
             if WarningErrorList[i].removesuffix("BatchJob") in errorDictionary.keys():
-                print(errorDictionary[WarningErrorList[i].removesuffix("BatchJob")])
+                #print(errorDictionary[WarningErrorList[i].removesuffix("BatchJob")])
                 HeaderCriticalErrorJob.append(errorDictionary[WarningErrorList[i].removesuffix("BatchJob")])
             else:
                 print("nothing matched")
@@ -1050,7 +1050,7 @@ def win32_new():
 
 
         with open(filepath, 'r') as fp:
-            print("\t\t\t\t\t::::ERROR JOB LIST ::::::")               
+            #print("\t\t\t\t\t::::ERROR JOB LIST ::::::")               
         
             for l_no, line in enumerate(fp):
                 for x in check_error:
@@ -1058,7 +1058,7 @@ def win32_new():
                         line1=line.strip()
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
-                            print(line2[1])
+                            #print(line2[1])
                             tempListTop = ['TopBenefitEndPrint', 'TopCpsReportingPrint', 'TopDssReportingFilesImport', 'TopHealthRelationExport', 'TopIrteReportingCorrectionPrint', 'TopIrteReportingPrint', 'TopLifeCertificatePrintBatchJob', 'TopOsirMetaDataUpdate', 'TopTestCVRSelfServiceServices', 'TopUnitLinkYieldReport']
                             my_file.writelines('\n')
                             # my_file.writelines("\n\t\t\t\t::::::::::: Fejlet batchjobs :::::::::::")
@@ -1097,7 +1097,7 @@ def win32_new():
             ## TODO -- right now we are not capturing the Critical jobs for Warning Code 21 - 29 
 
         with open(filepath, 'r') as fp:
-            print("\t\t\t\t\t::::Critical JOB Error LIST ::::::")               
+            #print("\t\t\t\t\t::::Critical JOB Error LIST ::::::")               
                 
             for l_no, line in enumerate(fp):
                 for x in check_error:
@@ -1138,7 +1138,7 @@ def win32_new():
         #             critical_file.writelines('\n')
         #             critical_file.writelines(ErrorJobNameFromTWSToCheckCompareCriticalJob[i])
         #         else:
-        #             print("not found and critical job in TWS report, check the critical_file in the folders")
+        #             #print("not found and critical job in TWS report, check the critical_file in the folders")
         # except:
         #     pass
 
@@ -1173,9 +1173,9 @@ def win32_new():
         
 
         for i in range(len(inprogressList)):
-            print(i)
+            #print(i)
             if inprogressList[i].removesuffix("BatchJob") in inprogressDictionary.keys():
-                print(inprogressDictionary[inprogressList[i].removesuffix("BatchJob")])
+                #print(inprogressDictionary[inprogressList[i].removesuffix("BatchJob")])
                 HeaderCriticalErrorJob.append(inprogressDictionary[inprogressList[i].removesuffix("BatchJob")])
             else:
                 print("nothing matched")
@@ -1184,14 +1184,14 @@ def win32_new():
         ## checking the list and adding ti to ti,
         #  #adding the line Bemark and last line to the end of the list with this  
         if len(HeaderCriticalErrorJob) != 0:
-            print("sucess")
+            #print("sucess")
             HeaderCriticalErrorJob.insert(0,'Bemærk:')
             HeaderCriticalErrorJob.insert(len(HeaderCriticalErrorJob),'Ny status forventes kl. 10.')
     
         else:
             print("failure not found")
 
-        print(HeaderCriticalErrorJob)
+        #print(HeaderCriticalErrorJob)
         
         # writing the list to a file for critical batch job names danish Names 
         outputFileCriticalError = open('Outputfile_result_new.txt', "w")
@@ -1205,8 +1205,8 @@ def win32_new():
 
 
         with open(filepath, 'r') as fp:
-            print('\n')
-            print("\t\t\t\t\t::::INPROGRESS JOB LIST ::::::")
+            #print('\n')
+            #print("\t\t\t\t\t::::INPROGRESS JOB LIST ::::::")
             # my_file.writelines('\n')
             # my_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
             for l_no, line in enumerate(fp):
@@ -1217,8 +1217,8 @@ def win32_new():
                             line2=line1.split(',')
                             tempListTop = ['TopBenefitEndPrint', 'TopCpsReportingPrint', 'TopDssReportingFilesImport', 'TopHealthRelationExport', 'TopIrteReportingCorrectionPrint', 'TopIrteReportingPrint', 'TopLifeCertificatePrintBatchJob', 'TopOsirMetaDataUpdate', 'TopTestCVRSelfServiceServices', 'TopUnitLinkYieldReport']
                             if x in line2[9]:
-                                print(line2[1]+" = "+line2[8])
-                                #print(line2[1])
+                                #print(line2[1]+" = "+line2[8])
+                                ##print(line2[1])
                                 my_file.writelines('\n')
                                 # my_file.writelines("\n\t\t\t\t\t:::::::::::   INPROGRESS JOBS   :::::::::::")
                                 my_file.write('\n')
@@ -1245,7 +1245,7 @@ def win32_new():
 
 
         with open(filepath, 'r') as fp:
-            print("\t\t\t\t\t::::WARNING JOB LIST ::::::")               
+            #print("\t\t\t\t\t::::WARNING JOB LIST ::::::")               
             # my_file.writelines('\n')
             # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
             
@@ -1255,7 +1255,7 @@ def win32_new():
                         line1=line.strip()
                         line2=line1.split(',')
                         if x in line2[9]:     ## searching on the particular column of the error code , against each row taken as input 
-                            print(line2[1])
+                            #print(line2[1])
                             my_file.writelines('\n')
                             # my_file.writelines("\n\t\t\t\t\t:::::::::::   WARNING JOBS   :::::::::::")
                             my_file.write('\n')
@@ -1412,7 +1412,7 @@ def win32_new():
         inbox = outlook.Folders[liva_operation].Folders['indbakke']
         messages = inbox.Items
 
-        print(inbox.Name)
+        #print(inbox.Name)
 
         # Function to search the today's subjected email and attachment . 
 
@@ -1420,12 +1420,12 @@ def win32_new():
             for message in messages:
                 if subject in message.Subject and message.Senton.date() == today:
                     for attachment in message.Attachments:
-                        print(attachment.FileName)
+                        #print(attachment.FileName)
                         attachment.SaveAsFile(os.path.join(path, str(attachment)))
         
         # save_attachments('Liva batchrapport 202205')
         try:
-            print(f'trying the script for  {YYYYMM} month')
+            #print(f'trying the script for  {YYYYMM} month')
             # save_attachments('Liva batchrapport 202208')
             # save_attachments('Liva batchrapport 202209')
             save_attachments(f"Liva batchrapport {YYYYMM}")
@@ -1442,7 +1442,7 @@ def win32_new():
         extension = 'csv'
         os.chdir(filepath)
         result = glob.glob('*.{}'.format(extension))
-        print(result)
+        #print(result)
 
         if len(result) == 1:
             os.rename(result[0], 'test.csv')
@@ -1581,7 +1581,7 @@ def win32_new():
     def file_remove(filename):
         if os.path.isfile(filename):
             os.remove(filename)
-            print(f"Old File removed : {filename} ")
+            #print(f"Old File removed : {filename} ")
         else:
             print(f"File doesn't exist : {filename}")
 
@@ -1682,7 +1682,7 @@ def win32_new():
 
     # Running the first script to pull the email attachments on every run 
     time = datetime.datetime.now()
-    print(f'Script started at  {time} ')
+    #print(f'Script started at  {time} ')
     # Pulling the attachments can be controlled from here
     Pull_Attachments()
 
@@ -1696,12 +1696,12 @@ def win32_new():
         csvfile_processing()
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0:
             Send_email_Both_files_present()
-            print(f'Email sent for both the files at {time} ')
+            #print(f'Email sent for both the files at {time} ')
             twilio_SMS()
 
         else:
             Send_email_Both_files_with_no_error()
-            print(f'Email sent for both the files, there were no errors to report at {time} ')
+            #print(f'Email sent for both the files, there were no errors to report at {time} ')
             #exit the program as both the files are there and output is received 
             # exit()
             #TODO : change the send email with no errors to mention that other file was missing eventhough there were no errors
@@ -1709,28 +1709,28 @@ def win32_new():
         csvfile_processing()
         if os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/warning_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/inprogress_file_dupsremoved.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0:
             Send_email_only_Batch_report_csv_file_present()
-            print(f'Email sent for only the Batch Report only, at {time}')
+            #print(f'Email sent for only the Batch Report only, at {time}')
             twilio_SMS()
             twilio_SMS_Batch_report_file_missing()
         else:
             Send_email_Both_files_with_no_error()
-            print(f'Email sent for only the Batch Report file, there were no errors to report at {time}')
+            #print(f'Email sent for only the Batch Report file, there were no errors to report at {time}')
             twilio_SMS_Batch_report_file_missing()
 
     elif os.path.isfile('DP5PLST1.txt'):
         TWS_textfile_processing_Time1_Error_Header()
         if os.path.getsize(os.getcwd() + "/compared_output_2files_dupsRemoved_Time_Filtered.txt") != 0 or os.path.getsize(os.getcwd() + "/Outputfile_result_new.txt") != 0 or os.path.getsize(os.getcwd() + "/error_file_dupsremoved.txt") != 0: 
             Send_email_only_TWS_txt_file_present()
-            print(f'Email sent for only the TWS report only, at {time} ')
+            #print(f'Email sent for only the TWS report only, at {time} ')
             twilio_SMS_TWS_file_missing()
         else:
             Send_email_Both_files_with_no_error()
-            print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
+            #print(f'Email sent for only the TWS report only,there were no errors to report  at {time} ')
             twilio_SMS_TWS_file_missing()
     
     else:
         Send_email_as_both_files_are_missing()
-        print(f'Email sent as NO Batch Report file , NO TWS report received yet,  at {time} ')
+        #print(f'Email sent as NO Batch Report file , NO TWS report received yet,  at {time} ')
         twilio_SMS_not_able_to_access_emailsForAttachments()
 
 
@@ -1765,4 +1765,3 @@ while True:
     schedule.run_pending()
     time.sleep(1)
     
-
