@@ -16,19 +16,33 @@ from datetime import date
 from datetime import timedelta
 from twilio.rest import Client
 import keys
+from rocketry import Rocketry
+from rocketry.conds import cron
 
-liva_operation = 'liva operations'
-liva_operation_mail = 'liva-operations@keylane.com'
-liva_operation_send = 'liva-operations@keylane.com'
-# liva_operation_send = 'liva-batch-rapportering@keylane.com'
+app = Rocketry()
 
-HeaderCriticalErrorJob = []
-WaitingJobListTimeFiltered = []
-CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
-CriticalBatchListTempFullName = ['EndMonthBatchJob','BundleWaitingTradesBatchJob','OiAccountItemExportBatchJob','OiAccountBalanceExportBatchJob','Db9669PaymentImportBatchJob','UltimoBatchJob','BillingBatchJob','PrimoBatchJob','SapPaymentBatchJob','SapPaymentNemKontoBatchJob','ExecutePortfolioTradesBatchJob']
+# liva_operation = 'liva operations'
+# liva_operation_mail = 'liva-operations@keylane.com'
+# liva_operation_send = 'liva-operations@keylane.com'
+# # liva_operation_send = 'liva-batch-rapportering@keylane.com'
 
+# HeaderCriticalErrorJob = []
+# WaitingJobListTimeFiltered = []
+# CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
+# CriticalBatchListTempFullName = ['EndMonthBatchJob','BundleWaitingTradesBatchJob','OiAccountItemExportBatchJob','OiAccountBalanceExportBatchJob','Db9669PaymentImportBatchJob','UltimoBatchJob','BillingBatchJob','PrimoBatchJob','SapPaymentBatchJob','SapPaymentNemKontoBatchJob','ExecutePortfolioTradesBatchJob']
 
-def win32_new():
+@app.task(cron("40 11 * * *"))
+def do_things():
+    liva_operation = 'liva operations'
+    liva_operation_mail = 'liva-operations@keylane.com'
+    liva_operation_send = 'liva-operations@keylane.com'
+    # liva_operation_send = 'liva-batch-rapportering@keylane.com'
+
+    HeaderCriticalErrorJob = []
+    WaitingJobListTimeFiltered = []
+    CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
+    CriticalBatchListTempFullName = ['EndMonthBatchJob','BundleWaitingTradesBatchJob','OiAccountItemExportBatchJob','OiAccountBalanceExportBatchJob','Db9669PaymentImportBatchJob','UltimoBatchJob','BillingBatchJob','PrimoBatchJob','SapPaymentBatchJob','SapPaymentNemKontoBatchJob','ExecutePortfolioTradesBatchJob']
+
 
     # removing the files before every new execution 
 
@@ -1735,7 +1749,7 @@ def win32_new():
 
 
 def win32_test_mail():
-
+    
     today = datetime.date.today()
     my_mailbox = 'Liva Operations'
     outlook = win32com.client.Dispatch("Outlook.Application")
@@ -1747,6 +1761,9 @@ def win32_test_mail():
     mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport."
     mail.Send()
 
+
+if __name__ == "__main__":
+    app.run()
 # Running the code for infinite loop
 
 # schedule.every().monday.at("14:25").do(win32_new)
@@ -1755,13 +1772,13 @@ def win32_test_mail():
 # schedule.every().thursday.at("10:38").do(win32_new)
 # schedule.every().friday.at("07:15").do(win32_new)
 
-schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("11:43").do(win32_new)        # to run everyday Daylight saving started + 
+# schedule.every().day.at("10:00").do(win32_test_mail)
+# schedule.every().day.at("11:43").do(win32_new)        # to run everyday Daylight saving started + 
 
 
 
-while True:
+# while True:
 
-    schedule.run_pending()
-    time.sleep(1)
+#     schedule.run_pending()
+#     time.sleep(1)
     
