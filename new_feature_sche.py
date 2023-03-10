@@ -1471,9 +1471,9 @@ def win32_new():
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
         mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n{open('Outputfile_result_new.txt','r').read()}{open('error_file_dupsremoved.txt','r').read()}\n{open('warning_file_dupsremoved.txt','r').read()}\n{open('inprogress_file_dupsremoved.txt','r').read()}\n{open('compared_output_2files_dupsRemoved_Time_Filtered.txt','r').read()}\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
-
+        # mail.SendUsingAccount = 'liva-operations@keylane.com'
         # mail.Attachments.Add(os.path.join(os.getcwd(), 'Morning_batch_report.pdf'))
-
+        
         mail.Display()
         # mail.Send()
         
@@ -1755,14 +1755,16 @@ def win32_test_mail():
 # schedule.every().thursday.at("10:38").do(win32_new)
 # schedule.every().friday.at("07:15").do(win32_new)
 
-schedule.every().day.at("10:00").do(win32_test_mail)
-schedule.every().day.at("11:43").do(win32_new)        # to run everyday Daylight saving started + 
+
+
+# schedule.every().day.at("10:00").do(win32_test_mail)
+# schedule.every().day.at("11:47").do(win32_new)        # to run everyday Daylight saving started + 
 
 
 
-while True:
+# while True:
 
-    schedule.run_pending()
-    time.sleep(1)
+#     schedule.run_pending()
+#     time.sleep(1)
     
-
+win32_new()
