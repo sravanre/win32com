@@ -161,3 +161,7 @@ PLPACKDFROMNETS,NETSIMPORT 603 ETT   (only Top job - not Liva job)
 PLPACODFROMNETS,NETSIMPORT 621 ETT   (only Top job - not Liva job)  
 PLPADFDTIME2,Start job after midnight  (only Top job - not Liva job)
 PLPAADDTIME,Start job after midnight
+PLPAGKQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år
+PLPAGLQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år 
+PLPAGMQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år
+PLPAFLMKNT2425,PensionDiverse korrektion kontotype 24 og 25
