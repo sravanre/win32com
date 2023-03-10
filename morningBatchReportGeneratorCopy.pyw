@@ -17,6 +17,7 @@ from datetime import timedelta
 from twilio.rest import Client
 import keys
 from rocketry import Rocketry
+from rocketry.conds import minutely, hourly, daily, weekly, monthly
 from rocketry.conds import cron
 
 app = Rocketry()
@@ -31,7 +32,7 @@ app = Rocketry()
 # CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
 # CriticalBatchListTempFullName = ['EndMonthBatchJob','BundleWaitingTradesBatchJob','OiAccountItemExportBatchJob','OiAccountBalanceExportBatchJob','Db9669PaymentImportBatchJob','UltimoBatchJob','BillingBatchJob','PrimoBatchJob','SapPaymentBatchJob','SapPaymentNemKontoBatchJob','ExecutePortfolioTradesBatchJob']
 
-@app.task(cron("43 11 * * *"))
+@app.task(cron("45 11 * * *"))
 def do_things():
     liva_operation = 'liva operations'
     liva_operation_mail = 'liva-operations@keylane.com'
