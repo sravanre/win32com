@@ -32,7 +32,7 @@ app = Rocketry()
 # CriticalBatchListTemp = ['EndMonthBatchJob','BundleWaitingTrades','OiAccountItemExport','OiAccountBalanceExport','Db9669PaymentImport','Ultimo','Billing','Primo','SapPayment','SapPaymentNemKonto','ExecutePortfolioTrades']
 # CriticalBatchListTempFullName = ['EndMonthBatchJob','BundleWaitingTradesBatchJob','OiAccountItemExportBatchJob','OiAccountBalanceExportBatchJob','Db9669PaymentImportBatchJob','UltimoBatchJob','BillingBatchJob','PrimoBatchJob','SapPaymentBatchJob','SapPaymentNemKontoBatchJob','ExecutePortfolioTradesBatchJob']
 
-@app.task(cron("45 11 * * *"))
+@app.task(cron("45 10 * * *"))
 def do_things():
     liva_operation = 'liva operations'
     liva_operation_mail = 'liva-operations@keylane.com'

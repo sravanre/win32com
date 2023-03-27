@@ -165,3 +165,9 @@ PLPAGKQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år
 PLPAGLQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år 
 PLPAGMQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år
 PLPAFLMKNT2425,PensionDiverse korrektion kontotype 24 og 25
+
+PLPAGONINDLAANAC,IndlaanAccount13T korrektioner tidligere år  
+PLPAGPMINDB22BAG,PensionDiverse korrektion kontotype 22 tidligere år
+PLPAGQMINDB22BAG,PensionDiverse korrektion kontotype 22 tidligere år
+PLPAGRMINDB22BAG,PensionDiverse korrektion kontotype 22 tidligere år
+PLPAGSMCALLDUPLA,DUPLA
