@@ -3,6 +3,8 @@ win32_2.py
 win32.py
 Morning_batch_report.pdf
 test.csv
-*.txt
+*.txt   
 *.csv
 keys.py
+!TWS*.txt   
+## adding the TWS to the git code 

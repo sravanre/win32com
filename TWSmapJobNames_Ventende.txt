@@ -1,0 +1,220 @@
+::::Dially batch job::::: 
+PLPAAADTRADEFUND,BundleWaitingTrades
+PLPACFDACCSMONAC,AccountStrategyMoneyAccount
+PLPACPDNPRINTDIS,PrintDistributor
+PLPABJDTRANSFP4,P41EdiHandleDelivery
+PLPAALDEXTRACT,SqlReporting
+PLPABVSAPPAYMENT,SapPaymentReceipt
+PLPACTDP41EDIMET,P41EdiBanksImport
+PLPACTDP41EDIMET,P41EdiFundsImport
+PLPACDDPIFUPDATE,PifUpdate
+PLPACZDBATCHREPO,BatchReport
+PLPABYTAXREPORT,AIncomeTaxReporting
+PLPAACDUNITFUND,TotalInvestmentInventory
+PLPAACDUNITFUND,FundMerge
+PLPAABDSHRPRICES,FundPriceImport
+PLPABZPAFREPORTI,PafReporting
+PLPAAODTRANSFP2,P41ediCreateDeliviery
+PLPAATMACCPROJEM,EndMonth Sidste kalenderdag 00:01
+PLPAAHDACCSTRAT,AccountStrategyPayablesReceiverWaiting
+PLPAAIDPAYOUTSAP,SapPayment
+PLPAAIDPAYOUTSAP,SapPaymentNemKonto
+PLPACRDPAYOUTSPC,PaymentSpecPrint
+PLPAAKDBOOKING,OiAccountItemExport
+PLPADXWASRECCON,AccountStrategyReceivablesContributor
+PLPAAKDBOOKING,OiAccountBalanceExport
+PLPAAQDNEEDSADVA,NeedsAdvance
+PLPABQDGTISKIFCP,GTISkiftCpr
+PLPABOGTISKIFTLA,GTISkiftLandekode
+PLPABPGTISKIFTS,GTISkiftStatus
+PLPACMDKEYPERREP,KeyPersonsReporting
+PLPACNDCOVCATREP,CoverCategorizationReporting
+PLPAAGDRECTAXC,EIncomeImport
+PLPACHDEKAPREC,EKapitalReceipt
+PLPAEFDMOBILEPAY,MpsPaymentImport
+PLPABCDPBSPAYSIM,PbsBetalingsServiceImport
+PLPABDDPBSINFOIM,PBSInfoServiceImport
+PLPAAEDTAXCRUN,StartTaxCardSubscription
+PLPAAJDDB9669PAY,Db9669PaymentImport
+PLPABFDPAYFROMDB,DbPaymentImport hverdage
+PLPADPDP41PAYINP,P41AccountPaymentImport
+PLPAEQDPAYIMPORT,CardPaymentImport
+ :::::::Monthly BAtCH jobs :::::::::::::
+PLPABXDRAFTAGREE,CancelDraftAgreements E. CancelActiveQuoteAgreements
+PLPABXDRAFTAGREE,CancelQuoteAgreements
+PLPABXDRAFTAGREE,CancelActiveQuoteAgreements
+PLPABHDAPCEXCOST,APCExternalCostTransaction
+PLPABXDRAFTAGREE,TerminateAgreements
+PLPABXDRAFTAGREE,CancelActiveDraftAgreement
+PLPAAZMUBILLREMI,UmbrellaBillingRemainder
+PLPABRRETIREPRNT,RetirementPrint
+PLPAATMACCPROJEM,EndMonth Første kalenderdag 00:01
+PLPAAPMPROVISION,CommissionPaymentPrimoMonth 
+PLPAFDWDSSIMPORT,TopDssReportingFilesImport
+PLPAFBWUNITLINK,TopUnitLinkYieldReport
+PLPAAUMINTRISKBO,InteresRiskBonus
+PLPABEDSAPPAYIMP,SapPaymentImport
+PLPABGMAPCEXPOLI,APCExportPolicyData
+PLPABYMTAXREPORT,AIncomeTaxReporting
+PLPADEMBINCOMFEE,BIncomeFeeReporting
+PLPAELMCPSPRINT,TopCpsReportingPrint
+PLPACSMREMUNERAT,ExternalCostExportSpec
+PLPACLMRUNPAYREP,RunningPayablesReporting
+PLPAAFMPOSTWAITA,ExternalCostAccountStrategy
+PLPAAYMPBILLREMI,PbsBillingReminder
+PLPAEOMTOPBENEND,TopBenefitEndPrint
+PLPABTPOLICYSERV,SyncronizePolicyServiceDepartment
+PLPAEGMINVESTMEN,TotalInvestmentInventoryByPolicy
+PLPAEWWQUOTEDEL,QuoteDeletion
+PLPABAMCVRFSTREM,CVRFirstRemainderPrint
+PLPAEWWQUOTEDEL,PersonDeletion
+PLPAEWWQUOTEDEL,GdprDatamartDeletion
+PLPADIMDISQPAY,DisqualifyingPaymentsReporting
+PLPADHMASKATALD,IncomeTaxcode45PreReporting
+PLPADHMASKATALD,IncomeTaxcode45Reporting
+PLPABWMREBALANCI,Rebalancing
+PLPABBMCVRSECREM,CVRSecondRemainderPrint
+PLPADBMPENDIVCOR,IrteCorrection
+PLPACYMBINCOMCOR,BIncomeTaxCorrection
+PLPACVMCPSCORREC,CpsCorrection
+PLPAARMACCPROJUL,Ultimo
+PLPACGMPEREREPOR,PereReporting
+PLPABSRESIGNATIN,ResignationInfoPrint
+PLPAAXMPOLICNETR,PbsBillingReceipt
+PLPACQMBILLING,Billing
+PLPACQMBILLING,BillingRequest
+PLPACQMBILLING,PbsBillingRequest
+PLPACQMBILLING,BillingRequestPrint
+:::::: Yearly batch jobs
+PLPADYYIRTEPRINT,TopIrteReportingPrint
+PLPADGYINDLAAN,IndlaanAccount13TaxReporting
+PLPACXMBINCOMREP,BIncomeTaxReporting
+PLPAEMYLIFECERT,TopLifeCertificatePrintBatchJob
+PLPADRNONBANKDAY,NonBankDays
+PLPAEHYUDKEXPORT,UdkExport
+PLPAEIYUDKRECEIP,UdkReceipt
+PLPACUYCPSREPORT,CpsReporting
+PLPADAYPENDIVREP,IrteReporting
+PLPADJYINDLAACOR,IndlaanAccount13TaxCorrection
+PLPADDYCRSREPORT,CrsReporting
+PLPADCYFATCAREPO,FatcaReporting
+::::::Vederlag og provision;;;;
+PLPAAPMPROVISION,CommissionPaymentPrimoMonth
+PLPAATMACCPROJEM,EndMonth Første kalenderdag
+PLPAAFMPOSTWAITA,ExternalCostAccountStrategy
+PLPACSMREMUNERAT,ExternalCostExportSpec
+PLPABGMAPCEXPOLI,APCExportPolicyData
+:::::Kurser og handler::::::
+PLPAFBWUNITLINK,TopUnitLinkYieldReport
+;;;;;SKAT EIndkomst jobs;;;;; 
+PLPABYMTAXREPORT,AIncomeTaxReporting
+PLPADHMASKATALD,IncomeTaxcode45Reporting
+::: SKAT eKapital jobs ;:::
+PLPADBWPENDIVREP,IrteCorrection
+PLPAENMPEREOPH,PereOphReporting
+:::Indbetaling alle kilder:::::
+PLPAESDHEAPDEPOS,HeapDeposites
+PLPABEDSAPPAYIMP,SapPaymentImport
+PLPABFDPAYFROMDB,DbPaymentImport
+::::::: Udbetaling og regnskab :::::
+PLPABVSAPPAYMENT,SapPaymentReciept
+PLPAAIDPAYOUTSAP,SapPayment
+Efter AccountStrategy
+PLPAAIDPAYOUTSAP,SapPaymentNemKonto
+Efter SapPayment
+PLPACRDPAYOUTSPC,PaymentSpecPrint
+PLPAAKDBOOKING,OiAccountItemExport
+PLPAAKDBOOKING,OiAccountBalanceExport
+::::::GTI filbaserede opdateringer:::::
+PLPABQGTISKIFCPR,GTISkiftCpr
+:::::Print og opkrævning:::::::
+PLPAELMCPSPRINT,TopCpsReportingPrint
+PLPPABRETIREPRNT,RetirementPrint
+PLPAAYMPBILLREMI,PbsBillingReminder
+PLPABAMCVRFSTREM,CVRFirstRemainderPrint
+PLPACQMBILLING,BillingRequest
+PLPAEOMTOPBENEND,TopBenefitEndPrint
+PLPACQMBILLING,PbsBillingRequest
+PLPACQMBILLING,BillingRequestPrint
+PLPAEMLIFECERT,TopLifeCertificatePrintBatchJob
+:::::::::Data Warehouse :::::::::::::
+PLPACCDDMMAPPER,DmProductMapper
+PLPACCDDMMAPPER,DmMapper
+PLPACCDDMMAPPER,DmReconcile
+PLPACCDDMMAPPER,SAS Efter DmMapper  
+PLTADQDPRODUCTM1,DmProductMapper
+PLTADQDPRODUCTM2,DmProductMapper
+PLTADQDPRODUCTM3,DmProductMapper
+PLTADQDPRODUCTM4,DmProductMapper
+PLTADQDPRODUCTM5,DmProductMapper
+PLTADQDPRODUCTM6,DmProductMapper
+PLTADQDPRODUCTM7,DmProductMapper
+PLTADQDPRODUCTM8,DmProductMapper
+PLTADQDPRODUCTM9,DmProductMapper
+::::::::Housekeeping::::::::::
+PLPABXDRAFTAGREE,TerminateAgreements
+PLPABXDRAFTAGREE,CancelQuoteAgreements
+PLPABXDRAFTAGREE,CancelDraftAgreements
+PLPABXDRAFTAGREE,CancelActiveQuoteAgreements
+PLPAASMACCPROJPR,Primo
+PLPAATMACCPROJEM,EndMonth
+PLPAAUMINTRISKBO,InteresRiskBonus
+PLPABTPOLICYSERV,SyncronizePolicyServiceDepartment
+PLPAEUMAGREEMENT,AgreementValidationExport
+PLPAAQDNEEDSADVA,NeedsAdvance
+PLPAEWWQUOTEDEL,QouteDeletion
+PLPAERDPRAAC,PolicyRollbackAfterAgreementChange
+:::::  Diverse jobs  :::
+PLPAPCDPIFUPDATE,PifUpdate
+PLPADZDPIF2UPDAT,Pif2Update
+:::PEP ::::
+PLPACLMRUNPAYREP,RunningPayablesReporting
+PLPAFFMVIRKDKCOL,VirkDkCollectCompanies
+PLPAFCAPENDIVADH,PenDivAdHocCorrection
+
+PLPABODGTISKIFTL,GTISkiftLandekode 
+PLPABPDGTISKIFTS,GTISkiftStatus
+PLPABRMRETIREPRN,RetirementPrint   
+PLPABSMRESIGNATI,ResignationInfoPrint     
+PLPABTMPOLICYSER,SyncronizePolicyServiceD 
+PLPABVDSAPPAYMEN,SapPaymentReceipt        
+PLPABZDPAFREPORT,PafReporting  
+PLPADQDPRODUCTM1,DmProductMapper at 10.00 
+PLPADQDPRODUCTM2,DmProductMapper at 11.00 
+PLPADQDPRODUCTM3,DmProductMapper at 12.00 
+PLPADQDPRODUCTM4,DmProductMapper at 13.00 
+PLPADQDPRODUCTM5,DmProductMapper at 14.00 
+PLPADQDPRODUCTM6,DmProductMapper at 15.00 
+PLPADQDPRODUCTM7,DmProductMapper at 16.00 
+PLPADQDPRODUCTM8,DmProductMapper at 17.00 
+PLPADQDPRODUCTM9,DmProductMapper at 18.00 
+PLPADSYENDPALYR,EndPalYear 
+PLPADTNMANCOMP,AdHocManualCompensation 
+PLPADUNPOLONHOLD,AdHocPoliciesOnHold
+PLPADVNROLLBACK,AdHocRollBack
+PLPAEAACRSCORREC,CrsCorrection 
+PLPAEBACRSDELETE,CrsDeletion
+PLPAECAFATCACOR,FatcaCorrection
+PLPAEEACOSTCLOSE,YearlyCostCloseInfo 
+PLPAEJDHEAPRECEI,Bestil indb pension var
+PLPAEXABINCOMCOR,TaxCorrectionPrevYears 
+PLPAEYACPSCORREC,CpsCorrectionPrevYears
+PLPAEZAASKATALD,In. Taxcode45 PrevYears
+PLPAFGAMLREP,AMLReporting  
+
+
+PLPACADFROMNETS,NETSIMPORT
+PLPACKDFROMNETS,NETSIMPORT 603 ETT   (only Top job - not Liva job) 
+PLPACODFROMNETS,NETSIMPORT 621 ETT   (only Top job - not Liva job)  
+PLPADFDTIME2,Start job after midnight  (only Top job - not Liva job)
+PLPAADDTIME,Start job after midnight
+PLPAGKQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år
+PLPAGLQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år 
+PLPAGMQINDBERET1,Cps - Bindkomst og ASkat45 tidligere år
+PLPAFLMKNT2425,PensionDiverse korrektion kontotype 24 og 25
+
+PLPAGONINDLAANAC,IndlaanAccount13T korrektioner tidligere år  
+PLPAGPMINDB22BAG,PensionDiverse korrektion kontotype 22 tidligere år
+PLPAGQMINDB22BAG,PensionDiverse korrektion kontotype 22 tidligere år
+PLPAGRMINDB22BAG,PensionDiverse korrektion kontotype 22 tidligere år
+PLPAGSMCALLDUPLA,DUPLA
