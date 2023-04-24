@@ -191,7 +191,7 @@ def win32_new():
         #         HeaderCriticalErrorJob.append(i)
 
             
-            
+        ## DmReconcile  job is ignored , i can remove the name entry from the TWS meaning full name, but here also there is a logic for ignoring the names from the report   
         lines_seen = set() # holds lines already seen
         outfile = open('compared_output_2files_dupsRemoved.txt', "w")
         for line in open("compared_output_2files.txt", "r"):
