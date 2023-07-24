@@ -1563,7 +1563,7 @@ def do_things():
         mail.Subject = f"Liva morgenrapport {today}"
         mail.HTMLBody = '<h3>This is HTML Body</h3>'
         # mail.Body = 'Godmorgen'
-        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport vedhæftet i pdf'en.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
+        mail.Body = f"Godmorgen, \n\nHer er den automatiske morgenrapport.\n\nIngen status, da TWS-rapporten ikke er sendt, og batchjobbet BatchReport ikke er kørt endnu\n\n\nFor spørgsmål til morgenrapporten, skriv til liva-operations@keylane.com. \n\nMed venlig hilsen,\nKeylane "
         
         mail.Display()
         # mail.Send()
