@@ -75,6 +75,22 @@ with open('compared_output_2files_dupsRemoved.txt', 'r') as fp:
                         # print(line)
                         my_file_time.writelines(line)
 
+                                    if int(line3) == int(todayMMDD):
+                line4 = line2[8:-2]
+                # if int(line4) == 0 or int(line4) == 1 or int(line4) == 2 or int(line4) == 3 or int(line4) == 7 or int(line4) == 22 or int(line4) == 23:
+                # if line4 == value00 or line4 == value02 or line4 == value03 or line4 == value04 or line4 == value05 or line4 == value06 or line4 == value07 or line4 == value01:    
+                #     print('today jobs ')
+                #     print(line1)
+                #     print(line)
+                #     my_file_time.writelines(line)
+                #     # my_file_time.writelines('\n')
+                for i in range(0,8):
+                    if line4 == '0'+str(i):
+                        print('today jobs ')
+                        print(line1)
+                        # print(line)
+                        my_file_time.writelines(line)
+
 
             
             # if todayMMDD in line:
